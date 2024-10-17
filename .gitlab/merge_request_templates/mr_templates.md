@@ -3,6 +3,10 @@
 
 ## Part
 
+**VS**
+- [ ] Extension
+
+**Web**
 - [ ] FE
 
 - [ ] BE
