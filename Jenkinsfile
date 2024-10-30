@@ -9,6 +9,7 @@ pipeline {
                 docker build -t test-app .
                 '''
             }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
