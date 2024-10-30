@@ -5,8 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                sudo docker rmi -f test-app || true
-                sudo docker build -t test-app .
+                docker rmi -f test-app || true
+                docker build -t test-app .
                 '''
             }
         }
@@ -14,9 +14,9 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sh '''
-                sudo docker stop test-app || true
-                sudo docker rm test-app || true
-                sudo docker run -d --name test-app -p 8000:8000 test-app
+                docker stop test-app || true
+                docker rm test-app || true
+                docker run -d --name test-app -p 8000:8000 test-app
                 '''
             }
         }
