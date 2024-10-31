@@ -4,7 +4,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_items():
-    return 200
+    return {"status" : 200}
 
 # 서버 실행
 if __name__ == "__main__":
