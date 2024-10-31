@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./test /test
 
 # FastAPI 애플리케이션 실행
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "test:app", "--host", "0.0.0.0", "--port", "8000"]
