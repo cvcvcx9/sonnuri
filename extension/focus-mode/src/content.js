@@ -91,51 +91,44 @@ function highlightTextNodes() {
     highlights = [];
 
     textNodes.forEach(node => {
-        const text = node.textContent; // 공백을 기준으로 word를 나눕니다
-        const wordRegex = /\S+/g;
-        let match;
-        const range = document.createRange();
+        const text = node.textContent;
         
-        while ((match = wordRegex.exec(text)) !== null) {
-            const word = match[0];
-            let startOffset = match.index; // word의 시작 위치
-            // serverWordList에 포함되는지 확인
-            // const matchServerWord = serverWordsMap.get(word);
-            const matchServerWord = serverWords.find(serverWord => serverWord.word === word);
-            range.setStart(node, startOffset); // 현재 word의 시작 위치 설정
-            range.setEnd(node, startOffset + word.length); // 현재 word의 끝 위치 설정
-            
-            // 만약 word가 우리가 가진 word 목록에 없으면 그냥 넘어가기
-            if (matchServerWord) {
-            const rects = range.getClientRects();
-            for (let rect of rects) {
-                // 화면에 보이는 영역만 그리기
-                if (rect.width > 0 && rect.height > 0 &&
-                    rect.top >= 0 && rect.top <= window.innerHeight &&
-                    rect.left >= 0 && rect.left <= window.innerWidth &&
-                    !isElementCovered(rect)) {
-                    
-                    // 라운드 직사각형 그리기
-                    ctx.roundRect(
-                        rect.left,
-                        rect.top,
-                        rect.width,
-                        rect.height,
-                        5 // 라운드 반경
-                    );
-                    highlights.push({
-                        word: word, // word
-                        rect: rect, // DOMRect 객체
-                        isHovered: false, // 마우스 hover 상태
-                        URL: matchServerWord.URL // URL
-                    });
-                        ctx.fill(); // 내부를 채우기
-                        ctx.stroke(); // 테두리 그리기
+        // 각 서버 단어에 대해 검사
+        serverWords.forEach(serverWord => {
+            let index = text.indexOf(serverWord.word);
+            while (index !== -1) {
+                range.setStart(node, index);
+                range.setEnd(node, index + serverWord.word.length);
+                
+                const rects = range.getClientRects();
+                for (let rect of rects) {
+                    if (rect.width > 0 && rect.height > 0 &&
+                        rect.top >= 0 && rect.top <= window.innerHeight &&
+                        rect.left >= 0 && rect.left <= window.innerWidth &&
+                        !isElementCovered(rect)) {
+                        
+                        ctx.roundRect(
+                            rect.left,
+                            rect.top,
+                            rect.width,
+                            rect.height,
+                            5
+                        );
+                        highlights.push({
+                            word: serverWord.word,
+                            rect: rect,
+                            isHovered: false,
+                            URL: serverWord.URL
+                        });
+                        ctx.fill();
+                        ctx.stroke();
                     }
                 }
+                // 다음 일치하는 부분 찾기
+                index = text.indexOf(serverWord.word, index + 1);
             }
-        }
-    })
+        });
+    });
 }
 
 
