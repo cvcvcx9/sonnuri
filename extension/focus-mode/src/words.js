@@ -1,4 +1,4 @@
-export default [
+const words = [
   {
    "NO": 1,
    "word": "국민 발안제",
@@ -91999,3 +91999,4 @@ export default [
    "URL": "http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20220801/1005050/MOV000359778_700X466.mp4"
   }
 ]
+module.exports = words;

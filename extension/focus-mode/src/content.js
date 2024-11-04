@@ -1,5 +1,5 @@
 // 
-import serverWords from './words.js';
+import serverWords from './sortedWords.js';
 CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
     this.beginPath();
     this.moveTo(x + radius, y);
@@ -15,7 +15,6 @@ CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, rad
 };
 
 let highlights = [];
-const serverWordsMap = new Map(serverWords.map(item => [item.word, item]));
 
 
 const modal = document.createElement('div');
@@ -79,63 +78,75 @@ function findTextNodes(element) {
 }
 
 // 텍스트 주변에 반투명한 라운드 직사각형 그리기
-const serverWordList =  serverWords.map(word => word.word);
 function highlightTextNodes() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const textNodes = findTextNodes(document.body);
-    
-    ctx.fillStyle = 'rgba(255, 0, 0, 0.3)'; // 반투명한 빨간색
-    ctx.strokeStyle = 'red'; // 테두리 색상
+    const range = new Range();
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+    ctx.strokeStyle = 'red';
     ctx.lineWidth = 1;
     
     highlights = [];
 
+    // 이미 하이라이트된 범위를 저장할 배열
+    let highlightedRanges = [];
+
     textNodes.forEach(node => {
-        const text = node.textContent; // 공백을 기준으로 word를 나눕니다
-        const wordRegex = /\S+/g;
-        let match;
-        const range = document.createRange();
+        const text = node.textContent;
         
-        while ((match = wordRegex.exec(text)) !== null) {
-            const word = match[0];
-            let startOffset = match.index; // word의 시작 위치
-            // serverWordList에 포함되는지 확인
-            // const matchServerWord = serverWordsMap.get(word);
-            const matchServerWord = serverWords.find(serverWord => serverWord.word === word);
-            range.setStart(node, startOffset); // 현재 word의 시작 위치 설정
-            range.setEnd(node, startOffset + word.length); // 현재 word의 끝 위치 설정
-            
-            // 만약 word가 우리가 가진 word 목록에 없으면 그냥 넘어가기
-            if (matchServerWord) {
-            const rects = range.getClientRects();
-            for (let rect of rects) {
-                // 화면에 보이는 영역만 그리기
-                if (rect.width > 0 && rect.height > 0 &&
-                    rect.top >= 0 && rect.top <= window.innerHeight &&
-                    rect.left >= 0 && rect.left <= window.innerWidth &&
-                    !isElementCovered(rect)) {
-                    
-                    // 라운드 직사각형 그리기
-                    ctx.roundRect(
-                        rect.left,
-                        rect.top,
-                        rect.width,
-                        rect.height,
-                        5 // 라운드 반경
+        serverWords.forEach(serverWord => {
+            let index = text.indexOf(serverWord.word);
+            while (index !== -1) {
+                // 현재 범위가 이미 하이라이트된 범위와 겹치는지 확인
+                const isOverlapping = highlightedRanges.some(range => {
+                    return (
+                        (index >= range.start && index < range.end) ||
+                        (index + serverWord.word.length > range.start && 
+                         index + serverWord.word.length <= range.end)
                     );
-                    highlights.push({
-                        word: word, // word
-                        rect: rect, // DOMRect 객체
-                        isHovered: false, // 마우스 hover 상태
-                        URL: matchServerWord.URL // URL
-                    });
-                        ctx.fill(); // 내부를 채우기
-                        ctx.stroke(); // 테두리 그리기
+                });
+
+                // 겹치지 않는 경우에만 하이라이트
+                if (!isOverlapping && serverWord.word.length > 1) {
+                    range.setStart(node, index);
+                    range.setEnd(node, index + serverWord.word.length);
+                    
+                    const rects = range.getClientRects();
+                    for (let rect of rects) {
+                        if (rect.width > 0 && rect.height > 0 &&
+                            rect.top >= 0 && rect.top <= window.innerHeight &&
+                            rect.left >= 0 && rect.left <= window.innerWidth &&
+                            !isElementCovered(rect)) {
+                            
+                            ctx.roundRect(
+                                rect.left,
+                                rect.top,
+                                rect.width,
+                                rect.height,
+                                5
+                            );
+                            highlights.push({
+                                word: serverWord.word,
+                                rect: rect,
+                                isHovered: false,
+                                URL: serverWord.URL
+                            });
+                            ctx.fill();
+                            ctx.stroke();
+
+                            // 하이라이트된 범위 저장
+                            highlightedRanges.push({
+                                start: index,
+                                end: index + serverWord.word.length
+                            });
+                        }
                     }
                 }
+                // 다음 일치하는 부분 찾기
+                index = text.indexOf(serverWord.word, index + 1);
             }
-        }
-    })
+        });
+    });
 }
 
 
@@ -264,13 +275,18 @@ window.addEventListener('scroll', () => {
         scrollTimeout = setTimeout(() => {
             canvas.style.display = 'block';
             highlightTextNodes();
-        }, 100);
+        }, 1000);
     }
 });
-
+let resizeTimeout;
 // 윈도우 리사이즈 시 다시 그리기
 window.addEventListener('resize', () => {
     if (isHighlighting) {
-        highlightTextNodes();
+        canvas.style.display = 'none';
+        clearTimeout(resizeTimeout)
+        resizeTimeout = setTimeout(()=>{
+            canvas.style.display = 'block'
+            highlightTextNodes();
+        },1000)
     }
 });
