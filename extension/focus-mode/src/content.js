@@ -117,7 +117,6 @@ function highlightTextNodes() {
                             rect.top >= 0 && rect.top <= window.innerHeight &&
                             rect.left >= 0 && rect.left <= window.innerWidth &&
                             !isElementCovered(rect)) {
-                            
                             ctx.roundRect(
                                 rect.left,
                                 rect.top,
@@ -245,8 +244,8 @@ controlPanel.style.cssText = `
 
 // 토글 버튼
 const toggleButton = document.createElement('button');
-toggleButton.textContent = '하이라이트 켜기';
-let isHighlighting = false;
+toggleButton.textContent = '하이라이트 끄기';
+let isHighlighting = true;
 
 
 toggleButton.onclick = () => {
