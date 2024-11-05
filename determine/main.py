@@ -2,14 +2,23 @@ from fastapi import FastAPI, HTTPException
 from kiwipiepy import Kiwi
 from pydantic import BaseModel
 from typing import List, Dict
+from dotenv import load_dotenv
+import os
 import pymongo
 import asyncio
+
+# .env 파일 로드
+load_dotenv()
+
+# 환경 변수에서 MongoDB 사용자 이름과 비밀번호 불러오기
+mongo_username = os.getenv("MONGO_USERNAME")
+mongo_password = os.getenv("MONGO_PASSWORD")
 
 kiwi = Kiwi(load_default_dict=True, integrate_allomorph=True, model_type='sbg', typos=None)
 app = FastAPI()
 
 # MongoDB 클라이언트 설정 (예: 로컬호스트)
-client = pymongo.MongoClient("mongodb://k11a301.p.ssafy.io:8017/")
+client = pymongo.MongoClient("mongodb://{mongo_username}:{mongo_password}@k11a301.p.ssafy.io:8017/")
 db = client["sonnuri"]
 collection = db["sonnuri"]
 

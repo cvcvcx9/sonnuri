@@ -3,3 +3,4 @@ uvicorn
 pydantic
 kiwipiepy
 pymongo
+dotenv
