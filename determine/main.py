@@ -9,7 +9,7 @@ kiwi = Kiwi(load_default_dict=True, integrate_allomorph=True, model_type='sbg', 
 app = FastAPI()
 
 # MongoDB 클라이언트 설정 (예: 로컬호스트)
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb://k11a301.p.ssafy.io:8017/")
 db = client["sonnuri"]
 collection = db["sonnuri"]
 

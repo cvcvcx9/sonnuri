@@ -7,7 +7,6 @@ WORKDIR /app
 COPY requirements.txt .
 COPY main.py .
 
-# 전체 소스 코드 복사
 RUN pip install -r requirements.txt
 
 # FastAPI 애플리케이션 실행
