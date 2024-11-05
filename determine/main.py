@@ -13,6 +13,9 @@ client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["sonnuri"]
 collection = db["sonnuri"]
 
+class TextInput(BaseModel):
+    text: str
+
 class Token(BaseModel):
     form: str
     tag: str
@@ -54,11 +57,11 @@ final_to_initial = {
     'ᇂ': 'ㅎ'
 }
 
-@app.get("/{text}")
-async def determine_texts(text: str):
+@app.post("/determine")
+async def determine_texts(input_data: TextInput):
     try:
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
-        analyzed_result = kiwi.split_into_sents(text, return_tokens=True)
+        analyzed_result = kiwi.split_into_sents(input_data.text, return_tokens=True)
         
         result = extract_words_from_sentence(analyzed_result)
         return {"result": result}
