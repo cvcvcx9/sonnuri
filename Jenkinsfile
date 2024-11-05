@@ -57,9 +57,6 @@ pipeline {
 
     post {
         success {
-            dir(DETERMINE_PATH) {
-                sh 'rm -f .env' // 빌드가 끝난 후 로컬의 .env 파일 삭제
-            }
             echo 'Build, package, and container run succeeded!'
         }
         failure {
