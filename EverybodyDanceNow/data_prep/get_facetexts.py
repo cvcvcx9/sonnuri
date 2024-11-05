@@ -29,7 +29,7 @@ n = start
 SIZE = 512
 boxbuffer = 70
 
-# 목표이미지 가로, 세로 크기!
+# 목표이미지 가로, 세로 크기 설정
 tary = 512
 tarx = 512
 
