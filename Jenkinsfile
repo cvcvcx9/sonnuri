@@ -14,6 +14,8 @@ pipeline {
                 script {
                     // determine 컨테이너 중지 및 제거
                     sh 'docker stop determine_app || true && docker rm determine_app || true'
+                    // 기존 determine_app 이미지 삭제
+                    sh 'docker rmi determine_app || true'
                     // determine 디렉토리에서 Docker 빌드 및 실행
                     dir(DETERMINE_PATH) {
                         sh 'docker build -t determine_app .'
@@ -30,6 +32,8 @@ pipeline {
                 script {
                     // sonnuri 컨테이너 중지 및 제거
                     sh 'docker stop sonnuri_app || true && docker rm sonnuri_app || true'
+                    // 기존 sonnuri_app 이미지 삭제
+                    sh 'docker rmi sonnuri_app || true'
                     // sonnuri 디렉토리에서 Docker 빌드 및 실행
                     dir(SONNURI_PATH) {
                         sh 'docker build -t sonnuri_app .'
