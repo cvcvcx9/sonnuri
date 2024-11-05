@@ -3,6 +3,7 @@ from kiwipiepy import Kiwi
 from pydantic import BaseModel
 from typing import List, Dict
 import pymongo
+import asyncio
 
 kiwi = Kiwi(load_default_dict=True, integrate_allomorph=True, model_type='sbg', typos=None)
 app = FastAPI()
@@ -24,23 +25,40 @@ class Sentence(BaseModel):
     start: int
     end: int
     tokens: List[Token]
-
-class InputData(BaseModel):
-    data: str
     
 class Word(BaseModel):
-    text: str
+    form: str
     url: str
     tokens: List[Token]
     
 class OutputData(BaseModel):
     words: List[Word]
+    
+# 종성 자음 -> 초성 자음 매핑 표
+final_to_initial = {
+    'ᆨ': 'ㄱ',
+    'ᆩ': 'ㄲ',
+    'ᆫ': 'ㄴ',
+    'ᆮ': 'ㄷ',
+    'ᆯ': 'ㄹ',
+    'ᆷ': 'ㅁ',
+    'ᆸ': 'ㅂ',
+    'ᆺ': 'ㅅ',
+    'ᆻ': 'ㅆ',
+    'ᆼ': 'ㅇ',
+    'ᆽ': 'ㅈ',
+    'ᆾ': 'ㅊ',
+    'ᆿ': 'ㅋ',
+    'ᇀ': 'ㅌ',
+    'ᇁ': 'ㅍ',
+    'ᇂ': 'ㅎ'
+}
 
 @app.get("/")
-async def determine_texts(input_data: InputData):
+async def determine_texts(text: str):
     try:
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
-        analyzed_result = kiwi.split_into_sents(input_data, return_tokens=True)
+        analyzed_result = kiwi.split_into_sents(text, return_tokens=True)
         
         result = extract_words_from_sentence(analyzed_result)
         return {"result": result}
@@ -62,20 +80,31 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             newUrl = ''
             # 띄어쓰기를 만났을 때: 단어를 만들고 token 리스트를 비움
             if lenCnt < token.start:
-                word = Word(text=texts[wordCnt], tokens=word_tokens, url='')
+                word = Word(form=texts[wordCnt], tokens=word_tokens, url='')
                 wordCnt += 1
                 words.append(word)
                 word_tokens = []
-            # 태그가 'E'로 시작할 경우 form의 맨 앞에 '-' 추가 (어미이기 때문)
-            if token.tag.startswith('E'):
-                newForm = '-' + token.form
-            
-            url_entry = collection.find_one({"tag": token.form})
-            if url_entry:
-                newUrl = url_entry[0]
                 
             lenCnt = token.start + token.len
-
+            
+            # 특수문자, 한자 등 없는 단어 제외(영어=SH는 포함)
+            if (token.tag.startswith('S') and token.tag != 'SH'):
+                continue
+            # 태그가 'E'로 시작할 경우 form의 맨 앞에 '-' 추가 (어미이기 때문)
+            if token.tag.startswith('E'):
+                # 종성 자음이 있을 경우 초성 자음으로 변경(검색을 위함)
+                if (ord('ᆨ') <= ord(token.form[0]) <= ord('ᇂ')):
+                    newForm = final_to_initial.get(token.form[0]) + token.form[1:]
+                newForm = '-' + newForm
+            # 태그가 'V'로 시작할 경우 form의 맨 뒤에 '다' 추가 (용언이기 때문)
+            if token.tag.startswith('V'):
+                newForm = token.form + '다'
+                
+            
+            url_entry = collection.find_one({"Word": newForm})
+            if url_entry:
+                newUrl = url_entry["URL"]
+                
             # 새 Token 객체 생성
             new_token = Token(
                 form=newForm,
@@ -86,13 +115,20 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             )
             word_tokens.append(new_token)
         # 마지막 토큰을 추가한 후 words에 word를 추가해준다
-        word = Word(text=texts[wordCnt], tokens=word_tokens, url='')
+        url_entry = collection.find_one({"Word": texts[wordCnt]})
+        wordUrl = ''
+        if url_entry:
+            wordUrl = url_entry["URL"]
+        word = Word(form=texts[wordCnt], tokens=word_tokens, url=wordUrl)
         words.append(word)
         
         result.append({"sentence": sentence.text, "words": words})
     
     return result
 
-test = kiwi.split_into_sents("저는 영리합니다. 찬 바람이 나의 뺨을 쳤습니다. 나는 천재다. 세게 때리자", return_tokens=True)
-a = extract_words_from_sentence(test)
-print(a)
+# test = kiwi.split_into_sents("쎄한 느낌이 들어 쎄했다. 맨 앞의 그 사람은 힘이 세다. 먹어본 그 삼겹살은 정말 맛있었다. 저는 영리입니다. 찬 바람이 나의 뺨을 쳤습니다. 나는 천재다. 세게 때리자. 아시아인프라투자은행은 멋지다", return_tokens=True)
+# a = extract_words_from_sentence(test)
+# print(a)
+
+# test = asyncio.run(determine_texts("쎄한 느낌이 들어 쎄했다. 맨 앞의 그 사람은 힘이 세다. 먹어본 그 삼겹살은 정말 맛있었다. 저는 영리입니다. 찬 바람이 나의 뺨을 쳤습니다. 나는 천재다. 세게 때리자. 아시아인프라투자은행은 멋지다"))
+# print(test)
