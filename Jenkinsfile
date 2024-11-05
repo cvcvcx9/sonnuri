@@ -11,10 +11,9 @@ pipeline {
                 changeset "${DETERMINE_PATH}/**" // determine 폴더에 변경 사항이 있을 때만 실행
             }
             steps {
-                // Credentials 블록을 사용하여 MongoDB 사용자 이름과 비밀번호를 환경 변수로 설정
+                // Credentials 블록을 사용하여 MongoDB .env파일을 환경변수로 가져오기
                 withCredentials([
-                    string(credentialsId: 'MONGO_USERNAME', variable: 'MONGO_USERNAME'),
-                    string(credentialsId: 'MONGO_PASSWORD', variable: 'MONGO_PASSWORD')
+                    file(credentialsId: 'MONGODB_ENV', variable: 'MONGODB_ENV')
                 ]) {
                     script {
                     // determine 컨테이너 중지 및 제거
@@ -23,11 +22,8 @@ pipeline {
                     sh 'docker rmi determine_app || true'
                     // determine 디렉토리에서 Docker 빌드 및 실행
                     dir(DETERMINE_PATH) {
-                        // 환경 변수를 .env 파일로 작성
-                        writeFile file: '.env', text: """
-                        MONGO_USERNAME=${env.MONGO_USERNAME}
-                        MONGO_PASSWORD=${env.MONGO_PASSWORD}
-                        """
+                        // Jenkins에 저장한 파일 복사
+                        sh 'cp \$MONGODB_ENV .env'
                         sh 'docker build -t determine_app .'
                         sh 'docker run -d --name determine_app -p 8001:8001 determine_app'
                         }
