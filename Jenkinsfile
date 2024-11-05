@@ -24,10 +24,10 @@ pipeline {
                     // determine 디렉토리에서 Docker 빌드 및 실행
                     dir(DETERMINE_PATH) {
                         // 환경 변수를 .env 파일로 작성
-                        sh '''
-                        echo "MONGO_USERNAME=$EXAMPLE_CREDS_USR" >> .env
-                        echo "MONGO_PASSWORD=$EXAMPLE_CREDS_PSW" >> .env
-                        '''
+                        sh """
+                        echo 'MONGO_USERNAME=$MONGO_USERNAME' >> .env
+                        echo 'MONGO_PASSWORD=$MONGO_PASSWORD' >> .env
+                        """
                         sh 'docker build -t determine_app .'
                         sh 'rm -f .env' // 빌드가 끝난 후 로컬의 .env 파일 삭제
                         sh 'docker run -d --name determine_app -p 8001:8001 determine_app'
