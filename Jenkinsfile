@@ -25,8 +25,8 @@ pipeline {
                     dir(DETERMINE_PATH) {
                         // 환경 변수를 .env 파일로 작성
                         writeFile file: '.env', text: """
-                        MONGO_USERNAME=${env.MONGO_USERNAME}
-                        MONGO_PASSWORD=${env.MONGO_PASSWORD}
+                        MONGO_USERNAME=$env.MONGO_USERNAME
+                        MONGO_PASSWORD=$env.MONGO_PASSWORD
                         """
                         sh 'docker build -t determine_app .'
                         sh 'rm -f .env' // 빌드가 끝난 후 로컬의 .env 파일 삭제
