@@ -4,20 +4,28 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh '''
-                docker rmi -f main-app || true
-                docker build -t main-app .
-                '''
+                script {
+                    // determine 컨테이너 중지 및 제거
+                    sh 'docker stop determine_app || true && docker rm determine_app || true'
+                    // determine 디렉토리에서 Docker 빌드 및 실행
+                    dir(DETERMINE_PATH) {
+                        sh 'docker build -t determine_app .'
+                        sh 'docker run -d -p 8001:8001 --rm determine_app'
+                    }
+                }
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
-                sh '''
-                docker stop main-app-container || true
-                docker rm main-app-container || true
-                docker run -d --name main-app-container -p 8000:8000 main-app
-                '''
+                script {
+                    // sonnuri 컨테이너 중지 및 제거
+                    sh 'docker stop sonnuri_app || true && docker rm sonnuri_app || true'
+                    // sonnuri 디렉토리에서 Docker 빌드 및 실행
+                    dir(SONNURI_PATH) {
+                        sh 'docker build -t sonnuri_app .'
+                        sh 'docker run -d -p 8000:8000 --rm sonnuri_app'
+                    }
+                }
             }
         }
     }
