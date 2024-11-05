@@ -15,7 +15,7 @@ pipeline {
                     // determine 디렉토리에서 Docker 빌드 및 실행
                     dir(DETERMINE_PATH) {
                         sh 'docker build -t determine_app .'
-                        sh 'docker run -p 8001:8001 --rm determine_app'
+                        sh 'docker run -d -p 8001:8001 --rm determine_app'
                     }
                 }
             }
@@ -29,7 +29,7 @@ pipeline {
                     // sonnuri 디렉토리에서 Docker 빌드 및 실행
                     dir(SONNURI_PATH) {
                         sh 'docker build -t sonnuri_app .'
-                        sh 'docker run -p 8000:8000 --rm sonnuri_app'
+                        sh 'docker run -d -p 8000:8000 --rm sonnuri_app'
                     }
                 }
             }
