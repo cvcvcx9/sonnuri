@@ -1,8 +1,15 @@
 pipeline {
     agent any
+    environment {
+        DETERMINE_PATH = 'determine'
+        SONNURI_PATH = 'sonnuri'
+    }
 
     stages {
-        stage('Build') {
+        stage('Build and Run Determine') {
+            when {
+                changeset "${DETERMINE_PATH}/**" // determine 폴더에 변경 사항이 있을 때만 실행
+            }
             steps {
                 script {
                     // determine 컨테이너 중지 및 제거
@@ -15,7 +22,10 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Build and Run Sonnuri') {
+            when {
+                changeset "${SONNURI_PATH}/**" // sonnuri 폴더에 변경 사항이 있을 때만 실행
+            }
             steps {
                 script {
                     // sonnuri 컨테이너 중지 및 제거
