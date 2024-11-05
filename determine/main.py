@@ -5,7 +5,7 @@ from typing import List, Dict
 from dotenv import load_dotenv
 import os
 import pymongo
-import asyncio
+# import asyncio
 
 # .env 파일 로드
 load_dotenv()
