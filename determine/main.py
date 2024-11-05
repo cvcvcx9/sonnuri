@@ -54,7 +54,7 @@ final_to_initial = {
     'ᇂ': 'ㅎ'
 }
 
-@app.get("/")
+@app.get("/{text}")
 async def determine_texts(text: str):
     try:
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
