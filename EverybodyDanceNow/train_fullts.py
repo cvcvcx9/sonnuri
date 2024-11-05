@@ -13,9 +13,11 @@ import torch
 from torch.autograd import Variable
 
 
-def main():
+if __name__ == '__main__':
+    # multiprocessing 지원을 위한 코드 추가
+    torch.multiprocessing.freeze_support()
+
     opt = TrainOptions().parse()
-    opt.gpu_ids = []  # 이 줄을 추가하여 CPU 모드로
     iter_path = os.path.join(opt.checkpoints_dir, opt.name, 'iter.txt')
     if opt.continue_train:
         try:
@@ -154,8 +156,3 @@ def main():
         ### linearly decay learning rate after certain iterations
         if epoch > opt.niter:
             model.module.update_learning_rate()
-
-
-## 추가
-if __name__ == "__main__":
-    main()

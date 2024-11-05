@@ -720,3 +720,119 @@ def getmedians_adapt(keypoint_list, threshold = 0.0, printme=False):
 	if printme:
 		print (my_median)
 	return np.array(my_median)
+
+def extract_frames(video_path, output_path):
+    """
+    비디오에서 프레임 추출
+    """
+    cap = cv.VideoCapture(video_path)
+    frame_count = 0
+    
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+        
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+            
+        frame_filename = os.path.join(output_path, f'frame_{frame_count:05d}.png')
+        cv.imwrite(frame_filename, frame)
+        print(f"Saved frame {frame_count} as {frame_filename}")
+        frame_count += 1
+        
+    cap.release()
+    print("Finished extracting frames.")
+
+def process_keypoints_to_images(json_dir, output_dir):
+    """
+    JSON 키포인트 파일들을 이미지로 변환
+    """
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # JSON 파일 목록
+    json_files = sorted([f for f in os.listdir(json_dir) if f.endswith('_keypoints.json')])
+
+    for json_file in json_files:
+        print(f"Processing {json_file}")
+        
+        # JSON 파일 읽기
+        json_path = os.path.join(json_dir, json_file)
+        posepts, facepts, r_handpts, l_handpts = readkeypointsfile_json(json_path)
+
+        # 빈 캔버스 생성 (흰색)
+        canvas = np.ones((512, 512, 3), dtype=np.uint8) * 255
+
+        # 포즈 그리기
+        if posepts:
+            canvas = renderpose(posepts, canvas)
+        
+        # 얼굴 그리기
+        if facepts:
+            canvas = renderface(facepts, canvas)
+        
+        # 손 그리기
+        if r_handpts:
+            canvas = renderhand(r_handpts, canvas)
+        if l_handpts:
+            canvas = renderhand(l_handpts, canvas)
+
+        # 이미지 저장 (같은 이름으로 .png 확장자)
+        output_name = json_file.replace('_keypoints.json', '.png')
+        output_path = os.path.join(output_dir, output_name)
+        cv.imwrite(output_path, canvas)
+
+
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_dir', type=str, help='Input image directory')
+    parser.add_argument('--output_dir', type=str, help='Output label directory')
+    parser.add_argument('--mode', type=str, help='keypoints or frames')
+    parser.add_argument('--video_path', type=str, help='Path to input video file')
+    
+    args = parser.parse_args()
+    
+    if args.mode == 'keypoints':
+        current_dir = os.getcwd()
+        
+        # OpenPose 임시 JSON 출력 디렉토리
+        temp_json_dir = os.path.join(args.output_dir, "temp_json")
+        os.makedirs(temp_json_dir, exist_ok=True)
+        
+        try:
+            os.chdir(os.path.join(current_dir, "openpose"))
+            
+            input_dir_abs = os.path.abspath(os.path.join(current_dir, args.input_dir))
+            temp_json_dir_abs = os.path.abspath(os.path.join(current_dir, args.output_dir, "temp_json"))
+            
+            openpose_command = (f"bin\\OpenPoseDemo.exe" + 
+                             f" --image_dir \"{input_dir_abs}\"" + 
+                             f" --write_json \"{temp_json_dir_abs}\"" + 
+                             f" --display 0" + 
+                             f" --render_pose 0" + 
+                             f" --face" +
+                             f" --hand" +
+                             f" --number_people_max 1" +
+                             f" --net_resolution -1x160" +
+                             f" --face_net_resolution 160x160" +
+                             f" --hand_net_resolution 160x160" +
+                             f" --scale_number 1" +
+                             f" --scale_gap 0.25")
+            
+            print(f"Executing OpenPose: {openpose_command}")
+            os.system(openpose_command)
+            
+        finally:
+            os.chdir(current_dir)
+        
+        print("Converting keypoints to images...")
+        process_keypoints_to_images(temp_json_dir, args.output_dir)
+        
+    elif args.mode == 'frames':
+        if not args.video_path:
+            print("Error: --video_path is required for frames mode")
+            exit(1)
+        extract_frames(args.video_path, args.output_dir)
