@@ -29,7 +29,6 @@ pipeline {
                         MONGO_PASSWORD=${env.MONGO_PASSWORD}
                         """
                         sh 'docker build -t determine_app .'
-                        sh 'rm -f .env' // 빌드가 끝난 후 로컬의 .env 파일 삭제
                         sh 'docker run -d --name determine_app -p 8001:8001 determine_app'
                         }
                     }
@@ -58,6 +57,9 @@ pipeline {
 
     post {
         success {
+            dir(DETERMINE_PATH) {
+                sh 'rm -f .env' // 빌드가 끝난 후 로컬의 .env 파일 삭제
+            }
             echo 'Build, package, and container run succeeded!'
         }
         failure {
