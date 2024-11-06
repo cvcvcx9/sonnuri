@@ -101,9 +101,8 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             newUrl = ''
             # 띄어쓰기를 만났을 때: 단어를 만들고 token 리스트를 비움
             if lenCnt < token.start:
-                word = Word(form=texts[wordCnt], tokens=word_tokens, url='')
+                saveWord(texts, wordCnt, word_tokens, words)
                 wordCnt += 1
-                words.append(word)
                 word_tokens = []
                 
             lenCnt = token.start + token.len
@@ -120,7 +119,6 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             # 태그가 'V'로 시작할 경우 form의 맨 뒤에 '다' 추가 (용언이기 때문)
             if token.tag.startswith('V'):
                 newForm = token.form + '다'
-                
             
             url_entry = collection.find_one({"Word": newForm})
             if url_entry:
@@ -135,16 +133,26 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
                 url=newUrl
             )
             word_tokens.append(new_token)
-                
-        url_entry = collection.find_one({"Word": texts[wordCnt]})
-        wordUrl = ''
-        if url_entry:
-            wordUrl = url_entry["URL"]
-        word = Word(form=texts[wordCnt], tokens=word_tokens, url=wordUrl)
-        words.append(word)
         
+        saveWord(texts, wordCnt, word_tokens, words)
         result.append({"sentence": sentence.text, "words": words})
     
     return result
 # test = asyncio.run(determine_texts("쎄한 느낌이 들어 쎄했다. 맨 앞의 그 사람은 힘이 세다. 먹어본 그 삼겹살은 정말 맛있었다. 저는 영리입니다. 찬 바람이 나의 뺨을 쳤습니다. 나는 천재다. 세게 때리자. 아시아인프라투자은행은 멋지다"))
 # print(test)
+
+def saveWord(texts: List[str], wordCnt: int, word_tokens: List[Token], words: List[Word]):
+    text = filter_not_korean(texts[wordCnt])
+    url_entry = collection.find_one({"Word": text})
+    wordUrl = ''
+    if url_entry:
+        wordUrl = url_entry["URL"]
+    word = Word(form=texts[wordCnt], tokens=word_tokens, url=wordUrl)
+    words.append(word)
+
+def filter_not_korean(text: str) -> str:
+    t = ""
+    for c in text:
+        if '가' <= c <= '힣':
+            t += c
+    return t
