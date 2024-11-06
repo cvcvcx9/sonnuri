@@ -135,9 +135,6 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
                 url=newUrl
             )
             word_tokens.append(new_token)
-        # 마지막 토큰을 추가한 후 words에 word를 추가해준다
-        for c in word:
-            if '가' > c and c < '힣':
                 
         url_entry = collection.find_one({"Word": texts[wordCnt]})
         wordUrl = ''
