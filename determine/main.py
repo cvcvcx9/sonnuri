@@ -137,10 +137,5 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
         result.append({"sentence": sentence.text, "words": words})
     
     return result
-
-# test = kiwi.split_into_sents("쎄한 느낌이 들어 쎄했다. 맨 앞의 그 사람은 힘이 세다. 먹어본 그 삼겹살은 정말 맛있었다. 저는 영리입니다. 찬 바람이 나의 뺨을 쳤습니다. 나는 천재다. 세게 때리자. 아시아인프라투자은행은 멋지다", return_tokens=True)
-# a = extract_words_from_sentence(test)
-# print(a)
-
 # test = asyncio.run(determine_texts("쎄한 느낌이 들어 쎄했다. 맨 앞의 그 사람은 힘이 세다. 먹어본 그 삼겹살은 정말 맛있었다. 저는 영리입니다. 찬 바람이 나의 뺨을 쳤습니다. 나는 천재다. 세게 때리자. 아시아인프라투자은행은 멋지다"))
 # print(test)
