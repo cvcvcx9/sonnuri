@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from kiwipiepy import Kiwi
 from pydantic import BaseModel
 from typing import List, Dict
@@ -16,6 +17,14 @@ mongo_password = os.getenv("MONGO_PASSWORD")
 
 kiwi = Kiwi(load_default_dict=True, integrate_allomorph=True, model_type='sbg', typos=None)
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # MongoDB 클라이언트 설정 (예: 로컬호스트)
 client = pymongo.MongoClient(f"mongodb://{mongo_username}:{mongo_password}@k11a301.p.ssafy.io:8017/?authSource=admin")
@@ -127,6 +136,9 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             )
             word_tokens.append(new_token)
         # 마지막 토큰을 추가한 후 words에 word를 추가해준다
+        for c in word:
+            if '가' > c and c < '힣':
+                
         url_entry = collection.find_one({"Word": texts[wordCnt]})
         wordUrl = ''
         if url_entry:
