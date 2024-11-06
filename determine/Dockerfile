@@ -4,8 +4,7 @@ FROM python:3.9.5
 WORKDIR /app
 
 # requirements.txt와 main.py 복사
-COPY requirements.txt .
-COPY main.py .
+COPY . /app
 
 RUN pip install -r requirements.txt
 
