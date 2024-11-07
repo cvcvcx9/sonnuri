@@ -7,7 +7,7 @@
   "content_scripts": [
       {
           "matches": ["<all_urls>"],
-          "js": ["dist/content.bundle.js"],
+          "js": ["dist/content.js"],
           "css":["css/style.css"]
       }
   ],
@@ -21,7 +21,7 @@
     "service_worker": "background.js"
       },
   "side_panel": {
-    "default_path": "sidebar.html",
+    "default_path": "dist/sidebar.html",
     "open_panel_action": {
       "default_icon": {
         "16": "images/icon16.png",
