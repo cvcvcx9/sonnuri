@@ -78,6 +78,44 @@ function findTextNodes(element) {
     return textNodes;
 }
 
+
+// 버튼 생성
+const button = document.createElement('button');
+button.id = 'show-sidebar-button';
+button.textContent = 'Show in Sidebar';
+button.style.position = 'absolute';
+button.style.zIndex = 10002; // 버튼이 위에 보이도록 설정
+button.style.padding = '8px 12px';
+button.style.backgroundColor = '#007bff';
+button.style.color = '#fff';
+button.style.border = 'none';
+button.style.borderRadius = '5px';
+button.style.cursor = 'pointer';
+button.style.boxShadow = '0px 2px 6px rgba(0, 0, 0, 0.2)';
+button.style.display = 'none';
+document.body.appendChild(button); // 버튼을 문서에 추가
+
+
+document.addEventListener("mouseup", (e) => {
+    const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
+    if (selectedText) {
+        console.log(selectedText);
+        button.style.top = `${e.pageY}px`; // 버튼 위치 변경
+        button.style.left = `${e.pageX}px`; // 버튼 위치 변경
+        button.style.display = 'block'; // 버튼 표시
+
+        // 버튼 클릭 이벤트
+        button.onclick = () => {
+            console.log("버튼 클릭");
+            chrome.runtime.sendMessage({ type: 'open_side_panel',text: selectedText });
+            button.style.display = 'none'; // 버튼 제거
+        };
+    } else {
+        button.style.display = 'none'; // 선택된 텍스트가 없으면 버튼 숨김
+
+    }
+});
+
 // 텍스트 주변에 반투명한 라운드 직사각형 그리기
 const serverWordList =  serverWords.map(word => word.word);
 function highlightTextNodes() {

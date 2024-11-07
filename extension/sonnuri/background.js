@@ -1,9 +1,16 @@
 let savedTexts = [];
 
 // 드래그된 텍스트 저장
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "save_text") {
-    savedTexts.push(message.text);
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+  console.log("백그라운드 메시지 수신");
+  if (request.type === "open_side_panel") {
+    await chrome.sidePanel.open({tabId: sender.tab.id});
+    await chrome.sidePanel.setOptions({
+      tabId: sender.tab.id,
+      path: "sidebar.html",
+      enabled: true, // 반드시 true로 설정해야 활성화됨
+    });
+    savedTexts.push(request.text);
     chrome.storage.local.set({ savedTexts });  // 저장
   }
 });
