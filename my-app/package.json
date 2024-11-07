@@ -1,0 +1,29 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "lucide-react": "^0.454.0",
+    "next": "15.0.2",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "shadcn": "^2.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "22.9.0",
+    "@types/react": "18.3.12",
+    "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "postcss": "^8.4.47",
+    "tailwind-merge": "^2.5.4",
+    "tailwind-variants": "^0.2.1",
+    "tailwindcss": "^3.4.14",
+    "typescript": "5.6.3"
+  }
+}
