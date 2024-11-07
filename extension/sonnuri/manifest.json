@@ -1,28 +1,28 @@
 {
-    "manifest_version": 3,
-    "name": "sonnuri",
-    "description": "한국 수어 사용자를 위한 웹 서핑 보조도구",
-    "version": "1.0",
-    "content_scripts": [
-        {
-            "matches": ["<all_urls>"],
-            "js": ["dist/content.bundle.js"],
-            "css":["css/style.css"]
-        }
-    ],
-    "icons": {
-      "16": "images/icon16.png",
-      "32": "images/icon32.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
-    },
-
-    "background": {
-      "service_worker": "dist/background.js"
+  "manifest_version": 3,
+  "name": "sonnuri",
+  "description": "한국 수어 사용자를 위한 웹 서핑 보조도구",
+  "version": "1.0",
+  "content_scripts": [
+      {
+          "matches": ["<all_urls>"],
+          "js": ["content.bundle.js"],
+          "css":["css/style.css"]
+      }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   },
-  "sidebar_action": {
-      "default_title": "Open Sidebar",
-      "default_icon": "images/icon16.png",
-      "default_panel": "sidebar.html"
-  }
-  }
+
+  "background": {
+    "service_worker": "background.js"
+},
+"sidebar_action": {
+    "default_title": "Open Sidebar",
+    "default_icon": "images/icon16.png",
+    "default_panel": "sidebar.html"
+}
+}
