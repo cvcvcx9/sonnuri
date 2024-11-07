@@ -94,6 +94,8 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
         texts = sentence.text.split(" ")
         words = []
         word_tokens = []
+        if not sentence.tokens:
+            continue
         lenCnt = sentence.tokens[0].start
         wordCnt = 0
         for token in sentence.tokens:
