@@ -1,6 +1,5 @@
 // 
 import serverWords from './words.js';
-import axios from 'axios';
 CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
     this.beginPath();
     this.moveTo(x + radius, y);
@@ -37,7 +36,7 @@ document.body.appendChild(modal);
 
 // 캔버스 오버레이 생성
 const overlay = document.createElement('div');
-overlay.innerHTML = '<canvas id="highlightCanvas" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none;"></canvas>';
+overlay.innerHTML = '<canvas id="highlightCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;"></canvas>';
 document.body.appendChild(overlay);
 
 const canvas = document.getElementById('highlightCanvas');
@@ -80,55 +79,67 @@ function findTextNodes(element) {
 }
 
 // 텍스트 주변에 반투명한 라운드 직사각형 그리기
+const serverWordList =  serverWords.map(word => word.word);
 function highlightTextNodes() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const textNodes = findTextNodes(document.body);
     
-    ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
-    ctx.strokeStyle = 'red';
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.3)'; // 반투명한 빨간색
+    ctx.strokeStyle = 'red'; // 테두리 색상
     ctx.lineWidth = 1;
     
     highlights = [];
 
     textNodes.forEach(node => {
-        const text = node.textContent;
+        const text = node.textContent; // 공백을 기준으로 word를 나눕니다
         const wordRegex = /\S+/g;
         let match;
         const range = document.createRange();
         
         while ((match = wordRegex.exec(text)) !== null) {
             const word = match[0];
-            let startOffset = match.index;
+            let startOffset = match.index; // word의 시작 위치
+            // serverWordList에 포함되는지 확인
+            // const matchServerWord = serverWordsMap.get(word);
+            const matchServerWord = serverWords.find(serverWord => serverWord.word === word);
+            range.setStart(node, startOffset); // 현재 word의 시작 위치 설정
+            range.setEnd(node, startOffset + word.length); // 현재 word의 끝 위치 설정
             
-            range.setStart(node, startOffset);
-            range.setEnd(node, startOffset + word.length);
-            
+            // 만약 word가 우리가 가진 word 목록에 없으면 그냥 넘어가기
+            if (matchServerWord) {
             const rects = range.getClientRects();
             for (let rect of rects) {
+                // 화면에 보이는 영역만 그리기
                 if (rect.width > 0 && rect.height > 0 &&
                     rect.top >= 0 && rect.top <= window.innerHeight &&
                     rect.left >= 0 && rect.left <= window.innerWidth &&
                     !isElementCovered(rect)) {
                     
+                    // 라운드 직사각형 그리기
                     ctx.roundRect(
                         rect.left,
                         rect.top,
                         rect.width,
                         rect.height,
-                        5
+                        5 // 라운드 반경
                     );
                     highlights.push({
-                        word: word,
-                        rect: rect,
-                        isHovered: false
+                        word: word, // word
+                        rect: rect, // DOMRect 객체
+                        isHovered: false, // 마우스 hover 상태
+                        URL: matchServerWord.URL // URL
                     });
-                    ctx.fill();
-                    ctx.stroke();
+                        ctx.fill(); // 내부를 채우기
+                        ctx.stroke(); // 테두리 그리기
+                    }
                 }
             }
         }
-    });
+    })
 }
+
+
+
 
 // 요소가 가려져 있는지 확인하는 함수
 function isElementCovered(rect) {
@@ -139,31 +150,31 @@ function isElementCovered(rect) {
 }
 
 // 마우스 이동 이벤트 처리
-// document.addEventListener('mousemove', (e) => {
-//     const mouseX = e.clientX;
-//     const mouseY = e.clientY;
-//     // 캔버스 위에서 마우스가 움직이고 있는지 처리
+document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    // 캔버스 위에서 마우스가 움직이고 있는지 처리
     
-//     // 마우스가 위에 있는 하이라이트 찾기
-//     const hoveredHighlight = highlights.find(highlight => 
-//         mouseX >= highlight.rect.left && mouseX <= highlight.rect.right &&
-//         mouseY >= highlight.rect.top && mouseY <= highlight.rect.bottom
-//     );
+    // 마우스가 위에 있는 하이라이트 찾기
+    const hoveredHighlight = highlights.find(highlight => 
+        mouseX >= highlight.rect.left && mouseX <= highlight.rect.right &&
+        mouseY >= highlight.rect.top && mouseY <= highlight.rect.bottom
+    );
 
-//     if (hoveredHighlight) {
-//         showModal(hoveredHighlight, mouseX, mouseY);
-//     } else {
-//         // 모든 하이라이트에서 벗어났을 경우에만 모달 숨김
-//         const isMouseOutsideAllHighlights = highlights.every(highlight => 
-//             mouseX < highlight.rect.left || mouseX > highlight.rect.right ||
-//             mouseY < highlight.rect.top || mouseY > highlight.rect.bottom
-//         );
+    if (hoveredHighlight) {
+        showModal(hoveredHighlight, mouseX, mouseY);
+    } else {
+        // 모든 하이라이트에서 벗어났을 경우에만 모달 숨김
+        const isMouseOutsideAllHighlights = highlights.every(highlight => 
+            mouseX < highlight.rect.left || mouseX > highlight.rect.right ||
+            mouseY < highlight.rect.top || mouseY > highlight.rect.bottom
+        );
 
-//         if (isMouseOutsideAllHighlights) {
-//             modal.style.display = 'none'; // 모든 사각형에서 벗어났을 경우 모달 숨김
-//         }
-//     }
-// });
+        if (isMouseOutsideAllHighlights) {
+            modal.style.display = 'none'; // 모든 사각형에서 벗어났을 경우 모달 숨김
+        }
+    }
+});
 
 function showModal(highlight, mouseX, mouseY) {
     let modalLeft = mouseX;
@@ -212,7 +223,7 @@ const controlPanel = document.createElement('div');
 
 controlPanel.style.cssText = `
     position: fixed;
-    bottom: 10px;
+    top: 10px;
     right: 10px;
     z-index: 10000;
     background: white;
@@ -263,63 +274,3 @@ window.addEventListener('resize', () => {
         highlightTextNodes();
     }
 });
-
-// 클릭 이벤트 처리 추가
-document.addEventListener('click', (e) => {
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-    
-    const clickedHighlight = highlights.find(highlight => 
-        mouseX >= highlight.rect.left && mouseX <= highlight.rect.right &&
-        mouseY >= highlight.rect.top && mouseY <= highlight.rect.bottom
-    );
-
-    if (clickedHighlight) {
-        // API 요청 보내기
-        console.log(`Clicked word: ${clickedHighlight.word}`);
-        // fetch 요청 예시:
-        fetch('http://k11a301.p.ssafy.io:8001/determine', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            mode: "cors",      
-            body: JSON.stringify({
-                text: clickedHighlight.word
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-});
-
-document.addEventListener("mouseup", () => {
-    const selectedText = window.getSelection().toString().trim();
-    if (selectedText) {
-      chrome.runtime.sendMessage({ action: "save_text", text: selectedText });
-    }
-  });
-
-// 아이콘 생성 및 표시 함수
-function showIcon(x, y) {
-    const icon = document.createElement('div');
-    icon.textContent = '🔍'; // 아이콘 내용 (예: 돋보기 아이콘)
-    icon.style.position = 'absolute';
-    icon.style.left = `${x}px`;
-    icon.style.top = `${y}px`;
-    icon.style.cursor = 'pointer';
-    icon.style.zIndex = 10000; // 다른 요소 위에 표시
-
-    // 아이콘 클릭 이벤트 처리
-    icon.addEventListener('click', () => {
-        openSidebar(draggedText); // 사이드바 열기
-        document.body.removeChild(icon); // 아이콘 제거
-    });
-
-    document.body.appendChild(icon);
-}
