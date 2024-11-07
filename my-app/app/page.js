@@ -24,10 +24,13 @@ export default function HomePage() {
                 <BellIcon className="h-4 w-4 mr-2" />
                 알림
               </button>
-              <button className="flex items-center text-sm text-gray-600 hover:text-blue-600">
+              <Link
+                href="/login"
+                className="flex items-center text-sm text-gray-600 hover:text-blue-600"
+              >
                 <UserIcon className="h-4 w-4 mr-2" />
-                마이페이지
-              </button>
+                로그인
+              </Link>
             </div>
           </div>
         </div>
