@@ -22,7 +22,7 @@ export default function SavingsDetailPage() {
             <ChevronRightIcon className="h-4 w-4 mx-1" />
             <span>예금/적금</span>
             <ChevronRightIcon className="h-4 w-4 mx-1" />
-            <span>급여하나 월복리 적금</span>
+            <span>희망 저축 계좌 적금</span>
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default function SavingsDetailPage() {
                     영업점
                   </span>
                 </div>
-                <h1 className="text-2xl font-bold">급여하나 월복리 적금</h1>
+                <h1 className="text-2xl font-bold">희망 저축 계좌 적금</h1>
                 <p className="text-gray-600">
                   현재는 가입 기간을 선택하여 월 납입 한도 내 신규한 원금이
                   자유롭고, 가계 실적에 따라 우대금리를 제공하는 적금
