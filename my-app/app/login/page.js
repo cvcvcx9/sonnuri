@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import Link from "next/link";
+import LoginDialog from '../components/LoginDialog';
 import { useRouter } from 'next/navigation';
 import { LockIcon, KeyIcon, ShieldIcon } from 'lucide-react';
 
@@ -8,11 +10,20 @@ export default function LoginPage() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('regular');
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // LoginDialog 열림 상태 관리
   const router = useRouter();
 
   const handleLogin = (e) => {
     e.preventDefault();
     router.push('/homepage');
+  };
+
+  const handleCertificateLogin = () => {
+    setIsDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
   };
 
   return (
@@ -66,12 +77,12 @@ export default function LoginPage() {
                 required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
               />
-              <button
-                type="submit"
+              <Link
+                href="/logincomplete"
                 className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center"
               >
                 <LockIcon className="mr-2 h-4 w-4" /> 로그인
-              </button>
+              </Link>
             </form>
           )}
 
@@ -82,7 +93,10 @@ export default function LoginPage() {
                 <ShieldIcon className="mx-auto h-12 w-12 text-blue-600" />
                 <p className="text-sm text-gray-600">공동인증서로 안전하게 로그인하세요</p>
               </div>
-              <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center">
+              <button 
+                onClick={handleCertificateLogin} 
+                className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center"
+              >
                 <KeyIcon className="mr-2 h-4 w-4" /> 인증서 로그인
               </button>
             </div>
@@ -119,6 +133,9 @@ export default function LoginPage() {
           </div>
         </div>
       </main>
+
+      {/* LoginDialog 모듈 */}
+      <LoginDialog isOpen={isDialogOpen} onClose={closeDialog} onLogin={handleLogin} />
     </div>
   );
 }

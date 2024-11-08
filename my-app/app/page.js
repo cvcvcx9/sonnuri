@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import { useEffect, useState } from 'react';
 import Link from "next/link";
 import {
   WalletIcon,
@@ -13,6 +14,16 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
+  const [username, setUsername] = useState();
+
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem('username');
+    console.log("Stored username:", storedUsername);
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b">
@@ -24,13 +35,19 @@ export default function HomePage() {
                 <BellIcon className="h-4 w-4 mr-2" />
                 알림
               </button>
-              <Link
-                href="/login"
-                className="flex items-center text-sm text-gray-600 hover:text-blue-600"
-              >
-                <UserIcon className="h-4 w-4 mr-2" />
-                로그인
-              </Link>
+              {username ? (
+                <span className="flex items-center text-sm text-gray-600">
+                  {username} 님
+                </span>
+              ) : (
+                <Link
+                  href="/login"
+                  className="flex items-center text-sm text-gray-600 hover:text-blue-600"
+                >
+                  <UserIcon className="h-4 w-4 mr-2" />
+                  로그인
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -105,7 +122,7 @@ export default function HomePage() {
             <div className="space-y-4">
               <div className="p-4 bg-blue-50 rounded-lg">
                 <div className="font-bold">
-                  <Link href="/detail">급여하나 월복리 적금</Link>
+                  <Link href="/detail">희망 저축 계좌 적금</Link>
                 </div>
                 <div className="text-sm text-gray-600 mt-1">연 최대 4.5%</div>
               </div>

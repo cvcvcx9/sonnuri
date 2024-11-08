@@ -1,29 +1,32 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
+import Link from "next/link";
+
 
 export default function TransferPage() {
-  const [amount, setAmount] = useState('')
-  const [recipient, setRecipient] = useState('')
+  const [amount, setAmount] = useState("");
+  const [recipient, setRecipient] = useState("");
+  
 
   const handleTransfer = (e) => {
-    e.preventDefault()
-    // 이체 처리 로직
-  }
-
-  const handleCancel = () => {
-    router.push('/') // 취소 버튼 클릭 시 홈페이지로 이동
-  }
+    e.preventDefault();
+    
+  };
 
   // 버튼 컴포넌트
   const Button = ({ children, onClick, variant, className }) => (
     <button
       onClick={onClick}
-      className={`py-2 px-4 rounded-md ${variant === 'outline' ? 'border border-gray-400' : 'bg-blue-600 text-white'} ${className}`}
+      className={`py-2 px-4 rounded-md ${
+        variant === "outline"
+          ? "border border-gray-400"
+          : "bg-blue-600 text-white"
+      } ${className}`}
     >
       {children}
     </button>
-  )
+  );
 
   // 입력 컴포넌트
   const Input = ({ value, onChange, placeholder }) => (
@@ -34,12 +37,14 @@ export default function TransferPage() {
       placeholder={placeholder}
       className="py-2 px-4 border border-gray-300 rounded-md w-full"
     />
-  )
+  );
 
   // 레이블 컴포넌트
   const Label = ({ children }) => (
-    <label className="block text-sm font-medium text-gray-700">{children}</label>
-  )
+    <label className="block text-sm font-medium text-gray-700">
+      {children}
+    </label>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -116,13 +121,21 @@ export default function TransferPage() {
             </div>
           </div>
 
-          
+        
           <div className="flex justify-center gap-4">
-            <Button variant="outline" className="w-32">취소</Button>
-            <Button onClick={handleTransfer} className="w-32">이체하기</Button>
+            <Button variant="outline" className="w-32">
+              취소
+            </Button>
+           
+            <Link
+              href="/transfercomplete"
+              className="w-32 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-center inline-block"
+            >
+              이체하기
+            </Link>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }
