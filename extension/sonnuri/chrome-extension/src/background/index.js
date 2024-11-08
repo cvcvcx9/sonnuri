@@ -6,15 +6,15 @@ chrome.runtime.onMessage.addListener ((request, sender, sendResponse) => {
   if (request.type === "open_side_panel") {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
       const tabId = tabs[0].id;
-      chrome.sidePanel.setOptions({
+      chrome.sidePanel.setOptions({ 
         tabId: tabId,
         path: 'side-panel/index.html',
         enabled: true, // 반드시 true로 설정해야 활성화됨
+      })    
+      chrome.sidePanel.open({tabId: tabId})
+      savedTexts.push(request.text);
+      chrome.storage.local.set({ savedTexts });  // 저장
     });
-      chrome.sidePanel.open({tabId: tabId});
-    });
-    savedTexts.push(request.text);
-    chrome.storage.local.set({ savedTexts });  // 저장
   }
 });
 

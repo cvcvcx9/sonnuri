@@ -59,8 +59,14 @@ const manifest = deepmerge(
     web_accessible_resources: [
       {
         resources: ['*.js', '*.css', '*.svg', 'icon-128.png', 'icon-34.png'],
-        matches: ['*://*/*'],
-      },
+        matches: ['*://*/*', '<all_urls>'],
+      },{
+        resources: ['content/img/*.gif'],
+        matches: ['*://*/*', '<all_urls>'],
+      },{
+        resources: ['content/img/*.png'],
+        matches: ['*://*/*', '<all_urls>'],
+      }
     ],
   },
   !isFirefox && sidePanelConfig,
