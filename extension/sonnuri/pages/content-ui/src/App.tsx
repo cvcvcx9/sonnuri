@@ -1,23 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@extension/ui';
 import { useStorage } from '@extension/shared';
 import { exampleThemeStorage } from '@extension/storage';
+import HighlightText from './components/HighlightText';
 
 export default function App() {
-  const theme = useStorage(exampleThemeStorage);
-
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
-    console.log('content ui loaded');
+    console.log('content-ui loaded');
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({ x: event.pageX, y: event.pageY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
-
+  const handleClick = () => {
+    alert(`Mouse position: ${mousePosition.x}, ${mousePosition.y}`);
+  };
   return (
-    <div className="flex items-center justify-between gap-2 rounded bg-blue-100 px-2 py-1">
-      <div className="flex gap-1 text-blue-500">
-        Edit <strong className="text-blue-700">pages/content-ui/src/app.tsx</strong> and save to reload.
-      </div>
-      <Button theme={theme} onClick={exampleThemeStorage.toggle}>
-        Toggle Theme
-      </Button>
+    <div>
+      <HighlightText />
     </div>
   );
 }
