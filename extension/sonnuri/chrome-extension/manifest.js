@@ -29,13 +29,11 @@ const manifest = deepmerge(
     description: '__MSG_extensionDescription__',
     host_permissions: ['<all_urls>'],
     permissions: ['storage', 'scripting', 'tabs', 'activeTab'],
-    options_page: 'options/index.html',
     background: {
       service_worker: 'background.iife.js',
       type: 'module',
     },
     action: {
-      default_popup: 'popup/index.html',
       default_icon: 'icon-34.png',
     },
     icons: {
@@ -55,18 +53,19 @@ const manifest = deepmerge(
         css: ['content.css'], // public folder
       },
     ],
-    devtools_page: 'devtools/index.html',
     web_accessible_resources: [
       {
         resources: ['*.js', '*.css', '*.svg', 'icon-128.png', 'icon-34.png'],
         matches: ['*://*/*', '<all_urls>'],
-      },{
+      },
+      {
         resources: ['content/img/*.gif'],
         matches: ['*://*/*', '<all_urls>'],
-      },{
+      },
+      {
         resources: ['content/img/*.png'],
         matches: ['*://*/*', '<all_urls>'],
-      }
+      },
     ],
   },
   !isFirefox && sidePanelConfig,

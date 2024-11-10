@@ -325,6 +325,9 @@ importers:
       '@extension/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
     devDependencies:
       '@extension/hmr':
         specifier: workspace:*
@@ -338,6 +341,9 @@ importers:
       '@extension/vite-config':
         specifier: workspace:*
         version: link:../../packages/vite-config
+      '@types/lodash':
+        specifier: ^4.17.13
+        version: 4.17.13
       concurrently:
         specifier: ^9.0.1
         version: 9.0.1
@@ -1371,6 +1377,9 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  '@types/lodash@4.17.13':
+    resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
 
   '@types/mocha@10.0.7':
     resolution: {integrity: sha512-GN8yJ1mNTcFcah/wKEFIJckJx9iJLoMSzWcfRRuxz/Jk+U6KQNnml+etbtxFK8lPjzOw3zp4Ha/kjSst9fsHYw==}
@@ -5106,6 +5115,8 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
+
+  '@types/lodash@4.17.13': {}
 
   '@types/mocha@10.0.7': {}
 
