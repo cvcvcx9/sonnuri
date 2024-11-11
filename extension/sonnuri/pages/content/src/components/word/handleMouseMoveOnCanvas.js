@@ -1,7 +1,8 @@
+import hideVideoModal from "./hideVideoModal";
+
 let previousHoveredHighlight = null;
 
 export default function handleMouseMoveOnCanvas(e, highlights, modal, showVideoModal) {
-  console.log('handleMouseMoveOnCanvas');
   const mouseX = e.clientX;
   const mouseY = e.clientY;
 
@@ -15,7 +16,6 @@ export default function handleMouseMoveOnCanvas(e, highlights, modal, showVideoM
 
   if (hoveredHighlight) {
     if (hoveredHighlight !== previousHoveredHighlight) {
-      console.log('hoveredHighlight', hoveredHighlight);
       showVideoModal(hoveredHighlight, mouseX, mouseY, modal);
     }
     previousHoveredHighlight = hoveredHighlight;
@@ -29,7 +29,7 @@ export default function handleMouseMoveOnCanvas(e, highlights, modal, showVideoM
     );
 
     if (isMouseOutsideAllHighlights) {
-      modal.style.display = 'none';
+      hideVideoModal(modal);
       previousHoveredHighlight = null;
     }
   }

@@ -27,17 +27,17 @@ const manifest = deepmerge(
     name: '__MSG_extensionName__',
     version: packageJson.version,
     description: '__MSG_extensionDescription__',
-    host_permissions: ['<all_urls>'],
-    permissions: ['storage', 'scripting', 'tabs', 'activeTab'],
+    permissions: ['storage', 'tabs', 'activeTab'],
     background: {
       service_worker: 'background.iife.js',
       type: 'module',
     },
     action: {
-      default_icon: 'icon-34.png',
+      default_icon: 'sonnuriIcon_32.png',
     },
     icons: {
-      128: 'icon-128.png',
+      64: 'sonnuriIcon_64.png',
+      128: 'sonnuriIcon_128.png',
     },
     content_scripts: [
       {
