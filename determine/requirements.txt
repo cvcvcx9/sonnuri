@@ -4,3 +4,4 @@ pydantic
 kiwipiepy
 pymongo
 python-dotenv
+openai
