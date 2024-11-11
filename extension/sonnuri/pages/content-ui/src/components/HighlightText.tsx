@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import serverWords from '../data/serverWords.js'; // 서버 단어 목록을 가져옵니다.
+import serverWords from '../data/words.js'; // 서버 단어 목록을 가져옵니다.
 
 const HighlightText = () => {
     const canvasRef = useRef(null);
-    const [highlights, setHighlights] = useState([]);
+    const [highlights, setHighlights] = useState<{ word: string; rect: DOMRect; URL: string }[]>([]);
 
     useEffect(() => {
         const highlightTextNodes = () => {
             const textNodes = findTextNodes(document.body);
-            const newHighlights = [];
+            const newHighlights: { word: string; rect: DOMRect; URL: string }[] = [];
 
             textNodes.forEach(node => {
                 const text = node.textContent;

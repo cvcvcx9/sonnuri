@@ -5,5 +5,5 @@ export default function hideVideoModal(modal) {
       video.removeAttribute('src');
       video.load();
     }
-    modal.style.display = 'none';
+    modal.close();
   }

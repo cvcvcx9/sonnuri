@@ -23,7 +23,7 @@ const SidePanel: React.FC = () => {
   // URL 추출 로직 수정
   const extractUrls = (sentences: any) => {
     const urls: {url: string, word: string}[] = [];
-    if (sentences.length === 0) {
+    if (!sentences || sentences.length === 0) {
       return urls;
     }
     sentences.forEach((sentence: any) => {
@@ -46,7 +46,6 @@ const SidePanel: React.FC = () => {
 
   // handleUpdatedTexts 함수 수정
   const handleUpdatedTexts = async (newText: string) => {
-    console.log("newText", newText);
     setIsLoading(true);
     try {
       const response = await fetch("http://k11a301.p.ssafy.io:8001/determine", {
@@ -58,7 +57,6 @@ const SidePanel: React.FC = () => {
       });
       const data = await response.json();
       const videoUrls = extractUrls(data.result);
-      console.log("videoUrls", videoUrls);
       setPlaylistInfo(videoUrls);
       setPlaylist(videoUrls.map((item) => item.url));
       setCurrentVideoIndex(0);
@@ -71,29 +69,12 @@ const SidePanel: React.FC = () => {
 
   // 저장된 텍스트 로드 및 스토리지 변경 감지
   useEffect(() => {
-    loadSavedTexts();
-
-    const handleStorageChange = async (changes: any, namespace: string) => {
-      if (changes.savedTexts) {
-        loadSavedTexts();
-        const newTexts = changes.savedTexts.newValue;
-        handleUpdatedTexts(newTexts[newTexts.length - 1]);
+    chrome.storage.local.get("newSentence", (data) => {
+      if (data.newSentence) {
+        handleUpdatedTexts(data.newSentence);
       }
-    };
-
-    chrome.storage.onChanged.addListener(handleStorageChange);
-
-    return () => {
-      chrome.storage.onChanged.removeListener(handleStorageChange);
-    };
-  }, []);
-
-  function loadSavedTexts() {
-    console.log("loadSavedTexts");
-    chrome.storage.local.get("savedTexts", (data) => {
-      setSentenceList(data.savedTexts);
     });
-  }
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
