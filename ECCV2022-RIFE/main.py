@@ -2,6 +2,8 @@ import cv2
 import os
 from typing import List
 import hashlib
+import shutil
+import traceback
 
 class VideoConnector:
     def __init__(self, output_dir: str = "temp_frames"):
@@ -126,7 +128,6 @@ class VideoConnector:
         try:
             # output 디렉토리가 있다면 먼저 삭제
             if os.path.exists("output"):
-                import shutil
                 shutil.rmtree("output")
             os.makedirs("output")
             
@@ -150,48 +151,28 @@ class VideoConnector:
 
         except Exception as e:
             print(f"처리 중 오류 발생: {str(e)}")
-            import traceback
             traceback.print_exc()
         finally:
             # 4. 임시 파일 정리
             if os.path.exists("output"):
-                import shutil
                 shutil.rmtree("output")
+            if os.path.exists(self.output_dir):
+                shutil.rmtree(self.output_dir)  # temp_frames 디렉토리 삭제
 
 def main():
     try:
         # 작업 디렉토리 생성
         os.makedirs("videos", exist_ok=True)
         
-        sentence = "정맥주사 중환자실 두루마리"
+        sentence = "돈 빌리다"
         words = sentence.split()
         
         video_paths = [
-            "videos/bg_정맥주사.mp4",
-            "videos/bg_평화기구.mp4",
-            "videos/bg_중환자실.mp4",
+            "G:/공유 드라이브/수어사전데이터/videos/AI_videos/16853_마지못하다.mp4",
+            "G:/공유 드라이브/수어사전데이터/videos/AI_videos/12571_할 수 없다.mp4",
+
         ]
         
-
-
-
-    #     # 입력 문장
-    #     sentence = "대면 당회 데살로니가"
-    # #    sentence = "평화공세 평화공존 평화기구 두루마리"
-    #     words = sentence.split()
-        
-    #     # 각 단어에 해당하는 비디오 경로
-    #     video_paths = [
-    #         "videos/대면.mp4",
-    #         "videos/당회.mp4",
-    #         "videos/데살로니가.mp4",
-    #     ]
-    #    video_paths = [
-    #        "videos/1001_평화공세.mp4",
-    #     #    "videos/1002_평화공존.mp4",
-    #        "videos/1003_평화기구.mp4",
-    #        "videos/10005_두루마리.mp4",
-    #    ]
         
         # 비디오 파일 존재 확인
         for path in video_paths:
@@ -200,7 +181,7 @@ def main():
                 return
         
         connector = VideoConnector()
-        connector.process_sentence(words, video_paths, "test_t.mp4")
+        connector.process_sentence(words, video_paths, "G:/공유 드라이브/수어사전데이터/videos/AI_videos/20007_부득이한.mp4")
         
     except Exception as e:
         print(f"Error occurred: {str(e)}")
