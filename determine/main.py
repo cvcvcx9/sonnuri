@@ -5,9 +5,9 @@ from pydantic import BaseModel
 from typing import List, Dict
 from dotenv import load_dotenv
 from openai import OpenAI
+import re
 import os
 import pymongo
-# import asyncio
 
 # .env 파일 로드
 load_dotenv()
@@ -118,28 +118,33 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
                 
             lenCnt = token.start + token.len
             
-            # 특수문자, 한자 등 없는 단어, 부사격 조사를 제외한 조사, 접미사 제외(영어=SH는 포함)
-            if token.tag[0] == 'S' and token.tag != 'SH' or token.tag[0] == 'X' and token.tag != 'XPN' or token.tag[0] == 'J' and token.tag != 'JKB':
+            # 특수문자, 한자 등 없는 단어, 부사격 조사를 제외한 조사, 접미사 제외(영어=SN는 포함)
+            if token.tag[0] == 'E' or token.tag[0] == 'S' and (token.tag != 'SL' or token.tag != 'SN') or token.tag[0] == 'X' and token.tag != 'XPN' or token.tag[0] == 'J' and token.tag != 'JKB':
                 continue
             # 태그가 'E'로 시작할 경우 form의 맨 앞에 '-' 추가 (어미이기 때문)
-            if token.tag[0] == 'E':
-                if token.form[0] == '다':
-                    continue
-                # 종성 자음이 있을 경우 초성 자음으로 변경(검색을 위함)
-                if (ord('ᆨ') <= ord(token.form[0]) <= ord('ᇂ')):
-                    newForm = final_to_initial.get(token.form[0]) + token.form[1:]
-                newForm = '-' + newForm
+            # if token.tag[0] == 'E':
+            #     # if token.form[0] == '다':
+            #     #     continue
+            #     # 종성 자음이 있을 경우 초성 자음으로 변경(검색을 위함)
+            #     if (ord('ᆨ') <= ord(token.form[0]) <= ord('ᇂ')):
+            #         newForm = final_to_initial.get(token.form[0]) + token.form[1:]
+            #     if token.form != 'ㅂ니다' or token.form != '었':
+            #         continue                    
+            #     newForm = '-' + newForm
+
             # 태그가 'V'로 시작할 경우 form의 맨 뒤에 '다' 추가 (용언이기 때문)
             if token.tag[0] == 'V':
                 newForm = token.form + '다'
             
-            url_entry = collection.find_one({"Word": newForm.replace(" ", "")})
+            url_entry = collection.find_one({"Word": remove_non_alphanumeric_korean(newForm)})
             if url_entry:
                 newUrl = url_entry["URL"]
+            else:
+                newUrl = find_similar_word_url(newForm)
                 
             # 새 Token 객체 생성
             new_token = Token(
-                form=newForm,
+                form=newForm.replace("?", ""),
                 tag=token.tag,
                 start=token.start,
                 len=token.len,
@@ -151,30 +156,62 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
         result.append({"sentence": sentence.text, "words": words})
     
     return result
-# test = asyncio.run(determine_texts("쎄한 느낌이 들어 쎄했다. 맨 앞의 그 사람은 힘이 세다. 먹어본 그 삼겹살은 정말 맛있었다. 저는 영리입니다. 찬 바람이 나의 뺨을 쳤습니다. 나는 천재다. 세게 때리자. 아시아인프라투자은행은 멋지다"))
-# print(test)
 
 def saveWord(texts: List[str], wordCnt: int, word_tokens: List[Token], words: List[Word]):
-    text = filter_not_korean(texts[wordCnt])
+    text = remove_non_alphanumeric_korean(texts[wordCnt])
+    if (texts[wordCnt].endswith('?')):
+        lastToken = word_tokens[-1]
+        word_tokens.append(Token(form="?", tag="SF", start=lastToken.start + lastToken.len, len=1, url=collection.find_one({"Word": "-ㅂ니까"})["URL"]))
+    
     url_entry = collection.find_one({"Word": text})
     wordUrl = ''
     if url_entry:
         wordUrl = url_entry["URL"]
     word = Word(form=texts[wordCnt], tokens=word_tokens, url=wordUrl)
     words.append(word)
+    
+# 영어 (A-Z, a-z), 숫자 (0-9), 한글 (\uAC00-\uD7A3 완성형, \u3131-\u3163 자음/모음) 만 남기고 나머지 제거
+def remove_non_alphanumeric_korean(text):
+    return re.sub(r'[^A-Za-z0-9\uAC00-\uD7A3\u3131-\u3163]', '', text)
 
-def filter_not_korean(text: str) -> str:
-    t = ""
-    for c in text:
-        if '가' <= c <= '힣':
-            t += c
-    return t
-
-# ChatGPT 호출
+# ChatGPT 호출(문장 -> 한국수어)
 def translate_sentence(prompt: str):
     response = openai.chat.completions.create(
         model="gpt-4o",
-        messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야. 제시된 한국어 문장/문장들을 한국수어 문법으로 번역해서 응답해줘."},
+        messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야."
+                   "제시된 한국어 문장들을 한국수어 문법 형식으로 번역해서 응답해줘."
+                   "최대한 단어의 원형을 유지해줘."
+                   "응답은 번역한 문장을 그대로 돌려주면 돼."
+                #    "입력된 문장에서 오타가 있을 경우 올바르게 수정해."
+                #    "수어의 특징은 다음과 같아." 
+                #    "1. 강조되는 주어나 서술어를 앞에 둔다."
+                #    "2. 형용사와 같은 꾸미는 언어는 보통 꾸미는 대상 뒤에 둔다."
+                #    "3. 시제를 항상 맨 앞에 둔다."
+                #    "4. 완료, 진행, 미래와 같은 형식은 서술어 뒤에 온다."
+                   },
                   {"role": "user", "content": prompt}]
     )
     return response.choices[0].message.content
+
+def find_similar_word_url(word: str):
+    return "1"
+
+# # ChatGPT 호출(형태소로 분석된 문장 -> 한국수어)
+# def translate_sentence(prompt: List[Sentence]):
+#     response = openai.chat.completions.create(
+#     model="gpt-4o",
+#     messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야."
+#                 "제시된 한국어 문장을 한국수어 문법 형식으로 번역해서 응답해줘."
+#                 "문장 text 외의 정보는 문장을 형태소 분석한 결과야."
+#                 "최대한 단어의 원형을 유지해줘."
+#             #    "입력된 문장에서 오타가 있을 경우 올바르게 수정해."
+#             #    "수어의 특징은 다음과 같아." 
+#             #    "1. 강조되는 주어나 서술어를 앞에 둔다."
+#             #    "2. 형용사와 같은 꾸미는 언어는 보통 꾸미는 대상 뒤에 둔다."
+#             #    "3. 시제를 항상 맨 앞에 둔다."
+#             #    "4. 완료, 진행, 미래와 같은 형식은 서술어 뒤에 온다."
+#                 },
+#             {"role": "user", "content": str(prompt)}]
+#     )
+#     print(prompt)
+#     return response.choices[0].message.content
