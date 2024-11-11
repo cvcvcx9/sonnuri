@@ -4,6 +4,7 @@ from kiwipiepy import Kiwi
 from pydantic import BaseModel
 from typing import List, Dict
 from dotenv import load_dotenv
+from openai import OpenAI
 import os
 import pymongo
 # import asyncio
@@ -14,6 +15,12 @@ load_dotenv()
 # 환경 변수에서 MongoDB 사용자 이름과 비밀번호 불러오기
 mongo_username = os.getenv("MONGO_USERNAME")
 mongo_password = os.getenv("MONGO_PASSWORD")
+
+# OPENAI 연결 설정
+openai = OpenAI(
+    organization="org-CdqlMsWjfTiylVQPL4TCGTy0",
+    api_key=os.getenv("OPENAI_API_KEY")
+)
 
 kiwi = Kiwi(load_default_dict=True, integrate_allomorph=True, model_type='sbg', typos=None)
 app = FastAPI()
@@ -27,8 +34,8 @@ app.add_middleware(
 )
 
 # MongoDB 클라이언트 설정 (예: 로컬호스트)
-client = pymongo.MongoClient(f"mongodb://{mongo_username}:{mongo_password}@k11a301.p.ssafy.io:8017/?authSource=admin")
-db = client["sonnuri"]
+mongo = pymongo.MongoClient(f"mongodb://{mongo_username}:{mongo_password}@k11a301.p.ssafy.io:8017/?authSource=admin")
+db = mongo["sonnuri"]
 collection = db["sonnuri"]
 
 class TextInput(BaseModel):
@@ -78,8 +85,10 @@ final_to_initial = {
 @app.post("/determine")
 async def determine_texts(input_data: TextInput):
     try:
+        # ChatGPT를 활용해 문장을 한국어 -> 한국수어 문법으로 변형
+        ksl_sentence = translate_sentence(input_data.text)
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
-        analyzed_result = kiwi.split_into_sents(input_data.text, return_tokens=True)
+        analyzed_result = kiwi.split_into_sents(ksl_sentence, return_tokens=True)
         
         result = extract_words_from_sentence(analyzed_result)
         return {"result": result}
@@ -109,20 +118,22 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
                 
             lenCnt = token.start + token.len
             
-            # 특수문자, 한자 등 없는 단어 제외(영어=SH는 포함)
-            if (token.tag.startswith('S') and token.tag != 'SH'):
+            # 특수문자, 한자 등 없는 단어, 부사격 조사를 제외한 조사, 접미사 제외(영어=SH는 포함)
+            if token.tag[0] == 'S' and token.tag != 'SH' or token.tag[0] == 'X' and token.tag != 'XPN' or token.tag[0] == 'J' and token.tag != 'JKB':
                 continue
             # 태그가 'E'로 시작할 경우 form의 맨 앞에 '-' 추가 (어미이기 때문)
-            if token.tag.startswith('E'):
+            if token.tag[0] == 'E':
+                if token.form[0] == '다':
+                    continue
                 # 종성 자음이 있을 경우 초성 자음으로 변경(검색을 위함)
                 if (ord('ᆨ') <= ord(token.form[0]) <= ord('ᇂ')):
                     newForm = final_to_initial.get(token.form[0]) + token.form[1:]
                 newForm = '-' + newForm
             # 태그가 'V'로 시작할 경우 form의 맨 뒤에 '다' 추가 (용언이기 때문)
-            if token.tag.startswith('V'):
+            if token.tag[0] == 'V':
                 newForm = token.form + '다'
             
-            url_entry = collection.find_one({"Word": newForm})
+            url_entry = collection.find_one({"Word": newForm.replace(" ", "")})
             if url_entry:
                 newUrl = url_entry["URL"]
                 
@@ -158,3 +169,12 @@ def filter_not_korean(text: str) -> str:
         if '가' <= c <= '힣':
             t += c
     return t
+
+# ChatGPT 호출
+def translate_sentence(prompt: str):
+    response = openai.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야. 제시된 한국어 문장/문장들을 한국수어 문법으로 번역해서 응답해줘."},
+                  {"role": "user", "content": prompt}]
+    )
+    return response.choices[0].message.content
