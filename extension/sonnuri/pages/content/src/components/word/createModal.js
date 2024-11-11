@@ -1,18 +1,18 @@
 export default function createModal() {
   const modal = document.createElement('div');
-  modal.style.cssText = `
-      position: fixed;
-      background: white;
-      border: 1px solid black;
-      padding: 10px;
-      z-index: 10001;
-      width: 480px;
-      height: 360px;
-      display: none; /* 초기에는 숨김 */
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      `;
-  modal.textContent = 'word';
+  modal.id = 'my_word_modal';
+
   document.body.appendChild(modal);
+
+  modal.open = () => {
+    modal.classList.add('open');
+    modal.classList.remove('close');
+  };
+  
+  modal.close = () => {
+    modal.classList.remove('open');
+    modal.classList.add('close');
+  };
+
   return modal;
 }

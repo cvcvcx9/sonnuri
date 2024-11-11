@@ -1,6 +1,8 @@
 //
 import createTranslateButton from './components/sentence/createTranslateButton.js';
 import createTranslateImgWrapper from './components/sentence/createTraslateImgWrapper.js';
+import loadingCircle from './components/sentence/loadingCircle.js';
+import requestSentence from './components/sentence/requestSentence.js';
 import createModal from './components/word/createModal.js';
 import createOverlay from './components/word/createOverlay.js';
 import createToggleButton from './components/word/createToggleButton.js';
@@ -71,6 +73,9 @@ translateSentenceBtn.addEventListener('mouseleave', () => {
   translateImgWrapper.style.display = 'none';
 });
 
+
+const {loadingCircleWrapper,circle} = loadingCircle();
+
 document.addEventListener('mouseup', e => {
   const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
   if (selectedText) {
@@ -82,8 +87,10 @@ document.addEventListener('mouseup', e => {
     translateSentenceBtn.style.justifyContent = 'center'; // 수평 중앙 정렬
 
     // 버튼 클릭 이벤트 - 사이드바 열림 상태
-    translateSentenceBtn.onclick = () => {
+    translateSentenceBtn.onclick = async () => {
       console.log('버튼 클릭');
+      await requestSentence(selectedText, circle);
+
       chrome.runtime.sendMessage({
         type: 'open_side_panel',
         text: selectedText,
@@ -124,7 +131,6 @@ window.addEventListener('scroll', () => {
   if (isHighlighting) {
     // 스크롤 중에는 캔버스 숨기기
     canvas.style.display = 'none';
-
     // 스크롤이 멈추면 다시 그리기
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
