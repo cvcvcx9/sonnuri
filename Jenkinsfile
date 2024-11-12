@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DETERMINE_PATH = 'determine'
-        SONNURI_PATH = 'sonnuri'
+        ECCV_PATH = 'ECCV2022-RIFE'
     }
 
     stages {
@@ -31,20 +31,27 @@ pipeline {
                 }
             }
         }
-        stage('Build and Run Sonnuri') {
+        stage('Build and Run ECCV') {
             when {
-                changeset "${SONNURI_PATH}/**" // sonnuri 폴더에 변경 사항이 있을 때만 실행
+                changeset "${ECCV_PATH}/**" // ECCV2022-RIFE 폴더에 변경 사항이 있을 때만 실행
             }
             steps {
-                script {
-                    // sonnuri 컨테이너 중지 및 제거
-                    sh 'docker stop sonnuri_app || true && docker rm sonnuri_app || true'
-                    // 기존 sonnuri_app 이미지 삭제
-                    sh 'docker rmi sonnuri_app || true'
+                // Credentials 블록을 사용하여 ECCV2022-RIFE_ENV .env파일을 환경변수로 가져오기
+                withCredentials([
+                    file(credentialsId: 'ECCV2022-RIFE_ENV', variable: 'ECCV2022-RIFE_ENV')
+                ]) {
+                    script {
+                    // eccv_app 컨테이너 중지 및 제거
+                    sh 'docker stop eccv_app || true && docker rm eccv_app || true'
+                    // 기존 eccv_app 이미지 삭제
+                    sh 'docker rmi eccv_app || true'
                     // sonnuri 디렉토리에서 Docker 빌드 및 실행
-                    dir(SONNURI_PATH) {
-                        sh 'docker build -t sonnuri_app .'
-                        sh 'docker run -d --name sonnuri_app -p 8000:8000 sonnuri_app'
+                    dir(ECCV_PATH) {
+                        // Jenkins에 저장한 파일 복사
+                        sh 'cp ${ECCV2022-RIFE_ENV} .env'
+                        sh 'docker build -t eccv_app .'
+                        sh 'docker run -d --name eccv_app -p 8003:8003 eccv_app'
+                        }
                     }
                 }
             }
