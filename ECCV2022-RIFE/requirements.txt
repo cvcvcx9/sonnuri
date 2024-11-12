@@ -20,8 +20,8 @@ idna==3.10
 imageio==2.36.0
 imageio-ffmpeg==0.5.1
 itsdangerous==2.2.0
-jax==0.4.3
-jaxlib==0.4.3
+jax==0.4.35
+jaxlib==0.4.35
 Jinja2==3.1.4
 jmespath==1.0.1
 joblib==1.4.2
