@@ -10,9 +10,9 @@ click
 colorama
 contourpy
 cycler
+fastapi
 ffmpeg
 filelock
-Flask
 flatbuffers
 fonttools
 fsspec
