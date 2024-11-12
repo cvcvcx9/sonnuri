@@ -1,5 +1,20 @@
 import findTextNodes from './findTextNodes';
 
+const getTopElementAtPointExcludingCanvas = (x, y) => {
+  let topElement = document.elementFromPoint(x, y);
+
+  while (topElement && topElement.tagName.toLowerCase() === 'canvas') {
+    // canvas를 제외하고 다시 아래의 요소를 가져옴
+    topElement.style.pointerEvents = 'none'; // canvas 클릭 무효화
+    topElement = document.elementFromPoint(x, y);
+  }
+  return topElement;
+};
+
+const isDescendant = (topElement, targetNode) => {
+  return topElement.contains(targetNode);
+};
+
 export default function highlightTextNodes(ctx, canvas, documentBody, highlights, serverWords, isElementCovered) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const textNodes = findTextNodes(documentBody);
@@ -30,6 +45,7 @@ export default function highlightTextNodes(ctx, canvas, documentBody, highlights
         const rects = range.getClientRects();
         for (let rect of rects) {
           // 화면에 보이는 영역만 그리기
+          const elementAtPoint = getTopElementAtPointExcludingCanvas(rect.left + rect.width / 2, rect.top + rect.height / 2);
           if (
             rect.width > 0 &&
             rect.height > 0 &&
@@ -37,7 +53,8 @@ export default function highlightTextNodes(ctx, canvas, documentBody, highlights
             rect.top <= window.innerHeight &&
             rect.left >= 0 &&
             rect.left <= window.innerWidth &&
-            !isElementCovered(rect)
+            !isElementCovered(rect) &&
+            isDescendant(elementAtPoint, node)
           ) {
             // 라운드 직사각형 그리기
             ctx.roundRect(

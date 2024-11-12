@@ -25,27 +25,25 @@ export default function loadingCircle() {
     circle.stop = ()=>{
         circle.classList.remove("loading");
         circle.classList.add("stop");
+        div.style.backgroundColor = "orange";
         div.style.display = "none";
     }
 
     circle.success = ()=>{
         circle.classList.remove("loading");
-        circle.classList.add("success");
         div.style.backgroundColor = "green";
     }
-
+    div.onclick = ()=>{
+            chrome.runtime.sendMessage({type: "open_side_panel"});
+    }
+    
     circle.error = ()=>{
         circle.classList.remove("loading");
-        circle.classList.add("error");
         div.style.backgroundColor = "red";
     }
 
     div.appendChild(circle);
-
-    div.onclick = ()=>{
-        console.log("loading circle clicked");
-    }
-
+    
     document.body.appendChild(div);
     
     return {div,circle};
