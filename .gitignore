@@ -1,3 +1,7 @@
+
+.env
+.idea/vcs.xml
+.idea/workspace.xml
 ECCV2022-RIFE/venv/*
 ECCV2022-RIFE/ECCvenv/*
 .env
