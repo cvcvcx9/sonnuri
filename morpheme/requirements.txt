@@ -2,5 +2,5 @@ fastapi
 pydantic
 python-dotenv
 openai
-kobert_transformer
+kobert_transformers
 scikit-learn
