@@ -23,8 +23,12 @@ pipeline {
                     sh 'docker rmi determine_app || true'
                     // determine 디렉토리에서 Docker 빌드 및 실행
                     dir(DETERMINE_PATH) {
-                        // chmod 명령어로 쓰기 권한 추가
-                        sh 'chmod u+w .env'
+                        // .env 파일 처리
+                        sh '''
+                        if [ -f .env ]; then
+                            chmod u+w .env
+                        fi
+                        '''
                         // Jenkins에 저장한 파일 복사
                         sh 'cp ${MONGODB_ENV} .env'
                         sh 'docker build -t determine_app .'
@@ -50,8 +54,12 @@ pipeline {
                     sh 'docker rmi eccv_app || true'
                     // sonnuri 디렉토리에서 Docker 빌드 및 실행
                     dir(ECCV_PATH) {
-                        // chmod 명령어로 쓰기 권한 추가
-                        sh 'chmod u+w .env'
+                        // .env 파일 처리
+                        sh '''
+                        if [ -f .env ]; then
+                            chmod u+w .env
+                        fi
+                        '''
                         // Jenkins에 저장한 파일 복사
                         sh 'cp ${ECCV_ENV} .env'
                         sh 'docker build -t eccv_app .'
@@ -77,8 +85,12 @@ pipeline {
                     sh 'docker rmi morpheme_app || true'
                     // morpheme 디렉토리에서 Docker 빌드 및 실행
                     dir(MORPHEME_PATH) {
-                        // chmod 명령어로 쓰기 권한 추가
-                        sh 'chmod u+w .env'
+                        // .env 파일 처리
+                        sh '''
+                        if [ -f .env ]; then
+                            chmod u+w .env
+                        fi
+                        '''
                         // Jenkins에 저장한 파일 복사
                         sh 'cp ${MONGODB_ENV} .env'
                         sh 'docker build -t morpheme_app .'
