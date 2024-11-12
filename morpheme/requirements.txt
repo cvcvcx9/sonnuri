@@ -1,6 +1,6 @@
 fastapi
 pydantic
-dotenv
+python-dotenv
 openai
 kobert_transformer
 scikit-learn
