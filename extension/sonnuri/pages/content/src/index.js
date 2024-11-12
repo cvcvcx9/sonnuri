@@ -74,31 +74,45 @@ translateSentenceBtn.addEventListener('mouseleave', () => {
 });
 
 
-const {loadingCircleWrapper,circle} = loadingCircle();
+const {loadingCircleWrapper,circle : loadingCircleElement} = loadingCircle();
 
 document.addEventListener('mouseup', e => {
   const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
   if (selectedText) {
-    console.log(selectedText);
     translateSentenceBtn.style.top = `${e.pageY}px`; // 버튼 위치 변경
     translateSentenceBtn.style.left = `${e.pageX}px`; // 버튼 위치 변경
     translateSentenceBtn.style.display = 'flex'; // 플렉스 박스 사용
     translateSentenceBtn.style.alignItems = 'center'; // 수직 중앙 정렬
     translateSentenceBtn.style.justifyContent = 'center'; // 수평 중앙 정렬
 
-    // 버튼 클릭 이벤트 - 사이드바 열림 상태
+    // 버튼 클릭 이벤트 
+    // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
     translateSentenceBtn.onclick = async () => {
-      console.log('버튼 클릭');
-      await requestSentence(selectedText, circle);
-
-      chrome.runtime.sendMessage({
-        type: 'open_side_panel',
+      // 로딩 아이콘을 표시한다.
+      loadingCircleElement.loading();
+      await chrome.runtime.sendMessage({
+        type: 'request_sentence',
         text: selectedText,
       });
       translateSentenceBtn.style.display = 'none'; // 버튼 제거
     };
   } else {
     translateSentenceBtn.style.display = 'none'; // 선택된 텍스트가 없으면 버튼 숨김
+  }
+});
+
+// 백그라운드에서 요청이 완료되었을 때, 아이콘의 상태를 변경한다.
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message.type === "success_sentence_result") {
+    console.log("요청결과 전송받기 완료");
+    
+    loadingCircleElement.success();
+  }
+});
+
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message.type === 'error_sentence_result') {
+    loadingCircleElement.error();
   }
 });
 

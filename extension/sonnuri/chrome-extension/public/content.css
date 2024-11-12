@@ -44,6 +44,8 @@
 }
 
 
+
+
   .loader.loading {
     width: 36px;
     height: 36px;
@@ -56,15 +58,16 @@
     animation: rotation 1s linear infinite;
     }
     .loader.stop {
+        
         display: none;
     }
 
     .loader.success {
-        background: green;
+        display: none;
     }
 
     .loader.error {
-        background: red;
+        display: none;
     }
 
     @keyframes rotation {
