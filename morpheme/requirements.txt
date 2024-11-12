@@ -1,0 +1,6 @@
+fastapi
+pydantic
+dotenv
+openai
+kobert_transformer
+scikit-learn
