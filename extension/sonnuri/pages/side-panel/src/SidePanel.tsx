@@ -21,64 +21,51 @@ const SidePanel: React.FC = () => {
     setCurrentVideoIndex(index); // 클릭한 버튼의 인덱스를 현재 비디오 인덱스로 설정
   };
   // URL 추출 로직 수정
-  const extractUrls = (sentences: any) => {
-    const urls: {url: string, word: string}[] = [];
-    if (!sentences || sentences.length === 0) {
-      return urls;
-    }
-    sentences.forEach((sentence: any) => {
-      sentence.words.forEach((word: any) => {
-        if (word.url && word.url !== "") {
-          urls.push({url: word.url, word: word.form});
-          return;
-        }
-        if (word.tokens) {
-          word.tokens.forEach((token: any) => {
-            if (token.url && token.url !== "") {
-              urls.push({url: token.url, word: token.form});
-            }
-          });
-        }
-      });
-    });
-    return urls;
-  };
+  
 
   // handleUpdatedTexts 함수 수정
-  const handleUpdatedTexts = async (newText: string) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("http://k11a301.p.ssafy.io:8001/determine", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },  
-        body: JSON.stringify({ text: newText }),
-      });
-      const data = await response.json();
-      const videoUrls = extractUrls(data.result);
-      setPlaylistInfo(videoUrls);
-      setPlaylist(videoUrls.map((item) => item.url));
-      setCurrentVideoIndex(0);
-    } catch (error) {
-      console.error("에러:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const handleUpdatedTexts = async (newText: string) => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await fetch("http://k11a301.p.ssafy.io:8001/determine", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },  
+  //       body: JSON.stringify({ text: newText }),
+  //     });
+  //     const data = await response.json();
+  //     const videoUrls = extractUrls(data.result);
+  //     setPlaylistInfo(videoUrls);
+  //     setPlaylist(videoUrls.map((item) => item.url));
+  //     setCurrentVideoIndex(0);
+  //   } catch (error) {
+  //     console.error("에러:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //     chrome.runtime.sendMessage({type: "success"});
+  //   }
+  // };
 
   // 저장된 텍스트 로드 및 스토리지 변경 감지
   useEffect(() => {
-    chrome.storage.local.get("newSentence", (data) => {
-      if (data.newSentence) {
-        handleUpdatedTexts(data.newSentence);
+    chrome.storage.local.get("urls", (data) => {
+      if (data.urls) {
+        setPlaylistInfo(data.urls);
+        setPlaylist(data.urls.map((item) => item.url));
+        console.log(data.urls);
       }
     });
-    chrome.storage.onChanged.addListener((changes, namespace) => {
-      if (changes.newSentence) {
-        handleUpdatedTexts(changes.newSentence.newValue);
+    // 스토리지 변경을 감지하고, 변경된 값을 기반으로, 서버에 요청을 보내는 로직
+    const newSentenceListener = (changes: any, namespace: any) => {
+      if (changes.urls) {
+        setPlaylistInfo(changes.urls.newValue);
       }
-    });
+    };
+    chrome.storage.onChanged.addListener(newSentenceListener);
+    return () => {
+      chrome.storage.onChanged.removeListener(newSentenceListener);
+    };
   }, []);
 
   return (
@@ -106,8 +93,9 @@ const SidePanel: React.FC = () => {
               <>
                 <ReactPlayer
                   url={playlist[currentVideoIndex]}
-                  controls
+                  controls={false}
                   playing
+                  playbackRate={1.5}
                   width="100%"
                   height="200px"
                   onEnded={handleVideoEnd}

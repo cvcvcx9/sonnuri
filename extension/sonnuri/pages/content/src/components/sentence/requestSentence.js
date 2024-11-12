@@ -9,11 +9,9 @@ export default async function requestSentence(text, circle) {
         body: JSON.stringify({ text: text }),
       });
        const data = await response.json();
-       circle.success();
        return data;
     } catch (error) {
         console.error("Error fetching data:", error);
-        circle.error();
     } finally {
         setTimeout(() => {
             circle.stop();
