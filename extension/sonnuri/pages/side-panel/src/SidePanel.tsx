@@ -28,13 +28,13 @@ const SidePanel: React.FC = () => {
     }
     sentences.forEach((sentence: any) => {
       sentence.words.forEach((word: any) => {
-        if (word.url) {
+        if (word.url && word.url !== "") {
           urls.push({url: word.url, word: word.form});
           return;
         }
         if (word.tokens) {
           word.tokens.forEach((token: any) => {
-            if (token.url) {
+            if (token.url && token.url !== "") {
               urls.push({url: token.url, word: token.form});
             }
           });
@@ -72,6 +72,11 @@ const SidePanel: React.FC = () => {
     chrome.storage.local.get("newSentence", (data) => {
       if (data.newSentence) {
         handleUpdatedTexts(data.newSentence);
+      }
+    });
+    chrome.storage.onChanged.addListener((changes, namespace) => {
+      if (changes.newSentence) {
+        handleUpdatedTexts(changes.newSentence.newValue);
       }
     });
   }, []);

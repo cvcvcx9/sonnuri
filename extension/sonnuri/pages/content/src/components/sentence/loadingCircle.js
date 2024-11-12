@@ -18,6 +18,7 @@ export default function loadingCircle() {
         circle.classList.remove("stop");
         div.style.display = "flex";
         div.style.alignItems = "center";
+        div.style.backgroundColor = "orange";
         div.style.justifyContent = "center";
     }
 
@@ -30,11 +31,13 @@ export default function loadingCircle() {
     circle.success = ()=>{
         circle.classList.remove("loading");
         circle.classList.add("success");
+        div.style.backgroundColor = "green";
     }
-    
+
     circle.error = ()=>{
         circle.classList.remove("loading");
         circle.classList.add("error");
+        div.style.backgroundColor = "red";
     }
 
     div.appendChild(circle);
