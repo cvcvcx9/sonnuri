@@ -36,9 +36,9 @@ pipeline {
                 changeset "${ECCV_PATH}/**" // ECCV2022-RIFE 폴더에 변경 사항이 있을 때만 실행
             }
             steps {
-                // Credentials 블록을 사용하여 ECCV2022-RIFE_ENV .env파일을 환경변수로 가져오기
+                // Credentials 블록을 사용하여 ECCV_ENV .env파일을 환경변수로 가져오기
                 withCredentials([
-                    file(credentialsId: 'ECCV2022-RIFE_ENV', variable: 'ECCV2022-RIFE_ENV')
+                    file(credentialsId: 'ECCV_ENV', variable: 'ECCV_ENV')
                 ]) {
                     script {
                     // eccv_app 컨테이너 중지 및 제거
@@ -48,9 +48,9 @@ pipeline {
                     // sonnuri 디렉토리에서 Docker 빌드 및 실행
                     dir(ECCV_PATH) {
                         // Jenkins에 저장한 파일 복사
-                        sh 'cp ${ECCV2022-RIFE_ENV} .env'
+                        sh 'cp ${ECCV_ENV} .env'
                         sh 'docker build -t eccv_app .'
-                        sh 'docker run -d --name eccv_app -p 8003:8003 eccv_app'
+                        sh 'docker run -d --name eccv_app --env-file .env -p 8003:8003 eccv_app'
                         }
                     }
                 }
