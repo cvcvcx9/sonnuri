@@ -139,8 +139,8 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             url_entry = collection.find_one({"Word": remove_non_alphanumeric_korean(newForm)})
             if url_entry:
                 newUrl = url_entry["URL"]
-            else:
-                newUrl = find_similar_word_url(newForm)
+            # else:
+                # newUrl = find_similar_word_url(newForm)
                 
             # 새 Token 객체 생성
             new_token = Token(
@@ -193,8 +193,8 @@ def translate_sentence(prompt: str):
     )
     return response.choices[0].message.content
 
-def find_similar_word_url(word: str):
-    return "1"
+# def find_similar_word_url(word: str):
+
 
 # # ChatGPT 호출(형태소로 분석된 문장 -> 한국수어)
 # def translate_sentence(prompt: List[Sentence]):
