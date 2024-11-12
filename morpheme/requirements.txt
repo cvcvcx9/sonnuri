@@ -1,6 +1,12 @@
 fastapi
-pydantic
-python-dotenv
-openai
+kiwipiepy
 kobert_transformers
-scikit-learn
+numpy
+openai
+pandas
+pydantic
+pymongo
+python-dotenv
+Requests
+scikit_learn
+torch

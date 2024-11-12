@@ -38,7 +38,7 @@ pipeline {
                 }
             }
         }
-        stage('Build and Run morpheme') {
+        stage('Build and Run eccv') {
             when {
                 changeset "${ECCV_PATH}/**" // ECCV2022-RIFE 폴더에 변경 사항이 있을 때만 실행
             }
