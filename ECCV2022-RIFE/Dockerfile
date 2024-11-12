@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 
 # FastAPI 애플리케이션 실행
 EXPOSE 8003
-CMD ["python", "app.py"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8003"]

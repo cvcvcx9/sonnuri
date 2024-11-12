@@ -43,6 +43,7 @@ pillow
 protobuf
 psutil
 pycparser
+pydantic
 pyparsing
 python-dateutil
 python-dotenv
@@ -69,5 +70,6 @@ tqdm
 typing_extensions
 tzdata
 urllib3
+uvicorn
 Werkzeug
 wget

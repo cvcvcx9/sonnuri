@@ -2,8 +2,11 @@ import cv2
 import os
 import hashlib
 import boto3
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from typing import List
-from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 import requests
 from tempfile import NamedTemporaryFile
@@ -13,7 +16,15 @@ import shutil
 # .env 파일 로드
 load_dotenv()
 
-app = Flask(__name__)
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # S3 설정
 S3_BUCKET = os.getenv('AWS_S3_BUCKET')
@@ -278,33 +289,36 @@ class VideoConnector:
             
             print(f"처리 중 오류 발생: {str(e)}")
             raise
-
-@app.route('/process_videos', methods=['POST'])
-def process_videos():
-    try:
-        data = request.get_json()
-        if not data or 'video_urls' not in data:
-            return jsonify({'error': '비디오 URL 리스트가 필요합니다'}), 400
         
-        video_urls = data['video_urls']
+# 데이터 모델 정의 (입력 데이터 검증)
+class VideoRequest(BaseModel):
+    video_urls: list[str]
+
+@app.post('/process_videos')
+async def process_videos(request: VideoRequest):
+    try:
+        video_urls = request.video_urls
         if not isinstance(video_urls, list) or not video_urls:
-            return jsonify({'error': '유효한 비디오 URL 리스트가 필요합니다'}), 400
+            raise HTTPException(status_code=400, detail="유효한 비디오 URL 리스트가 필요합니다.")
         
         output_filename = f"processed_{hashlib.md5(''.join(video_urls).encode()).hexdigest()}.mp4"
         
         connector = VideoConnector()
         s3_url = connector.process_videos(video_urls, output_filename)
         
-        return jsonify({
-            'status': 'success',
-            'video_url': s3_url
-        })
+        return JSONResponse(
+            content={
+                "status": "success",
+                "video_url": s3_url
+            },
+            status_code=200
+        )
         
     except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500
-
-if __name__ == '__main__':
-    app.run()
+        return JSONResponse(
+            content={
+                "status": "error",
+                "message": str(e)
+            },
+            status_code=500
+        )
