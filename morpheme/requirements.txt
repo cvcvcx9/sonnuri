@@ -1,4 +1,5 @@
 fastapi
+uvicorn
 kiwipiepy
 kobert_transformers
 numpy
