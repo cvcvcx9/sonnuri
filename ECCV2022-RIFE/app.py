@@ -7,15 +7,20 @@ from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 import requests
 from tempfile import NamedTemporaryFile
+from dotenv import load_dotenv
+import shutil
+
+# .env 파일 로드
+load_dotenv()
 
 app = Flask(__name__)
 
 # S3 설정
-S3_BUCKET = 'your-bucket-name'
-S3_REGION = 'ap-northeast-2'
+S3_BUCKET = os.getenv('AWS_S3_BUCKET')
+S3_REGION = os.getenv('AWS_REGION')
 s3_client = boto3.client('s3',
-    aws_access_key_id='YOUR_ACCESS_KEY',
-    aws_secret_access_key='YOUR_SECRET_KEY',
+    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
     region_name=S3_REGION
 )
 
@@ -33,15 +38,56 @@ class VideoConnector:
     def download_video(self, url: str, local_path: str) -> bool:
         """URL에서 비디오 다운로드"""
         try:
-            response = requests.get(url, stream=True)
+            print(f"비디오 다운로드 시도: {url}")
+            
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            
+            response = requests.get(url, 
+                                stream=True, 
+                                headers=headers, 
+                                verify=False,  # SSL 인증서 검증 비활성화
+                                timeout=30)    # 타임아웃 설정
+            
+            print(f"응답 상태 코드: {response.status_code}")
+            print(f"응답 헤더: {response.headers}")
+            
             response.raise_for_status()
             
+            total_size = int(response.headers.get('content-length', 0))
+            print(f"파일 크기: {total_size} bytes")
+            
             with open(local_path, 'wb') as f:
+                downloaded = 0
                 for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
+                    if chunk:
+                        f.write(chunk)
+                        downloaded += len(chunk)
+                        print(f"다운로드 진행률: {(downloaded/total_size)*100:.2f}%")
+            
+            if os.path.exists(local_path):
+                file_size = os.path.getsize(local_path)
+                print(f"저장된 파일 크기: {file_size} bytes")
+                if file_size > 0:
+                    print("다운로드 성공!")
+                    return True
+                else:
+                    print("다운로드된 파일이 비어있습니다.")
+                    return False
+                    
             return True
+            
+        except requests.exceptions.RequestException as e:
+            print(f"요청 중 에러 발생: {str(e)}")
+            if hasattr(e.response, 'status_code'):
+                print(f"HTTP 상태 코드: {e.response.status_code}")
+            if hasattr(e.response, 'text'):
+                print(f"응답 내용: {e.response.text[:500]}")  # 처음 500자만 출력
+            return False
         except Exception as e:
-            print(f"비디오 다운로드 실패: {str(e)}")
+            print(f"예상치 못한 에러 발생: {str(e)}")
+            print(f"에러 타입: {type(e)}")
             return False
 
     def extract_all_frames(self, video_path: str, word: str) -> tuple:
@@ -150,7 +196,6 @@ class VideoConnector:
         """비디오 URL 리스트를 처리하고 결과 비디오의 S3 URL 반환"""
         try:
             if os.path.exists("output"):
-                import shutil
                 shutil.rmtree("output")
             os.makedirs("output")
             
@@ -188,17 +233,49 @@ class VideoConnector:
             self.create_final_video(words, fps, size, output_filename)
             
             # S3에 업로드
-            s3_key = f"processed_videos/{os.path.basename(output_filename)}"
+            s3_key = f"sentence/{os.path.basename(output_filename)}"
             s3_url = self.upload_to_s3(output_filename, s3_key)
             
-            # 임시 파일 정리
-            shutil.rmtree(temp_dir)
-            if os.path.exists("output"):
-                shutil.rmtree("output")
+            # 임시 파일들 정리
+            try:
+                # temp_videos 디렉토리 삭제
+                if os.path.exists(temp_dir):
+                    shutil.rmtree(temp_dir)
+                
+                # output 디렉토리 삭제
+                if os.path.exists("output"):
+                    shutil.rmtree("output")
+                    
+                # temp_frames 디렉토리 삭제
+                if os.path.exists(self.output_dir):
+                    shutil.rmtree(self.output_dir)
+                    
+                # 최종 output 파일 삭제
+                if os.path.exists(output_filename):
+                    os.remove(output_filename)
+                    
+                print("모든 임시 파일 정리 완료")
+                
+            except Exception as e:
+                print(f"임시 파일 정리 중 오류 발생: {str(e)}")
+                # 파일 정리 중 오류가 발생해도 메인 프로세스는 계속 진행
             
             return s3_url
             
         except Exception as e:
+            # 에러 발생 시에도 임시 파일들을 정리
+            try:
+                if os.path.exists(temp_dir):
+                    shutil.rmtree(temp_dir)
+                if os.path.exists("output"):
+                    shutil.rmtree("output")
+                if os.path.exists(self.output_dir):
+                    shutil.rmtree(self.output_dir)
+                if os.path.exists(output_filename):
+                    os.remove(output_filename)
+            except:
+                pass
+            
             print(f"처리 중 오류 발생: {str(e)}")
             raise
 
@@ -230,4 +307,4 @@ def process_videos():
         }), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
