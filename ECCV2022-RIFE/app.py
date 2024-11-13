@@ -7,11 +7,11 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
-from werkzeug.utils import secure_filename
 import requests
-from tempfile import NamedTemporaryFile
 from dotenv import load_dotenv
 import shutil
+from concurrent.futures import ThreadPoolExecutor
+import numpy as np
 
 # .env 파일 로드
 load_dotenv()
@@ -42,209 +42,142 @@ class VideoConnector:
         os.makedirs(output_dir, exist_ok=True)
         os.makedirs(f"{output_dir}/words", exist_ok=True)
         os.makedirs(f"{output_dir}/interpolated", exist_ok=True)
-        
+
     def get_safe_name(self, word: str) -> str:
         return hashlib.md5(word.encode()).hexdigest()
 
     def download_video(self, url: str, local_path: str) -> bool:
-        """URL에서 비디오 다운로드"""
         try:
-            print(f"비디오 다운로드 시도: {url}")
-            
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
             }
-            
-            response = requests.get(url, 
-                                stream=True, 
-                                headers=headers, 
-                                verify=False,  # SSL 인증서 검증 비활성화
-            )
-                                # timeout=300)    # 타임아웃 설정
-            
-            print(f"응답 상태 코드: {response.status_code}")
-            print(f"응답 헤더: {response.headers}")
-            
+            response = requests.get(url, stream=True, headers=headers, verify=False)
             response.raise_for_status()
-            
-            total_size = int(response.headers.get('content-length', 0))
-            print(f"파일 크기: {total_size} bytes")
-            
+
             with open(local_path, 'wb') as f:
-                downloaded = 0
                 for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        f.write(chunk)
-                        downloaded += len(chunk)
-                        print(f"다운로드 진행률: {(downloaded/total_size)*100:.2f}%")
-            
-            if os.path.exists(local_path):
-                file_size = os.path.getsize(local_path)
-                print(f"저장된 파일 크기: {file_size} bytes")
-                if file_size > 0:
-                    print("다운로드 성공!")
-                    return True
-                else:
-                    print("다운로드된 파일이 비어있습니다.")
-                    return False
-                    
-            return True
-            
-        except requests.exceptions.RequestException as e:
-            print(f"요청 중 에러 발생: {str(e)}")
-            if hasattr(e.response, 'status_code'):
-                print(f"HTTP 상태 코드: {e.response.status_code}")
-            if hasattr(e.response, 'text'):
-                print(f"응답 내용: {e.response.text[:500]}")  # 처음 500자만 출력
-            return False
+                    f.write(chunk)
+            return os.path.getsize(local_path) > 0
+
         except Exception as e:
-            print(f"예상치 못한 에러 발생: {str(e)}")
-            print(f"에러 타입: {type(e)}")
+            print(f"Download error: {str(e)}")
             return False
 
+    def download_videos_concurrently(self, video_urls: List[str]) -> List[str]:
+        temp_dir = "temp_videos"
+        os.makedirs(temp_dir, exist_ok=True)
+        local_paths = []
+
+        def download_single_video(index_url):
+            index, url = index_url
+            local_path = os.path.join(temp_dir, f"video_{index}.mp4")
+            if self.download_video(url, local_path):
+                local_paths.append(local_path)
+
+        with ThreadPoolExecutor() as executor:
+            executor.map(download_single_video, enumerate(video_urls))
+
+        return local_paths
+
     def extract_all_frames(self, video_path: str, word: str) -> tuple:
-        if not os.path.exists(video_path):
-            raise FileNotFoundError(f"비디오 파일을 찾을 수 없습니다: {video_path}")
-            
         cap = cv2.VideoCapture(video_path)
-        if not cap.isOpened():
-            raise ValueError(f"비디오를 열 수 없습니다: {video_path}")
-        
         fps = cap.get(cv2.CAP_PROP_FPS)
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        
+
         safe_word = self.get_safe_name(word)
         word_dir = f"{self.output_dir}/words/{safe_word}"
         os.makedirs(word_dir, exist_ok=True)
-        
-        frames = []
-        while True:
+
+        frame_idx = 0
+        while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
                 break
-            frames.append(frame)
-        
+            frame_path = f"{word_dir}/frame_{frame_idx:04d}.png"
+            cv2.imwrite(frame_path, frame)
+            frame_idx += 1
+
         cap.release()
-        
-        if not frames:
-            raise ValueError(f"비디오에서 프레임을 읽을 수 없습니다: {video_path}")
-        
-        for i, frame in enumerate(frames):
-            frame_path = f"{word_dir}/frame_{i:04d}.png"
-            success = cv2.imwrite(frame_path, frame)
-            if not success:
-                raise ValueError(f"프레임 저장 실패: {frame_path}")
-        
-        cv2.imwrite(f"{self.output_dir}/words/{safe_word}_first.png", frames[0])
-        cv2.imwrite(f"{self.output_dir}/words/{safe_word}_last.png", frames[-1])
-        
-        print(f"비디오 {word}에서 {len(frames)}개의 프레임 추출 완료")
-        self.word_to_safe[word] = safe_word
         return fps, (width, height)
 
-    def interpolate_frames(self, word1: str, word2: str):
-        safe_word1 = self.get_safe_name(word1)
-        safe_word2 = self.get_safe_name(word2)
-        
-        last_frame = f"{self.output_dir}/words/{safe_word1}_last.png"
-        first_frame = f"{self.output_dir}/words/{safe_word2}_first.png"
-        
-        output_dir = f"{self.output_dir}/interpolated/{safe_word1}_{safe_word2}"
+    def extract_frames_concurrently(self, local_paths: List[str], words: List[str]) -> tuple:
+        fps = None
+        size = None
+        with ThreadPoolExecutor() as executor:
+            results = executor.map(lambda p: self.extract_all_frames(*p), zip(local_paths, words))
+            for res in results:
+                fps, size = res if fps is None else (fps, size)
+        return fps, size
+
+    def interpolate_frames(self, frame1_path: str, frame2_path: str, output_dir: str, num_interpolated_frames: int = 10):
+        """두 프레임 사이에 보간 프레임 생성"""
+        frame1 = cv2.imread(frame1_path)
+        frame2 = cv2.imread(frame2_path)
+
         os.makedirs(output_dir, exist_ok=True)
         
-        command = f'python inference_img.py --img "{last_frame}" "{first_frame}" --exp=3'
-        os.system(command)
-        
-        for i in range(16):
-            src = f"output/img{i}.png"
-            dst = f"{output_dir}/frame_{i:04d}.png"
-            if os.path.exists(src):
-                os.rename(src, dst)
+        for i in range(1, num_interpolated_frames + 1):
+            alpha = i / (num_interpolated_frames + 1)
+            interpolated_frame = cv2.addWeighted(frame1, 1 - alpha, frame2, alpha, 0)
+            cv2.imwrite(f"{output_dir}/interp_{i:04d}.png", interpolated_frame)
+
+        print(f"{num_interpolated_frames}개의 보간 프레임이 생성되었습니다.")
 
     def create_final_video(self, words: List[str], fps: float, size: tuple, output_path: str):
         width, height = size
         temp_output = output_path + '.temp.mp4'
-        
-        # 먼저 임시 파일로 생성
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out = cv2.VideoWriter(
-            temp_output,
-            fourcc,
-            fps, 
-            (width, height)
-        )
-        
-        if not out.isOpened():
-            raise ValueError("비디오 writer를 초기화할 수 없습니다.")
-        
+        out = cv2.VideoWriter(temp_output, fourcc, fps, (width, height))
+
         try:
             for i, word in enumerate(words):
                 safe_word = self.get_safe_name(word)
                 word_dir = f"{self.output_dir}/words/{safe_word}"
                 frame_files = sorted([f for f in os.listdir(word_dir) if f.startswith("frame_")])
-                
-                print(f"Processing word {i+1}/{len(words)}: {len(frame_files)} frames")
-                
+
                 for frame_file in frame_files:
                     frame = cv2.imread(os.path.join(word_dir, frame_file))
                     if frame is not None:
                         frame = cv2.resize(frame, (width, height))
                         out.write(frame)
-                
+
+                # 보간 프레임 생성 및 추가
                 if i < len(words) - 1:
-                    safe_word_next = self.get_safe_name(words[i+1])
+                    safe_word_next = self.get_safe_name(words[i + 1])
+                    last_frame = f"{self.output_dir}/words/{safe_word}/frame_{len(frame_files) - 1:04d}.png"
+                    first_frame_next = f"{self.output_dir}/words/{safe_word_next}/frame_0000.png"
                     interp_dir = f"{self.output_dir}/interpolated/{safe_word}_{safe_word_next}"
-                    if os.path.exists(interp_dir):
-                        interp_files = sorted([f for f in os.listdir(interp_dir) if f.startswith("frame_")])
-                        print(f"Processing interpolation: {len(interp_files)} frames")
-                        for interp_file in interp_files:
-                            frame = cv2.imread(os.path.join(interp_dir, interp_file))
-                            if frame is not None:
-                                frame = cv2.resize(frame, (width, height))
-                                out.write(frame)
-        
-        finally:
+                    
+                    self.interpolate_frames(last_frame, first_frame_next, interp_dir)
+
+                    interp_files = sorted([f for f in os.listdir(interp_dir) if f.startswith("interp_")])
+                    for interp_file in interp_files:
+                        frame = cv2.imread(os.path.join(interp_dir, interp_file))
+                        if frame is not None:
+                            frame = cv2.resize(frame, (width, height))
+                            out.write(frame)
+
             out.release()
-        
-        print("임시 영상 생성 완료")
-        
-        # FFmpeg를 사용하여 웹 호환 포맷으로 변환
-        try:
-            import subprocess
-            
-            command = [
-                'ffmpeg', '-i', temp_output,
-                '-c:v', 'libx264',  # H.264 코덱
-                '-preset', 'medium',  # 인코딩 속도와 품질의 균형
-                '-movflags', 'faststart',  # 웹 스트리밍 최적화
-                '-pix_fmt', 'yuv420p',  # 호환성을 위한 픽셀 포맷
-                '-y',  # 기존 파일 덮어쓰기
-                output_path
-            ]
-            
-            subprocess.run(command, check=True)
-            print("FFmpeg 변환 완료")
-            
-            # 임시 파일 삭제
+            self.convert_with_ffmpeg(temp_output, output_path)
+
+        except Exception as e:
+            print(f"Video creation error: {str(e)}")
+            out.release()
             if os.path.exists(temp_output):
                 os.remove(temp_output)
-            
-            # 최종 파일 확인
-            if os.path.exists(output_path):
-                size_bytes = os.path.getsize(output_path)
-                print(f"최종 비디오 파일 크기: {size_bytes/1024/1024:.2f} MB")
-            else:
-                raise ValueError("최종 비디오 파일이 생성되지 않았습니다.")
-                
-        except Exception as e:
-            print(f"FFmpeg 변환 중 오류 발생: {str(e)}")
-            # 변환 실패 시 임시 파일을 최종 파일로 사용
-            if os.path.exists(temp_output):
-                os.rename(temp_output, output_path)
+
+    def convert_with_ffmpeg(self, temp_output: str, output_path: str):
+        import subprocess
+        command = [
+            'ffmpeg', '-i', temp_output,
+            '-c:v', 'libx264', '-preset', 'medium', '-movflags', 'faststart',
+            '-pix_fmt', 'yuv420p', '-y', output_path
+        ]
+        subprocess.run(command, check=True)
+        os.remove(temp_output)
 
     def upload_to_s3(self, file_path: str, s3_key: str) -> str:
-        """파일을 S3에 업로드하고 URL 반환"""
         try:
             extra_args = {
                 'ContentType': 'video/mp4',
@@ -256,100 +189,36 @@ class VideoConnector:
                 s3_key,
                 ExtraArgs=extra_args
             )
-            url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{s3_key}"
-            return url
+            return f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{s3_key}"
         except Exception as e:
-            print(f"S3 업로드 실패: {str(e)}")
+            print(f"S3 upload error: {str(e)}")
             raise
 
     def process_videos(self, video_urls: List[str], output_filename: str) -> str:
-        """비디오 URL 리스트를 처리하고 결과 비디오의 S3 URL 반환"""
-        try:
-            if os.path.exists("output"):
-                shutil.rmtree("output")
-            os.makedirs("output")
-            
-            # 임시 디렉토리 생성
-            temp_dir = "temp_videos"
-            os.makedirs(temp_dir, exist_ok=True)
-            
-            # 비디오 다운로드
-            local_paths = []
-            for i, url in enumerate(video_urls):
-                local_path = os.path.join(temp_dir, f"video_{i}.mp4")
-                if not self.download_video(url, local_path):
-                    raise ValueError(f"비디오 다운로드 실패: {url}")
-                local_paths.append(local_path)
-            
-            fps = None
-            size = None
-            
-            # 가상의 단어 리스트 생성 (인덱스 기반)
-            words = [f"word_{i}" for i in range(len(video_urls))]
-            
-            # 프레임 추출
-            for word, video_path in zip(words, local_paths):
-                curr_fps, curr_size = self.extract_all_frames(video_path, word)
-                if fps is None:
-                    fps = curr_fps
-                    size = curr_size
-            
-            # 보간 수행
-            for i in range(len(words)-1):
-                print(f"보간 처리 중: {words[i]} -> {words[i+1]}")
-                self.interpolate_frames(words[i], words[i+1])
-            
-            # 최종 비디오 생성
-            self.create_final_video(words, fps, size, output_filename)
-            
-            # S3에 업로드
-            s3_key = f"sentence/{os.path.basename(output_filename)}"
-            s3_url = self.upload_to_s3(output_filename, s3_key)
-            
-            # 임시 파일들 정리
-            try:
-                # temp_videos 디렉토리 삭제
-                if os.path.exists(temp_dir):
-                    shutil.rmtree(temp_dir)
-                
-                # output 디렉토리 삭제
-                if os.path.exists("output"):
-                    shutil.rmtree("output")
-                    
-                # temp_frames 디렉토리 삭제
-                if os.path.exists(self.output_dir):
-                    shutil.rmtree(self.output_dir)
-                    
-                # 최종 output 파일 삭제
-                if os.path.exists(output_filename):
-                    os.remove(output_filename)
-                    
-                print("모든 임시 파일 정리 완료")
-                
-            except Exception as e:
-                print(f"임시 파일 정리 중 오류 발생: {str(e)}")
-                # 파일 정리 중 오류가 발생해도 메인 프로세스는 계속 진행
-            
-            return s3_url
-            
-        except Exception as e:
-            # 에러 발생 시에도 임시 파일들을 정리
-            try:
-                if os.path.exists(temp_dir):
-                    shutil.rmtree(temp_dir)
-                if os.path.exists("output"):
-                    shutil.rmtree("output")
-                if os.path.exists(self.output_dir):
-                    shutil.rmtree(self.output_dir)
-                if os.path.exists(output_filename):
-                    os.remove(output_filename)
-            except:
-                pass
-            
-            print(f"처리 중 오류 발생: {str(e)}")
-            raise
-        
-# 데이터 모델 정의 (입력 데이터 검증)
+        if os.path.exists("output"):
+            shutil.rmtree("output")
+        os.makedirs("output")
+
+        local_paths = self.download_videos_concurrently(video_urls)
+        words = [f"word_{i}" for i in range(len(local_paths))]
+
+        fps, size = self.extract_frames_concurrently(local_paths, words)
+        self.create_final_video(words, fps, size, output_filename)
+
+        s3_key = f"sentence/{os.path.basename(output_filename)}"
+        s3_url = self.upload_to_s3(output_filename, s3_key)
+
+        self.cleanup_temp_files(temp_dir="temp_videos", output_dir="output")
+        return s3_url
+
+    def cleanup_temp_files(self, temp_dir: str, output_dir: str):
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
+        if os.path.exists(output_dir):
+            shutil.rmtree(output_dir)
+        if os.path.exists(self.output_dir):
+            shutil.rmtree(self.output_dir)
+
 class VideoRequest(BaseModel):
     video_urls: list[str]
 
@@ -382,9 +251,6 @@ async def process_videos(request: VideoRequest):
             status_code=500
         )
 
-
-
 if __name__ == "__main__":
     import uvicorn
-    # reload=True로 설정하면 코드 변경시 자동으로 서버가 재시작됩니다
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
