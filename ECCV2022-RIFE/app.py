@@ -163,10 +163,16 @@ class VideoConnector:
 
     def create_final_video(self, words: List[str], fps: float, size: tuple, output_path: str):
         width, height = size
+        # out = cv2.VideoWriter(output_path, 
+        #                     cv2.VideoWriter_fourcc(*'mp4v'),
+        #                     fps, 
+        #                     (width, height))
+        
+        fourcc = cv2.VideoWriter_fourcc(*'avc1')  # 또는 'H264'
         out = cv2.VideoWriter(output_path, 
-                            cv2.VideoWriter_fourcc(*'mp4v'),
-                            fps, 
-                            (width, height))
+                        fourcc,
+                        fps, 
+                        (width, height))
         
         for i, word in enumerate(words):
             safe_word = self.get_safe_name(word)
@@ -196,7 +202,16 @@ class VideoConnector:
     def upload_to_s3(self, file_path: str, s3_key: str) -> str:
         """파일을 S3에 업로드하고 URL 반환"""
         try:
-            s3_client.upload_file(file_path, S3_BUCKET, s3_key)
+            extra_args = {
+                'ContentType': 'video/mp4',
+                'ContentDisposition': 'inline'
+            }
+            s3_client.upload_file(
+                file_path, 
+                S3_BUCKET, 
+                s3_key,
+                ExtraArgs=extra_args
+            )
             url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{s3_key}"
             return url
         except Exception as e:
@@ -322,3 +337,10 @@ async def process_videos(request: VideoRequest):
             },
             status_code=500
         )
+
+
+
+if __name__ == "__main__":
+    import uvicorn
+    # reload=True로 설정하면 코드 변경시 자동으로 서버가 재시작됩니다
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

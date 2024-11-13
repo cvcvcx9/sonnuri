@@ -4,7 +4,6 @@
 
 *.pkl
 output/*
-train_log/*
 *.mp4
 
 test/
