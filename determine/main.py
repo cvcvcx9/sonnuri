@@ -76,11 +76,11 @@ async def determine_texts(input_data: TextInput):
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
         analyzed_result = kiwi.split_into_sents(ksl_sentence, return_tokens=True)
         
-        extracted_result = extract_words_from_sentence(analyzed_result)
+        extracted_result, video_urls = extract_words_from_sentence(analyzed_result)
         
-        result = await make_one_video(extracted_result)
+        # result = await make_one_video(extracted_result)
         
-        return {"result": result}
+        return {"sentences": extracted_result, "urls": video_urls}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error analyzing string: {str(e)}")
     
@@ -143,8 +143,30 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
         
         saveWord(texts, wordCnt, word_tokens, words)
         result.append({"sentence": sentence.text, "words": words})
+        
+    video_urls = []
+    # url이 없는 단어 - url이 없는 토큰을 자음/모음 단위로 나누어 url 가져오기
+    for r in result:
+        for word in r["words"]:
+            if word.url != '':
+                video_urls.extend(word.url.split(","))
+                continue
+            for token in word.tokens:
+                if token.url != '':
+                    video_urls.extend(token.url.split(","))
+                    continue
+                token_url = ''
+                texts = split_korean_chars(token.form)
+                for text in texts:
+                    text_url = ''
+                    url_entry = collection.find_one({"Word": text})
+                    if url_entry:
+                        text_url = url_entry["URL"]
+                    token_url += ',' + text_url
+                token.url = token_url[1:]
+                video_urls.extend(token.url.split(","))
     
-    return result
+    return result, video_urls
 
 def saveWord(texts: List[str], wordCnt: int, word_tokens: List[Token], words: List[Word]):
     text = remove_non_alphanumeric_korean(texts[wordCnt])
@@ -172,7 +194,6 @@ def translate_sentence(prompt: str):
                    "최대한 단어의 원형을 유지해줘."
                    "제시된 한국어 문장에서 값을 새로 추가해서는 안돼."
                    "다른 언어가 있을 경우 한국어로 번역해서 보여줘."
-                   "응답은 번역한 문장을 그대로 돌려주면 돼."
                    },
                   {"role": "user", "content": prompt}]
     )
