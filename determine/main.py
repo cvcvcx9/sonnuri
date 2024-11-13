@@ -240,7 +240,7 @@ def make_one_video(extracted_words: List[Dict[str, List[Word]]]):
 
 async def process_videos(video_urls: List[str]):
     target_url = "http://k11a301.p.ssafy.io:8003/process_videos"
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(timeout=180) as client:
         try:
             response = await client.post(
                 target_url,
@@ -248,6 +248,7 @@ async def process_videos(video_urls: List[str]):
                     "video_urls": video_urls
                 }
             )
+            response.raise_for_status()
             return response.json()  # 대상 서버의 응답 반환
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing videos: {str(e)}")
