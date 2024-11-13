@@ -1,9 +1,14 @@
 FROM python:3.12
 
-# OpenCV 관련 시스템 라이브러리 설치
+# ffmpeg 및 관련 라이브러리 설치
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
+    libx264-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 작업 디렉토리 설정
