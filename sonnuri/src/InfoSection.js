@@ -10,10 +10,10 @@ function InfoSection({ number, title, description, image }) {
         </span>
         <h2 className="text-4xl font-semibold pl-2">{title}</h2>
       </div>
-      <div className="text-gray-700 pt-4 text-xl">
+      <div className="text-gray-700 pt-4 text-2xl">
         <p>{description}</p>
       </div>
-      <img src={image} alt={`${title} 이미지`} className="w-90 h-auto pt-2 pl-10" />
+      <img src={image} alt={`${title} 이미지`} className="w-auto h-80 pt-4 ml-20" />
     </div>
   );
 }

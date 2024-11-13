@@ -6,7 +6,7 @@ import Dot from "./Dot";
 function FuncFirst() {
   return (
     <div>
-      <div className="flex flex-row items-center justify-between px-20 py-10 h-screen">
+      <div className="flex flex-row items-center justify-between px-4 mb-10 h-screen">
         {/* 왼쪽 콘텐츠: 수어번역 정보 */}
         <InfoSection
           number={1}
