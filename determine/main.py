@@ -8,6 +8,9 @@ from openai import OpenAI
 import re
 import os
 import pymongo
+import unicodedata
+import httpx
+import asyncio
 
 # .env 파일 로드
 load_dotenv()
@@ -62,25 +65,8 @@ class Word(BaseModel):
 class OutputData(BaseModel):
     words: List[Word]
     
-# 종성 자음 -> 초성 자음 매핑 표
-final_to_initial = {
-    'ᆨ': 'ㄱ',
-    'ᆩ': 'ㄲ',
-    'ᆫ': 'ㄴ',
-    'ᆮ': 'ㄷ',
-    'ᆯ': 'ㄹ',
-    'ᆷ': 'ㅁ',
-    'ᆸ': 'ㅂ',
-    'ᆺ': 'ㅅ',
-    'ᆻ': 'ㅆ',
-    'ᆼ': 'ㅇ',
-    'ᆽ': 'ㅈ',
-    'ᆾ': 'ㅊ',
-    'ᆿ': 'ㅋ',
-    'ᇀ': 'ㅌ',
-    'ᇁ': 'ㅍ',
-    'ᇂ': 'ㅎ'
-}
+class VideoRequest(BaseModel):
+    video_urls: List[str]
 
 @app.post("/determine")
 async def determine_texts(input_data: TextInput):
@@ -90,7 +76,10 @@ async def determine_texts(input_data: TextInput):
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
         analyzed_result = kiwi.split_into_sents(ksl_sentence, return_tokens=True)
         
-        result = extract_words_from_sentence(analyzed_result)
+        extracted_result = extract_words_from_sentence(analyzed_result)
+        
+        result = await make_one_video(extracted_result)
+        
         return {"result": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error analyzing string: {str(e)}")
@@ -181,37 +170,84 @@ def translate_sentence(prompt: str):
         messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야."
                    "제시된 한국어 문장들을 한국수어 문법 형식으로 번역해서 응답해줘."
                    "최대한 단어의 원형을 유지해줘."
+                   "제시된 한국어 문장에서 값을 새로 추가해서는 안돼."
+                   "다른 언어가 있을 경우 한국어로 번역해서 보여줘."
                    "응답은 번역한 문장을 그대로 돌려주면 돼."
-                #    "입력된 문장에서 오타가 있을 경우 올바르게 수정해."
-                #    "수어의 특징은 다음과 같아." 
-                #    "1. 강조되는 주어나 서술어를 앞에 둔다."
-                #    "2. 형용사와 같은 꾸미는 언어는 보통 꾸미는 대상 뒤에 둔다."
-                #    "3. 시제를 항상 맨 앞에 둔다."
-                #    "4. 완료, 진행, 미래와 같은 형식은 서술어 뒤에 온다."
                    },
                   {"role": "user", "content": prompt}]
     )
     return response.choices[0].message.content
 
-# def find_similar_word_url(word: str):
+# 유니코드 자모 리스트
+CHOSEONG = [
+    'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ',
+    'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+]
+JUNGSEONG = [
+    'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ',
+    'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
+]
+JONGSEONG = [
+    '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 
+    'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 
+    'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+]
 
+def split_korean_chars(text):
+    result = []
+    korean_re = re.compile('[가-힣]')  # 한글 글자 필터링
 
-# # ChatGPT 호출(형태소로 분석된 문장 -> 한국수어)
-# def translate_sentence(prompt: List[Sentence]):
-#     response = openai.chat.completions.create(
-#     model="gpt-4o",
-#     messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야."
-#                 "제시된 한국어 문장을 한국수어 문법 형식으로 번역해서 응답해줘."
-#                 "문장 text 외의 정보는 문장을 형태소 분석한 결과야."
-#                 "최대한 단어의 원형을 유지해줘."
-#             #    "입력된 문장에서 오타가 있을 경우 올바르게 수정해."
-#             #    "수어의 특징은 다음과 같아." 
-#             #    "1. 강조되는 주어나 서술어를 앞에 둔다."
-#             #    "2. 형용사와 같은 꾸미는 언어는 보통 꾸미는 대상 뒤에 둔다."
-#             #    "3. 시제를 항상 맨 앞에 둔다."
-#             #    "4. 완료, 진행, 미래와 같은 형식은 서술어 뒤에 온다."
-#                 },
-#             {"role": "user", "content": str(prompt)}]
-#     )
-#     print(prompt)
-#     return response.choices[0].message.content
+    for char in text:
+        if korean_re.match(char):  # 한글일 경우
+            code = ord(char) - 0xAC00  # 유니코드 계산
+            choseong = CHOSEONG[code // 588]  # 초성 추출
+            jungseong = JUNGSEONG[(code % 588) // 28]  # 중성 추출
+            jongseong = JONGSEONG[code % 28]  # 종성 추출
+
+            result.append(choseong)  # 초성 추가
+            result.append(jungseong)  # 중성 추가
+            if jongseong:  # 종성이 있을 경우
+                result.append(jongseong)
+        else:
+            result.append(char)  # 한글이 아닌 문자는 그대로 추가
+    return result
+
+def make_one_video(extracted_words: List[Dict[str, List[Word]]]):
+    video_urls = []
+    # url이 없는 단어 - url이 없는 토큰을 자음/모음 단위로 나누어 url 가져오기
+    for e in extracted_words:
+        for word in e["words"]:
+            if word.url != '':
+                video_urls.extend(word.url.split(","))
+                continue
+            for token in word.tokens:
+                if token.url != '':
+                    video_urls.extend(token.url.split(","))
+                    continue
+                token_url = ''
+                texts = split_korean_chars(token.form)
+                for text in texts:
+                    text_url = ''
+                    url_entry = collection.find_one({"Word": text})
+                    if url_entry:
+                        text_url = url_entry["URL"]
+                    token_url += ',' + text_url
+                token.url = token_url[1:]
+                video_urls.extend(token.url.split(","))
+    
+    # 하나의 영상으로 만들어서 보내기
+    return process_videos(video_urls)    
+
+async def process_videos(video_urls: List[str]):
+    target_url = "http://k11a301.p.ssafy.io:8003/process_videos"
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.post(
+                target_url,
+                json={
+                    "video_urls": video_urls
+                }
+            )
+            return response.json()  # 대상 서버의 응답 반환
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Error processing videos: {str(e)}")
