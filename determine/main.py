@@ -39,7 +39,7 @@ app.add_middleware(
 # MongoDB 클라이언트 설정 (예: 로컬호스트)
 mongo = pymongo.MongoClient(f"mongodb://{mongo_username}:{mongo_password}@k11a301.p.ssafy.io:8017/?authSource=admin")
 db = mongo["sonnuri"]
-collection = db["sonnuri"]
+collection = db["sign_word"]
 
 class TextInput(BaseModel):
     text: str
@@ -50,6 +50,7 @@ class Token(BaseModel):
     start: int
     len: int
     url: str
+    definition: str
 
 class Sentence(BaseModel):
     text: str
@@ -60,6 +61,7 @@ class Sentence(BaseModel):
 class Word(BaseModel):
     form: str
     url: str
+    definition: str
     tokens: List[Token]
     
 class OutputData(BaseModel):
@@ -98,7 +100,6 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
         wordCnt = 0
         for token in sentence.tokens:
             newForm = token.form
-            newUrl = ''
             # 띄어쓰기를 만났을 때: 단어를 만들고 token 리스트를 비움
             if lenCnt < token.start:
                 saveWord(texts, wordCnt, word_tokens, words)
@@ -125,9 +126,12 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             if token.tag[0] == 'V':
                 newForm = token.form + '다'
             
-            url_entry = collection.find_one({"Word": remove_non_alphanumeric_korean(newForm)})
-            if url_entry:
-                newUrl = url_entry["URL"]
+            tokenUrl = ''
+            definition = ''
+            data = collection.find_one({"Word": remove_non_alphanumeric_korean(newForm)})
+            if data:
+                tokenUrl = data.get("URL")
+                definition = data.get("Description", "")
             # else:
                 # newUrl = find_similar_word_url(newForm)
                 
@@ -137,19 +141,27 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
                 tag=token.tag,
                 start=token.start,
                 len=token.len,
-                url=newUrl
+                url=tokenUrl,
+                definition=definition
             )
             word_tokens.append(new_token)
         
         saveWord(texts, wordCnt, word_tokens, words)
         result.append({"sentence": sentence.text, "words": words})
         
+    # url이 없는 단어 - url이 없는 토큰을 자음/모음 단위로 나누어 url 가져오기    
     video_urls = []
-    # url이 없는 단어 - url이 없는 토큰을 자음/모음 단위로 나누어 url 가져오기
+    question_mark_url = collection.find_one({"Word": "-ㅂ니까"}).get("URL")
+    question_mark_description = collection.find_one({"Word": "-ㅂ니까"}).get("Description", "물음표")
     for r in result:
         for word in r["words"]:
+            if word.form.endswith('?'):
+                word.tokens.append(Token(form="?", tag="SF", start=0, len=1, url=question_mark_url, definition=question_mark_description))
             if word.url != '':
                 video_urls.extend(word.url.split(","))
+                if word.form.endswith('?'):
+                    word.url += ',' + question_mark_url
+                    video_urls.append(question_mark_url)
                 continue
             for token in word.tokens:
                 if token.url != '':
@@ -159,9 +171,9 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
                 texts = split_korean_chars(token.form)
                 for text in texts:
                     text_url = ''
-                    url_entry = collection.find_one({"Word": text})
-                    if url_entry:
-                        text_url = url_entry["URL"]
+                    data = collection.find_one({"Word": text})
+                    if data:
+                        text_url = data["URL"]
                     token_url += ',' + text_url
                 token.url = token_url[1:]
                 video_urls.extend(token.url.split(","))
@@ -170,15 +182,13 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
 
 def saveWord(texts: List[str], wordCnt: int, word_tokens: List[Token], words: List[Word]):
     text = remove_non_alphanumeric_korean(texts[wordCnt])
-    if (texts[wordCnt].endswith('?')):
-        lastToken = word_tokens[-1]
-        word_tokens.append(Token(form="?", tag="SF", start=lastToken.start + lastToken.len, len=1, url=collection.find_one({"Word": "-ㅂ니까"})["URL"]))
-    
-    url_entry = collection.find_one({"Word": text})
+    data = collection.find_one({"Word": text})
     wordUrl = ''
-    if url_entry:
-        wordUrl = url_entry["URL"]
-    word = Word(form=texts[wordCnt], tokens=word_tokens, url=wordUrl)
+    definition = ''
+    if data:
+        wordUrl = data.get("URL")
+        definition = data.get("Description", "")
+    word = Word(form=texts[wordCnt], tokens=word_tokens, url=wordUrl, definition=definition)
     words.append(word)
     
 # 영어 (A-Z, a-z), 숫자 (0-9), 한글 (\uAC00-\uD7A3 완성형, \u3131-\u3163 자음/모음) 만 남기고 나머지 제거
