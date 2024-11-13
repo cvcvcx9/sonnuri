@@ -59,7 +59,7 @@ class VideoConnector:
                                 stream=True, 
                                 headers=headers, 
                                 verify=False,  # SSL 인증서 검증 비활성화
-                                timeout=30)    # 타임아웃 설정
+                                timeout=300)    # 타임아웃 설정
             
             print(f"응답 상태 코드: {response.status_code}")
             print(f"응답 헤더: {response.headers}")
