@@ -59,7 +59,8 @@ class VideoConnector:
                                 stream=True, 
                                 headers=headers, 
                                 verify=False,  # SSL 인증서 검증 비활성화
-                                timeout=300)    # 타임아웃 설정
+            )
+                                # timeout=300)    # 타임아웃 설정
             
             print(f"응답 상태 코드: {response.status_code}")
             print(f"응답 헤더: {response.headers}")
@@ -163,41 +164,84 @@ class VideoConnector:
 
     def create_final_video(self, words: List[str], fps: float, size: tuple, output_path: str):
         width, height = size
-        # out = cv2.VideoWriter(output_path, 
-        #                     cv2.VideoWriter_fourcc(*'mp4v'),
-        #                     fps, 
-        #                     (width, height))
+        temp_output = output_path + '.temp.mp4'
         
-        fourcc = cv2.VideoWriter_fourcc(*'avc1')  # 또는 'H264'
-        out = cv2.VideoWriter(output_path, 
-                        fourcc,
-                        fps, 
-                        (width, height))
+        # 먼저 임시 파일로 생성
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        out = cv2.VideoWriter(
+            temp_output,
+            fourcc,
+            fps, 
+            (width, height)
+        )
         
-        for i, word in enumerate(words):
-            safe_word = self.get_safe_name(word)
-            word_dir = f"{self.output_dir}/words/{safe_word}"
-            frame_files = sorted([f for f in os.listdir(word_dir) if f.startswith("frame_")])
+        if not out.isOpened():
+            raise ValueError("비디오 writer를 초기화할 수 없습니다.")
+        
+        try:
+            for i, word in enumerate(words):
+                safe_word = self.get_safe_name(word)
+                word_dir = f"{self.output_dir}/words/{safe_word}"
+                frame_files = sorted([f for f in os.listdir(word_dir) if f.startswith("frame_")])
+                
+                print(f"Processing word {i+1}/{len(words)}: {len(frame_files)} frames")
+                
+                for frame_file in frame_files:
+                    frame = cv2.imread(os.path.join(word_dir, frame_file))
+                    if frame is not None:
+                        frame = cv2.resize(frame, (width, height))
+                        out.write(frame)
+                
+                if i < len(words) - 1:
+                    safe_word_next = self.get_safe_name(words[i+1])
+                    interp_dir = f"{self.output_dir}/interpolated/{safe_word}_{safe_word_next}"
+                    if os.path.exists(interp_dir):
+                        interp_files = sorted([f for f in os.listdir(interp_dir) if f.startswith("frame_")])
+                        print(f"Processing interpolation: {len(interp_files)} frames")
+                        for interp_file in interp_files:
+                            frame = cv2.imread(os.path.join(interp_dir, interp_file))
+                            if frame is not None:
+                                frame = cv2.resize(frame, (width, height))
+                                out.write(frame)
+        
+        finally:
+            out.release()
+        
+        print("임시 영상 생성 완료")
+        
+        # FFmpeg를 사용하여 웹 호환 포맷으로 변환
+        try:
+            import subprocess
             
-            for frame_file in frame_files:
-                frame = cv2.imread(os.path.join(word_dir, frame_file))
-                if frame is not None:
-                    frame = cv2.resize(frame, (width, height))
-                    out.write(frame)
+            command = [
+                'ffmpeg', '-i', temp_output,
+                '-c:v', 'libx264',  # H.264 코덱
+                '-preset', 'medium',  # 인코딩 속도와 품질의 균형
+                '-movflags', 'faststart',  # 웹 스트리밍 최적화
+                '-pix_fmt', 'yuv420p',  # 호환성을 위한 픽셀 포맷
+                '-y',  # 기존 파일 덮어쓰기
+                output_path
+            ]
             
-            if i < len(words) - 1:
-                safe_word_next = self.get_safe_name(words[i+1])
-                interp_dir = f"{self.output_dir}/interpolated/{safe_word}_{safe_word_next}"
-                if os.path.exists(interp_dir):
-                    interp_files = sorted([f for f in os.listdir(interp_dir) if f.startswith("frame_")])
-                    for interp_file in interp_files:
-                        frame = cv2.imread(os.path.join(interp_dir, interp_file))
-                        if frame is not None:
-                            frame = cv2.resize(frame, (width, height))
-                            out.write(frame)
-        
-        out.release()
-        print("최종 영상 생성 완료")
+            subprocess.run(command, check=True)
+            print("FFmpeg 변환 완료")
+            
+            # 임시 파일 삭제
+            if os.path.exists(temp_output):
+                os.remove(temp_output)
+            
+            # 최종 파일 확인
+            if os.path.exists(output_path):
+                size_bytes = os.path.getsize(output_path)
+                print(f"최종 비디오 파일 크기: {size_bytes/1024/1024:.2f} MB")
+            else:
+                raise ValueError("최종 비디오 파일이 생성되지 않았습니다.")
+                
+        except Exception as e:
+            print(f"FFmpeg 변환 중 오류 발생: {str(e)}")
+            # 변환 실패 시 임시 파일을 최종 파일로 사용
+            if os.path.exists(temp_output):
+                os.rename(temp_output, output_path)
 
     def upload_to_s3(self, file_path: str, s3_key: str) -> str:
         """파일을 S3에 업로드하고 URL 반환"""
