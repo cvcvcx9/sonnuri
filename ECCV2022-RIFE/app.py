@@ -1,5 +1,5 @@
-import cv2
 import os
+import cv2
 import hashlib
 import boto3
 from fastapi import FastAPI, HTTPException
@@ -10,8 +10,10 @@ from typing import List
 import requests
 from dotenv import load_dotenv
 import shutil
-from concurrent.futures import ThreadPoolExecutor
 import numpy as np
+from concurrent.futures import ProcessPoolExecutor
+import asyncio
+import aiohttp
 
 # .env 파일 로드
 load_dotenv()
@@ -46,37 +48,31 @@ class VideoConnector:
     def get_safe_name(self, word: str) -> str:
         return hashlib.md5(word.encode()).hexdigest()
 
-    def download_video(self, url: str, local_path: str) -> bool:
+    async def download_video_async(self, url: str, local_path: str) -> bool:
         try:
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-            response = requests.get(url, stream=True, headers=headers, verify=False)
-            response.raise_for_status()
-
-            with open(local_path, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url) as response:
+                    response.raise_for_status()
+                    with open(local_path, 'wb') as f:
+                        while chunk := await response.content.read(1024):
+                            f.write(chunk)
             return os.path.getsize(local_path) > 0
-
         except Exception as e:
-            print(f"Download error: {str(e)}")
+            print(f"Async download error: {str(e)}")
             return False
 
-    def download_videos_concurrently(self, video_urls: List[str]) -> List[str]:
+    async def download_videos_concurrently_async(self, video_urls: List[str]) -> List[str]:
         temp_dir = "temp_videos"
         os.makedirs(temp_dir, exist_ok=True)
         local_paths = []
+        tasks = []
 
-        def download_single_video(index_url):
-            index, url = index_url
+        for index, url in enumerate(video_urls):
             local_path = os.path.join(temp_dir, f"video_{index}.mp4")
-            if self.download_video(url, local_path):
-                local_paths.append(local_path)
+            tasks.append(self.download_video_async(url, local_path))
+            local_paths.append(local_path)
 
-        with ThreadPoolExecutor() as executor:
-            executor.map(download_single_video, enumerate(video_urls))
-
+        await asyncio.gather(*tasks)
         return local_paths
 
     def extract_all_frames(self, video_path: str, word: str) -> tuple:
@@ -101,17 +97,24 @@ class VideoConnector:
         cap.release()
         return fps, (width, height)
 
+
+    def _extract_frames_helper(self, args):
+        video_path, word = args
+        return self.extract_all_frames(video_path, word)
+
     def extract_frames_concurrently(self, local_paths: List[str], words: List[str]) -> tuple:
         fps = None
         size = None
-        with ThreadPoolExecutor() as executor:
-            results = executor.map(lambda p: self.extract_all_frames(*p), zip(local_paths, words))
+        max_workers = os.cpu_count()  # vCPU 수에 맞게 워커 설정
+
+        # 메서드로 직접 전달
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
+            results = executor.map(self._extract_frames_helper, zip(local_paths, words))
             for res in results:
                 fps, size = res if fps is None else (fps, size)
         return fps, size
 
     def interpolate_frames(self, frame1_path: str, frame2_path: str, output_dir: str, num_interpolated_frames: int = 10):
-        """두 프레임 사이에 보간 프레임 생성"""
         frame1 = cv2.imread(frame1_path)
         frame2 = cv2.imread(frame2_path)
 
@@ -121,8 +124,6 @@ class VideoConnector:
             alpha = i / (num_interpolated_frames + 1)
             interpolated_frame = cv2.addWeighted(frame1, 1 - alpha, frame2, alpha, 0)
             cv2.imwrite(f"{output_dir}/interp_{i:04d}.png", interpolated_frame)
-
-        print(f"{num_interpolated_frames}개의 보간 프레임이 생성되었습니다.")
 
     def create_final_video(self, words: List[str], fps: float, size: tuple, output_path: str):
         width, height = size
@@ -142,7 +143,6 @@ class VideoConnector:
                         frame = cv2.resize(frame, (width, height))
                         out.write(frame)
 
-                # 보간 프레임 생성 및 추가
                 if i < len(words) - 1:
                     safe_word_next = self.get_safe_name(words[i + 1])
                     last_frame = f"{self.output_dir}/words/{safe_word}/frame_{len(frame_files) - 1:04d}.png"
@@ -172,7 +172,7 @@ class VideoConnector:
         command = [
             'ffmpeg', '-i', temp_output,
             '-c:v', 'libx264', '-preset', 'medium', '-movflags', 'faststart',
-            '-pix_fmt', 'yuv420p', '-y', output_path
+            '-pix_fmt', 'yuv420p', '-threads', str(os.cpu_count()), '-y', output_path
         ]
         subprocess.run(command, check=True)
         os.remove(temp_output)
@@ -194,12 +194,12 @@ class VideoConnector:
             print(f"S3 upload error: {str(e)}")
             raise
 
-    def process_videos(self, video_urls: List[str], output_filename: str) -> str:
+    async def process_videos(self, video_urls: List[str], output_filename: str) -> str:
         if os.path.exists("output"):
             shutil.rmtree("output")
         os.makedirs("output")
 
-        local_paths = self.download_videos_concurrently(video_urls)
+        local_paths = await self.download_videos_concurrently_async(video_urls)
         words = [f"word_{i}" for i in range(len(local_paths))]
 
         fps, size = self.extract_frames_concurrently(local_paths, words)
@@ -209,6 +209,8 @@ class VideoConnector:
         s3_url = self.upload_to_s3(output_filename, s3_key)
 
         self.cleanup_temp_files(temp_dir="temp_videos", output_dir="output")
+        if os.path.exists(output_filename):
+            os.remove(output_filename)  # 최종 비디오 파일 삭제
         return s3_url
 
     def cleanup_temp_files(self, temp_dir: str, output_dir: str):
@@ -232,7 +234,7 @@ async def process_videos(request: VideoRequest):
         output_filename = f"processed_{hashlib.md5(''.join(video_urls).encode()).hexdigest()}.mp4"
         
         connector = VideoConnector()
-        s3_url = connector.process_videos(video_urls, output_filename)
+        s3_url = await connector.process_videos(video_urls, output_filename)
         
         return JSONResponse(
             content={
