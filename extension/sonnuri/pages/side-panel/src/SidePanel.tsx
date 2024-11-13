@@ -6,60 +6,45 @@ import SkeletonLoader from './components/SkeletonLoader';
 
 const SidePanel: React.FC = () => {
   const [sentenceList, setSentenceList] = useState<string[]>([]);
-  const [playlistInfo, setPlaylistInfo] = useState<{url: string, word: string}[]>([]); 
+  const [playlistInfo, setPlaylistInfo] = useState<{url: string, word: string, isFirstIdx: number}[]>([]); 
   const [playlist, setPlaylist] = useState<string[]>([]); 
+  const [playlistInfoIsFirst, setPlaylistInfoIsFirst] = useState<number[]>([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false); // 재생 상태 추가
   // 비디오 재생이 끝났을 때 다음 비디오로 넘어가는 핸들러
   const handleVideoEnd = () => {
     if (currentVideoIndex < playlist.length - 1) {
       setCurrentVideoIndex(currentVideoIndex + 1);
+      const nextIsFirst = playlistInfoIsFirst[currentVideoIndex + 1];
+      console.log(nextIsFirst);
+      setIsPlaying(nextIsFirst === -1 ? true : false); 
     } 
   };
 // 버튼 클릭 핸들러 추가
   const handleButtonClick = (index: number) => {
     setCurrentVideoIndex(index); // 클릭한 버튼의 인덱스를 현재 비디오 인덱스로 설정
+    setIsPlaying(true);
   };
   // URL 추출 로직 수정
-  
-
-  // handleUpdatedTexts 함수 수정
-  // const handleUpdatedTexts = async (newText: string) => {
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await fetch("http://k11a301.p.ssafy.io:8001/determine", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },  
-  //       body: JSON.stringify({ text: newText }),
-  //     });
-  //     const data = await response.json();
-  //     const videoUrls = extractUrls(data.result);
-  //     setPlaylistInfo(videoUrls);
-  //     setPlaylist(videoUrls.map((item) => item.url));
-  //     setCurrentVideoIndex(0);
-  //   } catch (error) {
-  //     console.error("에러:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //     chrome.runtime.sendMessage({type: "success"});
-  //   }
-  // };
 
   // 저장된 텍스트 로드 및 스토리지 변경 감지
   useEffect(() => {
     chrome.storage.local.get("urls", (data) => {
       if (data.urls) {
-        setPlaylistInfo(data.urls);
-        setPlaylist(data.urls.map((item) => item.url));
         console.log(data.urls);
+        setPlaylistInfo(data.urls.filter((item: any) => item.isFirstIdx !== -1));
+        setPlaylist(data.urls.map((item: any) => item.url));
+        setPlaylistInfoIsFirst(data.urls.map((item: any) => item.isFirstIdx));
       }
     });
-    // 스토리지 변경을 감지하고, 변경된 값을 기반으로, 서버에 요청을 보내는 로직
+    // 스토리지 변경을 감지하고, 변경된 값을 
     const newSentenceListener = (changes: any, namespace: any) => {
       if (changes.urls) {
-        setPlaylistInfo(changes.urls.newValue);
+        setCurrentVideoIndex(0);
+        setPlaylistInfo(changes.urls.newValue.filter((item: any) => item.isFirstIdx !== -1));
+        setPlaylist(changes.urls.newValue.map((item: any) => item.url));
+        setPlaylistInfoIsFirst(changes.urls.newValue.map((item: any) => item.isFirstIdx));
       }
     };
     chrome.storage.onChanged.addListener(newSentenceListener);
@@ -77,7 +62,7 @@ const SidePanel: React.FC = () => {
         <div className="flex flex-wrap gap-2">
 
           {playlistInfo && playlistInfo.length > 0 ? playlistInfo.map((item, index) => (
-            <Button key={index} onClick={() => handleButtonClick(index)} className="text-sm bg-gray-200 px-2 py-1 rounded-full">{item.word}</Button>
+            <Button key={index} onClick={() => handleButtonClick(item.isFirstIdx)} className="text-sm bg-gray-200 px-2 py-1 rounded-full">{item.word}</Button>
             )) : <div className="text-center text-gray-500">
               저장된 문장이 없습니다.
             </div>}
@@ -93,8 +78,10 @@ const SidePanel: React.FC = () => {
               <>
                 <ReactPlayer
                   url={playlist[currentVideoIndex]}
+                  // url={"https://sonnuri.s3.ap-northeast-2.amazonaws.com/sentence/processed_52a78f3c57b475c024e9a8b7329cbf9c.mp4"}
                   controls={false}
-                  playing
+                  playing={isPlaying}
+                  // 
                   playbackRate={1.5}
                   width="100%"
                   height="200px"

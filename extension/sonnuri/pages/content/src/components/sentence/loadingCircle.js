@@ -35,6 +35,7 @@ export default function loadingCircle() {
     }
     div.onclick = ()=>{
             chrome.runtime.sendMessage({type: "open_side_panel"});
+            circle.stop();
     }
     
     circle.error = ()=>{

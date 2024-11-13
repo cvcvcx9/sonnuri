@@ -2,7 +2,7 @@
 import createTranslateButton from './components/sentence/createTranslateButton.js';
 import createTranslateImgWrapper from './components/sentence/createTraslateImgWrapper.js';
 import loadingCircle from './components/sentence/loadingCircle.js';
-import requestSentence from './components/sentence/requestSentence.js';
+
 import createModal from './components/word/createModal.js';
 import createOverlay from './components/word/createOverlay.js';
 import createToggleButton from './components/word/createToggleButton.js';
@@ -11,6 +11,7 @@ import hideVideoModal from './components/word/hideVideoModal.js';
 import highlightTextNodes from './components/word/highlightTextNodes.js';
 import showVideoModal from './components/word/showVideoModal.js';
 import serverWords from './words.js';
+
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
   this.beginPath();
   this.moveTo(x + radius, y);
@@ -42,6 +43,13 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
+const { highlights: newHighlights, isHighlighting } = createToggleButton(
+  ctx,
+  canvas,
+  highlights,
+  serverWords,
+  isElementCovered,
+);
 // 요소가 가려져 있는지 확인하는 함수
 function isElementCovered(rect) {
   const elements = document.elementsFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
@@ -49,13 +57,10 @@ function isElementCovered(rect) {
     return getComputedStyle(element).zIndex !== 'auto' && element !== canvas;
   });
 }
-// 하이라이트 그리기 - 초기 설정
-highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
-
 // 마우스 이동 이벤트 처리
 document.addEventListener('mousemove', e => handleMouseMoveOnCanvas(e, highlights, modal, showVideoModal));
-// 버튼 생성
 
+// 버튼 생성햐
 const translateSentenceBtn = createTranslateButton();
 // 버튼에 설명하는 수어 이미지 추가
 const translateImgWrapper = createTranslateImgWrapper();
@@ -73,9 +78,12 @@ translateSentenceBtn.addEventListener('mouseleave', () => {
   translateImgWrapper.style.display = 'none';
 });
 
-
-const {loadingCircleWrapper,circle : loadingCircleElement} = loadingCircle();
-
+const { loadingCircleWrapper, circle: loadingCircleElement } = loadingCircle();
+if (isHighlighting) {
+  setTimeout(() => {
+    highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+  }, 300);
+}
 document.addEventListener('mouseup', e => {
   const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
   if (selectedText) {
@@ -85,7 +93,7 @@ document.addEventListener('mouseup', e => {
     translateSentenceBtn.style.alignItems = 'center'; // 수직 중앙 정렬
     translateSentenceBtn.style.justifyContent = 'center'; // 수평 중앙 정렬
 
-    // 버튼 클릭 이벤트 
+    // 버튼 클릭 이벤트
     // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
     translateSentenceBtn.onclick = async () => {
       // 로딩 아이콘을 표시한다.
@@ -103,9 +111,8 @@ document.addEventListener('mouseup', e => {
 
 // 백그라운드에서 요청이 완료되었을 때, 아이콘의 상태를 변경한다.
 chrome.runtime.onMessage.addListener((message, sender) => {
-  if (message.type === "success_sentence_result") {
-    console.log("요청결과 전송받기 완료");
-    
+  if (message.type === 'success_sentence_result') {
+    console.log('요청결과 전송받기 완료');
     loadingCircleElement.success();
   }
 });
@@ -119,6 +126,34 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 // 이벤트 리스너 수정
 canvas.addEventListener('mouseleave', () => hideVideoModal(modal));
 
+// canvas.addEventListener('DOMContentLoaded', () => {
+
+window.addEventListener('popstate', () => {
+  if (isHighlighting) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    setTimeout(() => {
+      highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+    }, 300);
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (isHighlighting) {
+    highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+  }
+});
+
+// react, next 화면이동감지
+document.addEventListener('click', event => {
+  if (isHighlighting) {
+    // 하이라이트 초기화
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    setTimeout(() => {
+      highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+    }, 300);
+  }
+});
+
 // 페이지 언로드 시 정리
 window.addEventListener(
   'beforeunload',
@@ -129,13 +164,6 @@ window.addEventListener(
 );
 
 // 컨트롤 패널 생성 - 하이라이트 토글 버튼
-const { highlights: newHighlights, isHighlighting } = createToggleButton(
-  ctx,
-  canvas,
-  highlights,
-  serverWords,
-  isElementCovered,
-);
 
 highlights = newHighlights;
 
@@ -155,11 +183,7 @@ window.addEventListener('scroll', () => {
 });
 
 // 윈도우 리사이즈 시 다시 그리기
-window.addEventListener('resize', () => {
-  if (isHighlighting) {
-    highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
-  }
-});
+
 
 // cleanup 함수
 function cleanup() {

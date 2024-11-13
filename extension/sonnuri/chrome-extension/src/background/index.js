@@ -15,13 +15,20 @@ const extractUrls = sentences => {
   sentences.forEach(sentence => {
     sentence.words.forEach(word => {
       if (word.url && word.url !== '') {
-        urls.push({ url: word.url, word: word.form });
+        const splitUrls = word.url.split(',');
+        splitUrls.forEach((url,index) => {
+          urls.push({ url: url.trim(), word: word.form, isFirstIdx: index === 0 ? urls.length: -1});
+        });
         return;
       }
       if (word.tokens) {
         word.tokens.forEach(token => {
           if (token.url && token.url !== '') {
-            urls.push({ url: token.url, word: token.form });
+            const splitUrls = token.url.split(',');
+
+            splitUrls.forEach((url,index) => {
+              urls.push({ url: url.trim(), word: token.form, isFirstIdx: index === 0 ? urls.length: -1});
+            });
           }
         });
       }
@@ -40,17 +47,19 @@ const requestSentence = async text => {
       body: JSON.stringify({ text: text }),
     });
     const resultJson = await result.json();
-    const urls = extractUrls(resultJson.result);
+    const urls = extractUrls(resultJson.sentences);
+    console.log('urls',urls);
     chrome.runtime.sendMessage({ type: 'success_sentence_result' });
     return urls;
   } catch (error) {
     console.error('Error fetching data:', error);
     chrome.runtime.sendMessage({ type: 'error_sentence_result' });
+    return [];
   }
 };
 
 // 드래그된 텍스트 저장
-chrome.runtime.onMessage.addListener(async (request, sender) => {
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.type === 'request_sentence') {
     if (request.text) {
       // 드래그된 텍스트로 요청을 보내고, 그 결과를 저장.
@@ -58,6 +67,7 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
       await chrome.storage.local.set({ urls: result });
       const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
       const response = await chrome.tabs.sendMessage(tab.id, { type: 'success_sentence_result' });
+      sendResponse({success: true});
     }
   }
   return true;

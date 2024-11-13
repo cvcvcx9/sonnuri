@@ -16,7 +16,7 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
 
   // 토글 버튼
   const toggleButton = document.createElement('button');
-  toggleButton.textContent = '하이라이트 켜기';
+  toggleButton.textContent = '하이라이트 끄기';
   let isHighlighting = true;
 
   toggleButton.onclick = () => {

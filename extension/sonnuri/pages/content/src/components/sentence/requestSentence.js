@@ -16,7 +16,6 @@ export default async function requestSentence(text, circle) {
         setTimeout(() => {
             circle.stop();
         }, 30000);
-
     }
   
   await chrome.storage.local.set({ newSentence: text });

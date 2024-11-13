@@ -3,7 +3,6 @@ export default function hideVideoModal(modal) {
     if (video) {
       video.pause();
       video.removeAttribute('src');
-      video.load();
     }
     modal.close();
   }
