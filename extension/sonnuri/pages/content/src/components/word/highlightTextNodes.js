@@ -12,6 +12,7 @@ const getTopElementAtPointExcludingCanvas = (x, y) => {
 };
 
 const isDescendant = (topElement, targetNode) => {
+  if (!topElement || !targetNode) return false;
   return topElement.contains(targetNode);
 };
 
