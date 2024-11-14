@@ -47,5 +47,5 @@ export default function loadingCircle() {
     
     document.body.appendChild(div);
     
-    return {div,circle};
+    return {loadingCircleWrapper: div, circle};
 }

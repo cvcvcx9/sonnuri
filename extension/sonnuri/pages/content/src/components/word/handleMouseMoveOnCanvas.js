@@ -17,8 +17,6 @@ export default function handleMouseMoveOnCanvas(e, highlights, modal, showVideoM
 
   if (hoveredHighlight && hoveredHighlight !== null) {
     if (hoveredHighlight !== previousHoveredHighlight ) {
-      console.log('hoveredHighlight', hoveredHighlight);
-      console.log("previousHoveredHighlight", previousHoveredHighlight);
       showVideoModal(hoveredHighlight, mouseX, mouseY, modal);
     }
     previousHoveredHighlight = hoveredHighlight;

@@ -1,3 +1,5 @@
+import requestMakeVideo from "./requestMakeVideo";
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.sidePanel.setOptions({
     path: 'side-panel/index.html',
@@ -47,32 +49,56 @@ const requestSentence = async text => {
       body: JSON.stringify({ text: text }),
     });
     const resultJson = await result.json();
+    console.log('resultJson',resultJson);
     const urls = extractUrls(resultJson.sentences);
-    console.log('urls',urls);
-    chrome.runtime.sendMessage({ type: 'success_sentence_result' });
+    // 요청 성공 메시지 전달 - 콘텐츠 페이지에서 처리
+    chrome.tabs.query({active: true, currentWindow: true}, async tabs => {
+      const tabId = tabs[0].id;
+      chrome.tabs.sendMessage(tabId, { type: 'success_sentence_result', urls: resultJson.urls });
+    });
     return urls;
   } catch (error) {
-    console.error('Error fetching data:', error);
-    chrome.runtime.sendMessage({ type: 'error_sentence_result' });
+    // 요청 실패 메시지 전달 - 콘텐츠 페이지에서 처리
+    chrome.tabs.query({active: true, currentWindow: true}, async tabs => {
+      const tabId = tabs[0].id;
+      chrome.tabs.sendMessage(tabId, { type: 'error_sentence_result', urls: [] });
+    });
     return [];
   }
 };
 
-// 드래그된 텍스트 저장
+// 드래그된 텍스트 저장 및 요청
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.type === 'request_sentence') {
     if (request.text) {
+      chrome.storage.local.set({original_text: request.text});
       // 드래그된 텍스트로 요청을 보내고, 그 결과를 저장.
       const result = await requestSentence(request.text);
+      // console.log('result',result.urls);
       await chrome.storage.local.set({ urls: result });
-      const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-      const response = await chrome.tabs.sendMessage(tab.id, { type: 'success_sentence_result' });
       sendResponse({success: true});
     }
   }
   return true;
 });
 
+// 보간 비디오 생성 요청
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  if (message.type === 'request_make_video') {
+    console.log('request_make_video 요청 전달받음', message.urls);
+    // 보간 비디오 생성 요청
+    console.log('result',message.urls);
+    chrome.runtime.sendMessage({type: 'make_video_started'});
+    
+    const result = await requestMakeVideo(message.urls);
+    chrome.storage.local.set({created_video_url: result.video_url});
+    console.log('생성된 비디오 링크',result);
+    chrome.runtime.sendMessage({type: 'make_video_ended',data: result.video_url});
+  }
+  return true;
+});
+
+// 사이드패널 열기 요청
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'open_side_panel') {
     console.log("open_side_panel 요청 전달받음");
@@ -84,20 +110,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         enabled: true, // 반드시 true로 설정해야 활성화됨
       });
       await chrome.sidePanel.open({tabId: tabId});
+      sendResponse({success: true});
     });
   }
   return true;
 });
 
-// 사이드바 요청을 위한 메시지 처리
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'get_saved_texts') {
-    chrome.storage.local.get('savedTexts', data => {
-      sendResponse(data.savedTexts || []);
-    });
-    return true; // 비동기 응답을 위한 리턴값
-  }
-});
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'success') {

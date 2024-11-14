@@ -78,7 +78,20 @@ translateSentenceBtn.addEventListener('mouseleave', () => {
   translateImgWrapper.style.display = 'none';
 });
 
+// 로딩 컨테이너 생성
+const loadingContainer = document.createElement('div');
+loadingContainer.id = 'loading-container';
+document.body.appendChild(loadingContainer);
+
+// 문장 수어번역 요청 로딩 아이콘
 const { loadingCircleWrapper, circle: loadingCircleElement } = loadingCircle();
+loadingContainer.appendChild(loadingCircleWrapper);
+
+// 보간 비디오 생성 요청 로딩 아이콘
+const {loadingCircleWrapper: loadingMakeVideoCircleWrapper, circle: loadingMakeVideoCircleElement } = loadingCircle();
+loadingContainer.appendChild(loadingMakeVideoCircleWrapper);
+
+// 하이라이트 생성
 if (isHighlighting) {
   setTimeout(() => {
     highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
@@ -97,7 +110,10 @@ document.addEventListener('mouseup', e => {
     // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
     translateSentenceBtn.onclick = async () => {
       // 로딩 아이콘을 표시한다.
-      loadingCircleElement.loading();
+      await chrome.runtime.sendMessage({
+        type: 'open_side_panel',
+      });
+      // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
       await chrome.runtime.sendMessage({
         type: 'request_sentence',
         text: selectedText,
@@ -107,15 +123,31 @@ document.addEventListener('mouseup', e => {
   } else {
     translateSentenceBtn.style.display = 'none'; // 선택된 텍스트가 없으면 버튼 숨김
   }
+  return true;
 });
 
 // 백그라운드에서 요청이 완료되었을 때, 아이콘의 상태를 변경한다.
+// 또한 비디오 주소 리스트를 받아와서, 보간된 비디오 생성 요청을 보낸다.
 chrome.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'success_sentence_result') {
     console.log('요청결과 전송받기 완료');
     loadingCircleElement.success();
+    console.log('컨텐츠 스크립트 message.urls', message.urls);
+    chrome.runtime.sendMessage({
+      type: 'request_make_video',
+      urls: message.urls,
+    });
   }
 });
+
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message.type === 'success_make_video_result') {
+    loadingMakeVideoCircleElement.success();
+    console.log('보간 비디오 생성 요청 결과 전송받기 완료');
+  }
+});
+
+
 
 chrome.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'error_sentence_result') {

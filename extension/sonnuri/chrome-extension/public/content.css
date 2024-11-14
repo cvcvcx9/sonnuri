@@ -29,17 +29,27 @@
     visibility: visible;
   }
 
+/* 로딩 컨테이너 */
+#loading-container {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10003;
+    top: 50%;
+    right:10px;
+    transform: translateY(-50%);
+}
+
+/* 로딩 컨테이너 내부 로딩 아이콘 */
   #loading-circle-container {
     display: none;
-    position: fixed;
     width: 48px;
     height: 48px;
     border: 1px solid #777777;
     border-radius: 5px;
     background: orange;
-    z-index: 10003;
-    top: 50%;
-    transform: translateY(-50%);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
     right: 10px;
 }
