@@ -1,5 +1,6 @@
 import cv2
 import os
+import pandas as pd
 from typing import List
 import hashlib
 import shutil
@@ -79,7 +80,6 @@ class VideoConnector:
         
         ## 실행코드
         command = f'python inference_img.py --img "{last_frame}" "{first_frame}" --exp=3'
-    #    command = f'python inference_img.py --img "{last_frame}" "{first_frame}" --exp=1 --scale=2.0'
         os.system(command)
         
         for i in range(16):
@@ -160,33 +160,25 @@ class VideoConnector:
                 shutil.rmtree(self.output_dir)  # temp_frames 디렉토리 삭제
 
 def main():
-    try:
-        # 작업 디렉토리 생성
-        os.makedirs("videos", exist_ok=True)
+    # CSV 파일 경로
+    csv_path = "C:/Users/SSAFY/Desktop/A301/parsed_morphemes.csv"
+    data = pd.read_csv(csv_path, encoding='cp949')
+    data.columns = data.columns.str.strip()
+    # 각 행에 대해 비디오 처리
+    for _, row in data.iterrows():
+        형태소 = row['형태소']
+        files = eval(row['파일'])  # 문자열로 되어 있는 리스트를 리스트로 변환
+        new_num = row['번호']
         
-        sentence = "돈 빌리다"
-        words = sentence.split()
+        # 파일 경로 목록 생성
+        video_paths = [f"G:/공유 드라이브/수어사전데이터/videos/AI_videos/{file}.mp4" for file in files]
         
-        video_paths = [
-            "G:/공유 드라이브/수어사전데이터/videos/AI_videos/16853_마지못하다.mp4",
-            "G:/공유 드라이브/수어사전데이터/videos/AI_videos/12571_할 수 없다.mp4",
-
-        ]
+        # 결과 비디오 경로 설정
+        output_path = f"G:/공유 드라이브/수어사전데이터/videos/AI_videos/{new_num}_{형태소}.mp4"
         
-        
-        # 비디오 파일 존재 확인
-        for path in video_paths:
-            if not os.path.exists(path):
-                print(f"Error: 비디오 파일을 찾을 수 없습니다: {path}")
-                return
-        
+        # VideoConnector 초기화 및 처리
         connector = VideoConnector()
-        connector.process_sentence(words, video_paths, "G:/공유 드라이브/수어사전데이터/videos/AI_videos/20007_부득이한.mp4")
+        connector.process_sentence(files, video_paths, output_path)
         
-    except Exception as e:
-        print(f"Error occurred: {str(e)}")
-        import traceback
-        traceback.print_exc()
-
 if __name__ == "__main__":
     main()
