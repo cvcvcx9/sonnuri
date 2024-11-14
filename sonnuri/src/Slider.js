@@ -34,9 +34,11 @@ function Slider() {
         <SwiperSlide className="bg-gray-100 flex items-center justify-center">
           <FuncThird />
         </SwiperSlide>
-        <SwiperSlide className="bg-gray-100 flex items-center justify-center">
+        
+        {/* 4번째 불투명도 조절 없음 */}
+        {/* <SwiperSlide className="bg-gray-100 flex items-center justify-center">
           <FuncForth />
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
 
       {/* 사용자 정의 이전 버튼 */}
