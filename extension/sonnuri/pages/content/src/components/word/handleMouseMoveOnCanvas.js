@@ -3,6 +3,7 @@ import hideVideoModal from "./hideVideoModal";
 let previousHoveredHighlight = null;
 
 export default function handleMouseMoveOnCanvas(e, highlights, modal, showVideoModal) {
+  
   const mouseX = e.clientX;
   const mouseY = e.clientY;
 
@@ -14,8 +15,8 @@ export default function handleMouseMoveOnCanvas(e, highlights, modal, showVideoM
       mouseY <= highlight.rect.bottom,
   );
 
-  if (hoveredHighlight) {
-    if (hoveredHighlight !== previousHoveredHighlight) {
+  if (hoveredHighlight && hoveredHighlight !== null) {
+    if (hoveredHighlight !== previousHoveredHighlight ) {
       showVideoModal(hoveredHighlight, mouseX, mouseY, modal);
     }
     previousHoveredHighlight = hoveredHighlight;
