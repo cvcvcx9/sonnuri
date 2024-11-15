@@ -192,9 +192,9 @@ async def extract_words_from_sentence(sentences: List[Sentence], type: str) -> L
                             if data:
                                 text_url = data.get("URL", '')
                                 url += ',' + text_url
-                                video_urls.extend(text_url)
                         if url:
                             url = url[1:]
+                            video_urls.extend(url.split(","))
                         token.url = url
                     if response:
                         new_data = {
@@ -205,7 +205,7 @@ async def extract_words_from_sentence(sentences: List[Sentence], type: str) -> L
                         }
                         token.url = response
                         token.definition = definition
-                        video_urls.extend(token.url)
+                        video_urls.extend(token.url.split(","))
                         collection.insert_one(new_data)
     
     return result, video_urls
