@@ -5,3 +5,4 @@ kiwipiepy
 pymongo
 python-dotenv
 openai
+boto3
