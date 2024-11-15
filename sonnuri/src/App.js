@@ -60,6 +60,7 @@ function App() {
           <div className="text-xl md:text-xl lg:text-2xl pt-10 text-center animate-slide-up text-white text-opacity-80">
             모든 콘텐츠를 수어로 쉽게 이해하세요
           </div>
+          
 
         </div>
       </div>
