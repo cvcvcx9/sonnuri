@@ -11,6 +11,7 @@ import pymongo
 import unicodedata
 import httpx
 import asyncio
+import boto3
 
 # .env 파일 로드
 load_dotenv()
@@ -41,8 +42,21 @@ mongo = pymongo.MongoClient(f"mongodb://{mongo_username}:{mongo_password}@k11a30
 db = mongo["sonnuri"]
 collection = db["sign_word"]
 
+question_mark_url = collection.find_one({"Word": "-ㅂ니까"}).get("URL")
+question_mark_description = collection.find_one({"Word": "-ㅂ니까"}).get("Description", "물음표")
+
+# S3 설정
+S3_BUCKET = os.getenv('AWS_S3_BUCKET')
+S3_REGION = os.getenv('AWS_REGION')
+s3_client = boto3.client('s3',
+    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
+    region_name=S3_REGION
+)
+
 class TextInput(BaseModel):
     text: str
+    type: str
 
 class Token(BaseModel):
     form: str
@@ -70,15 +84,24 @@ class OutputData(BaseModel):
 class VideoRequest(BaseModel):
     video_urls: List[str]
 
+class SynonymUrl(BaseModel):
+    url: str
+    confidence: float
+
 @app.post("/determine")
 async def determine_texts(input_data: TextInput):
     try:
+        # 생성된 문장과 일치하는게 있는지 확인
+        pre_created_url = find_pre_created_sentence_url(input_data.text.strip())
+        if (pre_created_url):
+            return {"sentences": [Sentence(text = input_data.text, start = 0, end = 0, tokens = [])], "urls": pre_created_url}
+        
         # ChatGPT를 활용해 문장을 한국어 -> 한국수어 문법으로 변형
         ksl_sentence = translate_sentence(input_data.text)
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
         analyzed_result = kiwi.split_into_sents(ksl_sentence, return_tokens=True)
         
-        extracted_result, video_urls = extract_words_from_sentence(analyzed_result)
+        extracted_result, video_urls = extract_words_from_sentence(analyzed_result, input_data.type)
         
         # result = await make_one_video(extracted_result)
         
@@ -88,7 +111,7 @@ async def determine_texts(input_data: TextInput):
     
 
 # 토큰들로 이루어진 문장을 후처리: 띄어쓰기 단위로 단어를 구성하는 형태소들의 수어 영상을 붙여서 텍스트로 반환한다.
-def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, List[Word]]]:
+def extract_words_from_sentence(sentences: List[Sentence], type: str) -> List[Dict[str, List[Word]]]:
     result = []
     for sentence in sentences:
         texts = sentence.text.split(" ")
@@ -102,7 +125,7 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             newForm = token.form
             # 띄어쓰기를 만났을 때: 단어를 만들고 token 리스트를 비움
             if lenCnt < token.start:
-                saveWord(texts, wordCnt, word_tokens, words)
+                saveWord(texts[wordCnt], word_tokens, words, sentence.text, type)
                 wordCnt += 1
                 word_tokens = []
                 
@@ -126,14 +149,7 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             if token.tag[0] == 'V':
                 newForm = token.form + '다'
             
-            tokenUrl = ''
-            definition = ''
-            data = collection.find_one({"Word": remove_non_alphanumeric_korean(newForm)})
-            if data:
-                tokenUrl = data.get("URL")
-                definition = data.get("Description", "")
-            # else:
-                # newUrl = find_similar_word_url(newForm)
+            tokenUrl, definition = get_url_and_definition(newForm, sentence.text, type)
                 
             # 새 Token 객체 생성
             new_token = Token(
@@ -146,13 +162,11 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
             )
             word_tokens.append(new_token)
         
-        saveWord(texts, wordCnt, word_tokens, words)
+        saveWord(texts[wordCnt], word_tokens, words, sentence.text, type)
         result.append({"sentence": sentence.text, "words": words})
         
     # url이 없는 단어 - url이 없는 토큰을 자음/모음 단위로 나누어 url 가져오기    
     video_urls = []
-    question_mark_url = collection.find_one({"Word": "-ㅂ니까"}).get("URL")
-    question_mark_description = collection.find_one({"Word": "-ㅂ니까"}).get("Description", "물음표")
     for r in result:
         for word in r["words"]:
             if word.form.endswith('?'):
@@ -180,16 +194,66 @@ def extract_words_from_sentence(sentences: List[Sentence]) -> List[Dict[str, Lis
     
     return result, video_urls
 
-def saveWord(texts: List[str], wordCnt: int, word_tokens: List[Token], words: List[Word]):
-    text = remove_non_alphanumeric_korean(texts[wordCnt])
-    data = collection.find_one({"Word": text})
-    wordUrl = ''
-    definition = ''
-    if data:
-        wordUrl = data.get("URL")
-        definition = data.get("Description", "")
-    word = Word(form=texts[wordCnt], tokens=word_tokens, url=wordUrl, definition=definition)
+def saveWord(word: str, word_tokens: List[Token], words: List[Word], sentence: str, type: str):
+    text = remove_non_alphanumeric_korean(word)
+    url, definition = get_url_and_definition(text, sentence, type)
+    word = Word(form=word, tokens=word_tokens, url=url, definition=definition)
     words.append(word)
+    
+def get_url_and_definition(text: str, sentence: str, type: str):
+    url = ''
+    definition = ''
+    
+    if (type == 'finance'):
+        collection = db["finance_word"]
+        data = collection.find_one({"Word": text})
+        if data:
+            url = data.get("URL")
+            definition = data.get("Description", '')
+            if definition == '':
+                definition = get_definition_in_sentence(text, sentence)
+                collection.update_one({'_id': data.get("_id")}, {'$set': {'Description': definition}})
+        if not data:
+            texts = split_korean_chars(text)
+            for text in texts:
+                 text_url = ''
+                 data = collection.find_one({"Word": text})
+                 if data:
+                    text_url = data.get("URL", '')
+                 url += ',' + text_url
+            url = url[1:]
+        return url, definition
+    
+    data = collection.find_one({"Word": text})
+    if data:
+        url = data.get("URL")
+        definition = data.get("Description", '')
+        if definition == '':
+            definition = get_definition_in_sentence(text, sentence)
+            collection.update_one({'_id': data.get("_id")}, {'$set': {'Description': definition}})
+    if not data:
+        definition = get_definition_in_sentence(text, sentence)
+        url, confidence = get_synonym_url(text, definition)
+        if confidence < 0.7:
+            url = ''
+            texts = split_korean_chars(text)
+            for text in texts:
+                 text_url = ''
+                 data = collection.find_one({"Word": text})
+                 if data:
+                    text_url = data.get("URL", '')
+                 url += ',' + text_url
+            url = url[1:]
+        if confidence >= 0.7:
+            new_data = {
+                "No": collection.find_one(sort=[("No", -1)])["No"] + 1,
+                "Word": text,
+                "URL": url,
+                "Description": definition
+            }
+            collection.insert_one(new_data)
+        
+    return url, definition
     
 # 영어 (A-Z, a-z), 숫자 (0-9), 한글 (\uAC00-\uD7A3 완성형, \u3131-\u3163 자음/모음) 만 남기고 나머지 제거
 def remove_non_alphanumeric_korean(text):
@@ -202,12 +266,29 @@ def translate_sentence(prompt: str):
         messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야."
                    "제시된 한국어 문장들을 한국수어 문법 형식으로 번역해서 응답해줘."
                    "최대한 단어의 원형을 유지해줘."
-                   "제시된 한국어 문장에서 값을 새로 추가해서는 안돼."
+                   "그 외의 다른 말은 붙이지 마."
                    "다른 언어가 있을 경우 한국어로 번역해서 보여줘."
                    },
                   {"role": "user", "content": prompt}]
     )
     return response.choices[0].message.content
+
+def get_definition_in_sentence(text: str, sentence: str):
+    response = openai.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "system", "content": "너는 문장에서 단어가 가지는 뜻을 보여주는 사전이야. "
+                   "단어의 사전적 정의만 제공해줘. 추가적인 설명이나 예시는 포함하지 마."
+                   "형식은 다음과 같이 제공해줘. 단어:뜻"
+                   },
+                  {"role": "user", "content": f"단어:{text}, 문장:{sentence}"}]
+    )
+    return response.choices[0].message.content.split(":")[1].strip()
+
+# morpheme 서버로 요청 보내서 유사어 url과 confidence 가져오기
+def get_synonym_url(text: str, sentence: str):
+    
+    
+    return "url", 0.6
 
 # 유니코드 자모 리스트
 CHOSEONG = [
@@ -283,3 +364,66 @@ async def process_videos(video_urls: List[str]):
             return response.json()  # 대상 서버의 응답 반환
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing videos: {str(e)}")
+        
+def find_pre_created_sentence_url(sentence: str):
+    collection = db["sign_sentence"]
+    url = ''
+    pre_created_sentence = collection.find_one({"Sentence": sentence})
+    if pre_created_sentence:
+        url = pre_created_sentence.get("URL", '')
+    
+    return url
+
+def get_s3_file_list(bucket, prefix):
+    """S3 폴더 내 파일 리스트 가져오기"""
+    response = s3_client.list_objects_v2(Bucket=bucket, Prefix=prefix)
+    if 'Contents' not in response:
+        return []
+    return [obj['Key'] for obj in response['Contents'] if obj['Key'] != prefix]
+
+def parse_file_name(file_name):
+    """파일 이름에서 No와 Word 추출"""
+    match = re.match(r'(\d+)_(.+)\.mp4$', file_name)
+    if match:
+        no = int(match.group(1))
+        word = match.group(2)
+        return no, word
+    return None, None
+
+@app.get("/import-s3-ai-words")
+def import_s3_ai_words():
+    finance_collection = db['finance_word']
+    file_list = get_s3_file_list(S3_BUCKET, "AI_videos/")
+
+    # MongoDB에 데이터 삽입
+    for file_key in file_list:
+        # 파일 이름 파싱
+        file_name = file_key.split('/')[-1]  # 폴더 경로 제거
+        no, word = parse_file_name(file_name)
+
+        if no is not None and word is not None:
+            # S3 URL 생성
+            s3_url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{file_name}"
+            
+            # 기존 MongoDB 값
+            document = collection.find_one({'No': no})
+            description = ''
+            if document:
+                description = document.get("Description", '')
+
+            # MongoDB에 삽입할 데이터
+            query = {"No": no, "Word": word}  # 조건: No와 Word가 같은 데이터
+            finance_document = {
+                "$set": {
+                    'No': no,
+                    'Word': word,
+                    'URL': s3_url,
+                    'Description': description
+                }
+            }
+
+            # MongoDB에 데이터 삽입
+            finance_collection.update_one(query, finance_document, upsert=True)
+            print(f"Inserted into MongoDB: {finance_document}")
+        else:
+            print(f"Skipping file (invalid format): {file_name}")
