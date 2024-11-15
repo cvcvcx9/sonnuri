@@ -12,9 +12,9 @@ pipeline {
                 changeset "${DETERMINE_PATH}/**" // determine 폴더에 변경 사항이 있을 때만 실행
             }
             steps {
-                // Credentials 블록을 사용하여 MONGODB_ENV 파일을 환경변수로 가져오기
+                // Credentials 블록을 사용하여 ENV 파일을 환경변수로 가져오기
                 withCredentials([
-                    file(credentialsId: 'MONGODB_ENV', variable: 'MONGODB_ENV')
+                    file(credentialsId: 'ENV', variable: 'ENV')
                 ]) {
                     script {
                     // determine 컨테이너 중지 및 제거
@@ -30,7 +30,7 @@ pipeline {
                         fi
                         '''
                         // Jenkins에 저장한 파일 복사
-                        sh 'cp ${MONGODB_ENV} .env'
+                        sh 'cp ${ENV} .env'
                         sh 'docker build -t determine_app .'
                         sh 'docker run -d --name determine_app --env-file .env -p 8001:8001 determine_app'
                         }
@@ -43,9 +43,9 @@ pipeline {
                 changeset "${ECCV_PATH}/**" // ECCV2022-RIFE 폴더에 변경 사항이 있을 때만 실행
             }
             steps {
-                // Credentials 블록을 사용하여 ECCV_ENV 파일을 환경변수로 가져오기
+                // Credentials 블록을 사용하여 ENV 파일을 환경변수로 가져오기
                 withCredentials([
-                    file(credentialsId: 'ECCV_ENV', variable: 'ECCV_ENV')
+                    file(credentialsId: 'ENV', variable: 'ENV')
                 ]) {
                     script {
                     // eccv_app 컨테이너 중지 및 제거
@@ -61,7 +61,7 @@ pipeline {
                         fi
                         '''
                         // Jenkins에 저장한 파일 복사
-                        sh 'cp ${ECCV_ENV} .env'
+                        sh 'cp ${ENV} .env'
                         sh 'docker build -t eccv_app .'
                         sh 'docker run -d --name eccv_app --env-file .env -p 8003:8003 eccv_app'
                         }
@@ -74,9 +74,9 @@ pipeline {
                 changeset "${MORPHEME_PATH}/**" // morpheme 폴더에 변경 사항이 있을 때만 실행
             }
             steps {
-                // Credentials 블록을 사용하여 MONGODB_ENV 파일을 환경변수로 가져오기
+                // Credentials 블록을 사용하여 ENV 파일을 환경변수로 가져오기
                 withCredentials([
-                    file(credentialsId: 'MONGODB_ENV', variable: 'MONGODB_ENV')
+                    file(credentialsId: 'ENV', variable: 'ENV')
                 ]) {
                     script {
                     // morpheme_app 컨테이너 중지 및 제거
@@ -92,7 +92,7 @@ pipeline {
                         fi
                         '''
                         // Jenkins에 저장한 파일 복사
-                        sh 'cp ${MONGODB_ENV} .env'
+                        sh 'cp ${ENV} .env'
                         sh 'docker build -t morpheme_app .'
                         sh 'docker run -d --name morpheme_app --env-file .env -p 8005:8005 morpheme_app'
                         }
