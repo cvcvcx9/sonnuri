@@ -6,6 +6,7 @@ import positionsign from "./image/위치고정.png"
 
 
 function FuncThird() {
+  const videoSrc = "/video/Fixposition2.mp4"
   return ( 
     <div className="flex flex-row items-center justify-between px-4 mb-10 h-screen"> 
       {/* 왼쪽 콘텐츠: 수어번역 정보 */}  
@@ -19,9 +20,7 @@ function FuncThird() {
       />
 
       {/* 오른쪽 콘텐츠: 영상 */}
-      <VideoSection 
-        videoTitle="영상 보여줘야 함"
-      />  
+      <VideoSection key={videoSrc + Date.now()} videoTitle="영상" videoSrc="/video/Fixposition2.mp4" />
       <Dot activeIndex={3} />
     </div>  
   );  
