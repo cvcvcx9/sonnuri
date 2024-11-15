@@ -171,7 +171,7 @@ def main():
         new_num = row['번호']
         
         # 파일 경로 목록 생성
-        video_paths = [f"G:/공유 드라이브/수어사전데이터/videos/AI_videos/{file}.mp4" for file in files]
+        video_paths = [f"C:/Users/SSAFY/Desktop/A301/downloaded_videos/{file}.mp4" for file in files]
         
         # 결과 비디오 경로 설정
         output_path = f"C:/Users/SSAFY/Desktop/A301/new_wd_video/{new_num}_{형태소}.mp4"
