@@ -21,11 +21,13 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
 
   toggleButton.onclick = () => {
     isHighlighting = !isHighlighting;
+    console.log('isHighlighting', isHighlighting);
     toggleButton.textContent = isHighlighting ? '하이라이트 끄기' : '하이라이트 켜기';
 
     if (isHighlighting) {
       highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
     } else {
+      highlights = [];
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
   };

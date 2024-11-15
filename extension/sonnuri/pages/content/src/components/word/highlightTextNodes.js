@@ -16,7 +16,11 @@ const isDescendant = (topElement, targetNode) => {
   return topElement.contains(targetNode);
 };
 
-export default function highlightTextNodes(ctx, canvas, documentBody, highlights, serverWords, isElementCovered) {
+export default function highlightTextNodes(ctx, canvas, documentBody, highlights, serverWords, isElementCovered, isHighlighting) {
+  if (!isHighlighting) {
+    return highlights;
+  }
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const textNodes = findTextNodes(documentBody);
 
@@ -46,7 +50,10 @@ export default function highlightTextNodes(ctx, canvas, documentBody, highlights
         const rects = range.getClientRects();
         for (let rect of rects) {
           // 화면에 보이는 영역만 그리기
-          const elementAtPoint = getTopElementAtPointExcludingCanvas(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          const elementAtPoint = getTopElementAtPointExcludingCanvas(
+            rect.left + rect.width / 2,
+            rect.top + rect.height / 2,
+          );
           if (
             rect.width > 0 &&
             rect.height > 0 &&

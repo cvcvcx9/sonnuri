@@ -152,7 +152,7 @@ const SidePanel: React.FC = () => {
                         </div>
                       </>
                     ) : (
-                      <div className="bg-black w-full h-[200px] rounded-lg flex items-center justify-center">
+                      <div className="bg-transparent w-full h-[200px] rounded-lg flex items-center justify-center">
                         <ReactPlayer width="100%" height="200px" style={{ backgroundColor: '#000000' }} />
                       </div>
                     )}

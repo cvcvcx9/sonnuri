@@ -88,7 +88,7 @@ const { loadingCircleWrapper, circle: loadingCircleElement } = loadingCircle();
 loadingContainer.appendChild(loadingCircleWrapper);
 
 // 보간 비디오 생성 요청 로딩 아이콘
-const {loadingCircleWrapper: loadingMakeVideoCircleWrapper, circle: loadingMakeVideoCircleElement } = loadingCircle();
+const { loadingCircleWrapper: loadingMakeVideoCircleWrapper, circle: loadingMakeVideoCircleElement } = loadingCircle();
 loadingContainer.appendChild(loadingMakeVideoCircleWrapper);
 
 // 하이라이트 생성
@@ -147,8 +147,6 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   }
 });
 
-
-
 chrome.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'error_sentence_result') {
     loadingCircleElement.error();
@@ -164,14 +162,30 @@ window.addEventListener('popstate', () => {
   if (isHighlighting) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     setTimeout(() => {
-      highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+      highlights = highlightTextNodes(
+        ctx,
+        canvas,
+        document.body,
+        highlights,
+        serverWords,
+        isElementCovered,
+        isHighlighting,
+      );
     }, 300);
   }
 });
 
 window.addEventListener('resize', () => {
   if (isHighlighting) {
-    highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+    highlights = highlightTextNodes(
+      ctx,
+      canvas,
+      document.body,
+      highlights,
+      serverWords,
+      isElementCovered,
+      isHighlighting,
+    );
   }
 });
 
@@ -179,9 +193,17 @@ window.addEventListener('resize', () => {
 document.addEventListener('click', event => {
   if (isHighlighting) {
     // 하이라이트 초기화
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     setTimeout(() => {
-      highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+      highlights = highlightTextNodes(
+        ctx,
+        canvas,
+        document.body,
+        highlights,
+        serverWords,
+        isElementCovered,
+        isHighlighting,
+      );
     }, 300);
   }
 });
@@ -209,13 +231,20 @@ window.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       canvas.style.display = 'block';
-      highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+      highlights = highlightTextNodes(
+        ctx,
+        canvas,
+        document.body,
+        highlights,
+        serverWords,
+        isElementCovered,
+        isHighlighting,
+      );
     }, 100);
   }
 });
 
 // 윈도우 리사이즈 시 다시 그리기
-
 
 // cleanup 함수
 function cleanup() {
