@@ -5,6 +5,8 @@ import wordvideo from "./image/단어수어영상.png";
 import senvideo from "./image/문장수어영상.png";
 import hand from "./image/한국수어.png";
 import sonnuri from "./image/sonnuri.png";
+import description from "./image/설명.jpg"
+
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
@@ -65,7 +67,12 @@ function App() {
       {/* About us 부분 */}
       <div className="flex flex-col items-center my-20">
         <div className="w-px h-16 bg-gray-300"></div>
-        <div className="mt-4 text-3xl text-gray-400">About us</div>
+        {/* <div className="mt-4 text-4xl text-gray-400">설명</div> */}
+        <img
+          src={description}
+          alt="설명이미지"
+          className="w-28 h-auto mt-4"
+        />
         <div
           ref={ref} // 요소에 ref 추가
           className={`pt-4 text-3xl mt-8 transition-opacity duration-700 ${
