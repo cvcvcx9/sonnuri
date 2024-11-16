@@ -171,10 +171,16 @@ class VideoConnector:
             raise
 
     def cleanup_temp_files(self, temp_dir: str, output_dir: str):
+        # temp_videos 폴더 삭제
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
+        # output 폴더 삭제
         if os.path.exists(output_dir):
             shutil.rmtree(output_dir)
+        # temp_frames 폴더 삭제
+        if os.path.exists(self.output_dir):
+            shutil.rmtree(self.output_dir)
+
 
     async def process_videos(self, video_urls: List[str], sentence: str, output_filename: str) -> str:
         try:
@@ -188,7 +194,7 @@ class VideoConnector:
                 raise Exception("One or more video downloads failed.")
 
             print("Extracting frames...")
-            fps, size = self.extract_all_frames(local_paths[0])  # 첫 번째 동영상 사용 예제
+            fps, size = self.extract_all_frames(local_paths[0])
 
             print("Creating final video...")
             self.create_final_video(fps, size, output_filename)
@@ -203,11 +209,19 @@ class VideoConnector:
                 "S3 Key": s3_key
             })
 
-            self.cleanup_temp_files(temp_dir, output_dir)
+            print("Cleaning up temporary files...")
+            self.cleanup_temp_files(temp_dir, output_dir)  # 모든 임시 파일 삭제
+
+            if os.path.exists(output_filename):
+                os.remove(output_filename)  # 최종 output 파일도 삭제
+
             return s3_url
 
         except Exception as e:
-            self.cleanup_temp_files(temp_dir, output_dir)
+            print("Error occurred, cleaning up...")
+            self.cleanup_temp_files(temp_dir, output_dir)  # 에러 발생시에도 cleanup
+            if os.path.exists(output_filename):
+                os.remove(output_filename)
             raise Exception(f"Video processing failed: {str(e)}")
 
 
