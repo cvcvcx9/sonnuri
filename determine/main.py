@@ -92,12 +92,12 @@ class SynonymUrl(BaseModel):
 async def determine_texts(input_data: TextInput):
     try:
         # 생성된 문장과 일치하는게 있는지 확인
-        pre_created_url = await find_pre_created_sentence_url(input_data.text.strip())
+        pre_created_url = find_pre_created_sentence_url(input_data.text.strip())
         if (pre_created_url):
-            return {"sentences": [Sentence(text = input_data.text, start = 0, end = 0, tokens = [])], "urls": pre_created_url}
+            return {"sentences": {"sentence": input_data.text, "words": [Word(form = input_data.text, url= pre_created_url, definition='', tokens=[])]}, "urls": pre_created_url}
         
         # ChatGPT를 활용해 문장을 한국어 -> 한국수어 문법으로 변형
-        ksl_sentence = await translate_sentence(input_data.text)
+        ksl_sentence = translate_sentence(input_data.text)
         # kiwi를 활용해 들어온 값을 토큰들로 이루어진 문장으로 형태소 분석
         analyzed_result = kiwi.split_into_sents(ksl_sentence, return_tokens=True)
         
@@ -149,7 +149,7 @@ async def extract_words_from_sentence(sentences: List[Sentence], type: str) -> L
             if token.tag[0] == 'V':
                 newForm = token.form + '다'
             
-            tokenUrl, definition = await get_url_and_definition(newForm, sentence.text, type)
+            tokenUrl, definition = get_url_and_definition(newForm, sentence.text, type)
                 
             # 새 Token 객체 생성
             new_token = Token(
@@ -181,42 +181,42 @@ async def extract_words_from_sentence(sentences: List[Sentence], type: str) -> L
                 if token.url:
                     video_urls.extend(token.url.split(","))
                 if not token.url and type != 'finance':
-                    definition = await get_definition_in_sentence(token.form, sentence)
-                    response = await get_synonym_url(token.form, definition)
-                    if not response:
-                        url = ''
-                        texts = split_korean_chars(token.form)
-                        for text in texts:
-                            text_url = ''
-                            data = collection.find_one({"Word": text})
-                            if data:
-                                text_url = data.get("URL", '')
-                                url += ',' + text_url
-                        if url:
-                            url = url[1:]
-                            video_urls.extend(url.split(","))
-                        token.url = url
-                    if response:
-                        new_data = {
-                            "No": collection.find_one(sort=[("No", -1)])["No"] + 1,
-                            "Word": token.form,
-                            "URL": response,
-                            "Description": definition
-                        }
-                        token.url = response
-                        token.definition = definition
-                        video_urls.extend(token.url.split(","))
-                        collection.insert_one(new_data)
+                    definition = get_definition_in_sentence(token.form, sentence)
+                    # response = await get_synonym_url(token.form, definition)
+                    # if not response:
+                    url = ''
+                    texts = split_korean_chars(token.form)
+                    for text in texts:
+                        text_url = ''
+                        data = collection.find_one({"Word": text})
+                        if data:
+                            text_url = data.get("URL", '')
+                            url += ',' + text_url
+                    if url:
+                        url = url[1:]
+                        video_urls.extend(url.split(","))
+                    token.url = url
+                    # if response:
+                    #     new_data = {
+                    #         "No": collection.find_one(sort=[("No", -1)])["No"] + 1,
+                    #         "Word": token.form,
+                    #         "URL": response,
+                    #         "Description": definition
+                    #     }
+                    #     token.url = response
+                    #     token.definition = definition
+                    #     video_urls.extend(token.url.split(","))
+                    #     collection.insert_one(new_data)
     
     return result, video_urls
 
 async def saveWord(word: str, word_tokens: List[Token], words: List[Word], sentence: str, type: str):
     text = remove_non_alphanumeric_korean(word)
-    url, definition = await get_url_and_definition(text, sentence, type)
+    url, definition = get_url_and_definition(text, sentence, type)
     word = Word(form=word, tokens=word_tokens, url=url, definition=definition)
     words.append(word)
     
-async def get_url_and_definition(word: str, sentence: str, type: str):
+def get_url_and_definition(word: str, sentence: str, type: str):
     url = ''
     definition = ''
     c = collection
@@ -227,7 +227,7 @@ async def get_url_and_definition(word: str, sentence: str, type: str):
         url = data.get("URL")
         definition = data.get("Description", '')
         if definition == '':
-            definition = await get_definition_in_sentence(word, sentence)
+            definition = get_definition_in_sentence(word, sentence)
             c.update_one({'_id': data.get("_id")}, {'$set': {'Description': definition}})
     return url, definition
     
@@ -293,7 +293,7 @@ def remove_non_alphanumeric_korean(text):
     return re.sub(r'[^A-Za-z0-9\uAC00-\uD7A3\u3131-\u3163]', '', text)
 
 # ChatGPT 호출(문장 -> 한국수어)
-async def translate_sentence(prompt: str):
+def translate_sentence(prompt: str):
     response = openai.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "system", "content": "너는 한국어를 한국수어 문법으로 바꿔주는 번역기야."
@@ -306,7 +306,7 @@ async def translate_sentence(prompt: str):
     )
     return response.choices[0].message.content
 
-async def get_definition_in_sentence(text: str, sentence: str):
+def get_definition_in_sentence(text: str, sentence: str):
     response = openai.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "system", "content": "너는 문장에서 단어가 가지는 뜻을 보여주는 사전이야. "
@@ -411,7 +411,7 @@ async def process_videos(video_urls: List[str]):
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing videos: {str(e)}")
         
-async def find_pre_created_sentence_url(sentence: str):
+def find_pre_created_sentence_url(sentence: str):
     sentence_collection = db["sign_sentence"]
     url = ''
     pre_created_sentence = sentence_collection.find_one({"Sentence": sentence})
@@ -420,14 +420,14 @@ async def find_pre_created_sentence_url(sentence: str):
     
     return url
 
-async def get_s3_file_list(bucket, prefix):
+def get_s3_file_list(bucket, prefix):
     """S3 폴더 내 파일 리스트 가져오기"""
     response = s3_client.list_objects_v2(Bucket=bucket, Prefix=prefix)
     if 'Contents' not in response:
         return []
     return [obj['Key'] for obj in response['Contents'] if obj['Key'] != prefix]
 
-async def parse_file_name(file_name):
+def parse_file_name(file_name):
     """파일 이름에서 No와 Word 추출"""
     match = re.match(r'(\d+)_(.+)\.mp4$', file_name)
     if match:
@@ -439,7 +439,7 @@ async def parse_file_name(file_name):
 @app.get("/import-s3-ai-words")
 async def import_s3_ai_words():
     finance_collection = db['finance_word']
-    file_list = await get_s3_file_list(S3_BUCKET, "AI_videos/")
+    file_list = get_s3_file_list(S3_BUCKET, "AI_Videos/")
 
     # MongoDB에 데이터 삽입
     for file_key in file_list:
