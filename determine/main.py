@@ -454,7 +454,7 @@ async def import_s3_ai_words():
 
         if no is not None and word is not None:
             # S3 URL 생성
-            s3_url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{file_name}"
+            s3_url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/AI_Videos/{file_name}"
             
             # 기존 MongoDB 값
             document = collection.find_one({'No': no})
