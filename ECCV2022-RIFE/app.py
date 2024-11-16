@@ -2,6 +2,7 @@ import os
 import cv2
 import hashlib
 import boto3
+import pymongo
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,6 +15,7 @@ import numpy as np
 from concurrent.futures import ProcessPoolExecutor
 import asyncio
 import aiohttp
+import datetime
 
 # .env 파일 로드
 load_dotenv()
@@ -27,6 +29,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# MongoDB 설정
+MONGO_USERNAME = os.getenv('MONGO_USERNAME')
+MONGO_PASSWORD = os.getenv('MONGO_PASSWORD')
+mongo_client = pymongo.MongoClient(f"mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@k11a301.p.ssafy.io:8017/?authSource=admin")
+db = mongo_client["sonnuri"]
+collection = db["sign_sentence"]
 
 # S3 설정
 S3_BUCKET = os.getenv('AWS_S3_BUCKET')
@@ -97,7 +106,6 @@ class VideoConnector:
         cap.release()
         return fps, (width, height)
 
-
     def _extract_frames_helper(self, args):
         video_path, word = args
         return self.extract_all_frames(video_path, word)
@@ -107,7 +115,6 @@ class VideoConnector:
         size = None
         max_workers = os.cpu_count()  # vCPU 수에 맞게 워커 설정
 
-        # 메서드로 직접 전달
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
             results = executor.map(self._extract_frames_helper, zip(local_paths, words))
             for res in results:
@@ -177,7 +184,7 @@ class VideoConnector:
         subprocess.run(command, check=True)
         os.remove(temp_output)
 
-    def upload_to_s3(self, file_path: str, s3_key: str) -> str:
+    def upload_to_s3(self, file_path: str, s3_key: str) -> tuple[str, str]:
         try:
             extra_args = {
                 'ContentType': 'video/mp4',
@@ -189,12 +196,13 @@ class VideoConnector:
                 s3_key,
                 ExtraArgs=extra_args
             )
-            return f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{s3_key}"
+            url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{s3_key}"
+            return url, s3_key
         except Exception as e:
             print(f"S3 upload error: {str(e)}")
             raise
 
-    async def process_videos(self, video_urls: List[str], output_filename: str) -> str:
+    async def process_videos(self, video_urls: List[str], sentence: str, output_filename: str) -> str:
         if os.path.exists("output"):
             shutil.rmtree("output")
         os.makedirs("output")
@@ -206,11 +214,18 @@ class VideoConnector:
         self.create_final_video(words, fps, size, output_filename)
 
         s3_key = f"sentence/{os.path.basename(output_filename)}"
-        s3_url = self.upload_to_s3(output_filename, s3_key)
+        s3_url, s3_key = self.upload_to_s3(output_filename, s3_key)
+
+        # MongoDB에 데이터 저장
+        collection.insert_one({
+            "Sentence": sentence,
+            "URL": s3_url,
+            "S3 Key": s3_key
+        })
 
         self.cleanup_temp_files(temp_dir="temp_videos", output_dir="output")
         if os.path.exists(output_filename):
-            os.remove(output_filename)  # 최종 비디오 파일 삭제
+            os.remove(output_filename)
         return s3_url
 
     def cleanup_temp_files(self, temp_dir: str, output_dir: str):
@@ -222,24 +237,31 @@ class VideoConnector:
             shutil.rmtree(self.output_dir)
 
 class VideoRequest(BaseModel):
-    video_urls: list[str]
+    video_urls: List[str]
+    sentence: str
 
 @app.post('/process_videos')
 async def process_videos(request: VideoRequest):
     try:
         video_urls = request.video_urls
+        sentence = request.sentence
+        
         if not isinstance(video_urls, list) or not video_urls:
             raise HTTPException(status_code=400, detail="유효한 비디오 URL 리스트가 필요합니다.")
+        
+        if not sentence:
+            raise HTTPException(status_code=400, detail="문장이 필요합니다.")
         
         output_filename = f"processed_{hashlib.md5(''.join(video_urls).encode()).hexdigest()}.mp4"
         
         connector = VideoConnector()
-        s3_url = await connector.process_videos(video_urls, output_filename)
+        s3_url = await connector.process_videos(video_urls, sentence, output_filename)
         
         return JSONResponse(
             content={
                 "status": "success",
-                "video_url": s3_url
+                "video_url": s3_url,
+                "sentence": sentence
             },
             status_code=200
         )
