@@ -177,15 +177,15 @@ async def extract_words_from_sentence(sentences: List[Sentence], type: str) -> L
                     word.url += ',' + question_mark_url
                     video_urls.append(question_mark_url)
                 if word.definition == '':
-                    word.definition = get_definition_in_sentence(word.form, r.sentence)
+                    word.definition = get_definition_in_sentence(word.form, r["sentence"])
                 continue
             for token in word.tokens:
                 if token.url:
                     video_urls.extend(token.url.split(","))
-                    if definition == '':
-                        token.definition = get_definition_in_sentence(token.form, r.sentence)
+                    if token.definition == '':
+                        token.definition = get_definition_in_sentence(token.form, r["sentence"])
                 if not token.url and type != 'finance':
-                    definition = get_definition_in_sentence(token.form, r.sentence)
+                    definition = get_definition_in_sentence(token.form, r["sentence"])
                     # response = await get_synonym_url(token.form, definition)
                     # if not response:
                     url = ''
