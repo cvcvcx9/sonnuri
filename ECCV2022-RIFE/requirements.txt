@@ -74,3 +74,4 @@ uvicorn
 Werkzeug
 wget
 aiohttp
+pymongo
