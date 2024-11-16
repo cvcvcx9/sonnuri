@@ -5,7 +5,7 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
 
   controlPanel.style.cssText = `
     position: fixed;
-    bottom: 10px;
+    bottom: 120px;
     right: 10px;
     z-index: 10000;
     background: white;
