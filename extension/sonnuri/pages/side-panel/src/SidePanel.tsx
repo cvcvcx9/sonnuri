@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Card, CardContent, Tabs, TabsContent, TabsList, TabsTrigger } from '@extension/ui/lib/components/ui';
+import { Card, CardContent, Tabs, TabsContent, TabsList, TabsTrigger } from '@extension/ui/lib/components/ui';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import SkeletonLoader from './components/SkeletonLoader';
@@ -110,7 +110,7 @@ const SidePanel: React.FC = () => {
                 <img className="w-8 h-8" src="./word_sign_language.png" alt="word" />
               </TabsTrigger>
               <TabsTrigger value="interpolate" className="text-sm w-full" disabled={interpolateLoading}>
-                <img className="w-8 h-8" src="./sentence_sign_language.png" alt="word" />
+                <img className="w-16 h-16" src="./sentence_sign_language.png" alt="word" />
               </TabsTrigger>
             </TabsList>
             <TabsContent value="sentence">
@@ -119,12 +119,13 @@ const SidePanel: React.FC = () => {
                 <div className="flex flex-wrap gap-2 mt-4">
                   {playlistInfo && playlistInfo.length > 0 ? (
                     playlistInfo.map((item, index) => (
-                      <Button
+                      <button
                         key={index}
                         onClick={() => handleButtonClick(item.isFirstIdx)}
-                        className="text-sm bg-[#C1C1C1] px-2 py-1 text-white rounded-full">
+                        className="text-sm px-2 py-1 bg-[#5B679E] text-white rounded-full"
+                      >
                         {item.word}
-                      </Button>
+                      </button>
                     ))
                   ) : (
                     <div className="text-center text-gray-500">저장된 문장이 없습니다.</div>
@@ -198,7 +199,7 @@ const SidePanel: React.FC = () => {
         </CardContent>
       </Card>
 
-    </div>
+    </div >
   );
 };
 

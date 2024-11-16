@@ -98,7 +98,7 @@ if (isHighlighting) {
   }, 300);
 }
 document.addEventListener('mouseup', e => {
-  const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
+  const selectedText = window.getSelection().toString(); // 드래그된 단어 가���오기
   if (selectedText) {
     translateSentenceBtn.style.top = `${e.pageY}px`; // 버튼 위치 변경
     translateSentenceBtn.style.left = `${e.pageX}px`; // 버튼 위치 변경
@@ -136,6 +136,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     chrome.runtime.sendMessage({
       type: 'request_make_video',
       urls: message.urls,
+      sentence: selectedText,
     });
   }
 });
@@ -191,10 +192,10 @@ window.addEventListener('resize', () => {
 
 // react, next 화면이동감지
 document.addEventListener('click', event => {
-  if (isHighlighting) {
-    // 하이라이트 초기화
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    setTimeout(() => {
+  // 하이라이트 초기화
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  setTimeout(() => {
+    if (isHighlighting) {
       highlights = highlightTextNodes(
         ctx,
         canvas,
@@ -204,8 +205,11 @@ document.addEventListener('click', event => {
         isElementCovered,
         isHighlighting,
       );
-    }, 300);
-  }
+    } else {
+      highlights = [];
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }, 300);
 });
 
 // 페이지 언로드 시 정리
@@ -220,17 +224,21 @@ window.addEventListener(
 // 컨트롤 패널 생성 - 하이라이트 토글 버튼
 
 highlights = newHighlights;
-
+let isScrolling = false;
 // 스크롤 이벤트 처리
-let scrollTimeout;
+let scrollTimeout; // 스크롤 타임아웃 변수 선언
 window.addEventListener('scroll', () => {
   if (isHighlighting) {
-    // 스크롤 중에는 캔버스 숨기기
-    canvas.style.display = 'none';
-    // 스크롤이 멈추면 다시 그리기
+    if (!isScrolling) {
+      isScrolling = true;
+      canvas.style.opacity = '0';
+      canvas.style.transition = 'opacity 0.2s ease';
+    }
+
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
-      canvas.style.display = 'block';
+      isScrolling = false;
+      canvas.style.opacity = '1';
       highlights = highlightTextNodes(
         ctx,
         canvas,
@@ -240,7 +248,7 @@ window.addEventListener('scroll', () => {
         isElementCovered,
         isHighlighting,
       );
-    }, 100);
+    }, 150);
   }
 });
 
