@@ -10,35 +10,57 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 const extractUrls = sentences => {
-  const urls = [];
-  if (!sentences || sentences.length === 0) {
-    return urls;
-  }
-  sentences.forEach(sentence => {
-    sentence.words.forEach(word => {
-      if (word.url && word.url !== '') {
-        const splitUrls = word.url.split(',');
-        splitUrls.forEach((url, index) => {
-          urls.push({ url: url.trim(), word: word.form, isFirstIdx: index === 0 ? urls.length : -1 });
-        });
-        return;
-      }
-      if (word.tokens) {
-        word.tokens.forEach(token => {
-          if (token.url && token.url !== '') {
-            const splitUrls = token.url.split(',');
+  const urlGroups = {};
 
-            splitUrls.forEach((url, index) => {
-              urls.push({ url: url.trim(), word: token.form, isFirstIdx: index === 0 ? urls.length : -1 });
+  if (!sentences) {
+    return [];
+  }
+
+  if (!Array.isArray(sentences)) {
+    const word = sentences.form;
+    urlGroups[word] = urlGroups[word] || [];
+    urlGroups[word].push({ url: sentences.url, word, definition: sentences.definition, isFirstIdx: 0 });
+  } else {
+    sentences.forEach(sentence => {
+      if (sentence.words) {
+        sentence.words.forEach(word => {
+          if (word.url && word.url !== '') {
+            const splitUrls = word.url.split(',');
+            splitUrls.forEach(url => {
+              urlGroups[word.form] = urlGroups[word.form] || [];
+              urlGroups[word.form].push({
+                url: url.trim(),
+                word: word.form,
+                definition: word.definition,
+                isFirstIdx: urlGroups[word.form].length === 0 ? 0 : -1,
+              });
+            });
+          } else if (word.tokens) {
+            word.tokens.forEach(token => {
+              if (token.url && token.url !== '') {
+                const splitUrls = token.url.split(',');
+                splitUrls.forEach(url => {
+                  urlGroups[token.form] = urlGroups[token.form] || [];
+                  urlGroups[token.form].push({
+                    url: url.trim(),
+                    word: token.form,
+                    definition: token.definition,
+                    isFirstIdx: urlGroups[token.form].length === 0 ? 0 : -1,
+                  });
+                });
+              }
             });
           }
         });
       }
     });
-  });
-  return urls;
+  }
+
+  return urlGroups;
 };
 
+// 문장 요청
+// 문장 요청 후 추출된 링크를 반환
 const requestSentence = async (text, type) => {
   try {
     const result = await fetch('http://k11a301.p.ssafy.io:8001/determine', {
@@ -75,11 +97,11 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
       await chrome.storage.local.set({ isLoading: true });
       await chrome.storage.local.set({ created_video_url: '' });
       // 드래그된 텍스트로 요청을 보내고, 그 결과를 저장.
-      const result1 = await requestSentence(request.text, 'sentence');
-      const result2 = await requestSentence(request.text, 'finance');
+      const resultSentence = await requestSentence(request.text, 'sentence');
+      const resultFinance = await requestSentence(request.text, 'finance');
       await chrome.storage.local.set({ isLoading: false });
       // console.log('result',result.urls);
-      await chrome.storage.local.set({ urls: result1 });
+      await chrome.storage.local.set({ urls: resultSentence });
       sendResponse({ success: true });
     }
   }
