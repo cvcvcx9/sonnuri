@@ -16,9 +16,19 @@ const isDescendant = (topElement, targetNode) => {
   return topElement.contains(targetNode);
 };
 
-export default function highlightTextNodes(ctx, canvas, documentBody, highlights, serverWords, isElementCovered, isHighlighting) {
-  if (!isHighlighting) {
-    return highlights;
+export default function highlightTextNodes(
+  ctx,
+  canvas,
+  documentBody,
+  highlights,
+  serverWords,
+  isElementCovered,
+  highlightState,
+) {
+  console.trace('highlightTextNodes');
+  console.log('isHighlighting', highlightState.isHighlighting);
+  if (!highlightState.isHighlighting) {
+    return [];
   }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
