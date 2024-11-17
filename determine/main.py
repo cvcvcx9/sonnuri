@@ -94,7 +94,7 @@ async def determine_texts(input_data: TextInput):
         # 생성된 문장과 일치하는게 있는지 확인
         pre_created_url = find_pre_created_sentence_url(input_data.text.strip())
         if (pre_created_url):
-            return {"sentences": {"sentence": input_data.text, "words": [Word(form = input_data.text, url= pre_created_url, definition='', tokens=[])]}, "urls": pre_created_url}
+            return {"sentences": [{"sentence": input_data.text, "words": [Word(form = input_data.text, url= pre_created_url, definition='', tokens=[])]}], "urls": pre_created_url}
         
         # ChatGPT를 활용해 문장을 한국어 -> 한국수어 문법으로 변형
         ksl_sentence = translate_sentence(input_data.text)
