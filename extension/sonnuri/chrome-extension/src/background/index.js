@@ -71,9 +71,12 @@ const requestSentence = async text => {
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.type === 'request_sentence') {
     if (request.text) {
-      chrome.storage.local.set({ original_text: request.text });
+      await chrome.storage.local.set({ original_text: request.text });
+      await chrome.storage.local.set({ isLoading: true });
+      await chrome.storage.local.set({ created_video_url: '' });
       // 드래그된 텍스트로 요청을 보내고, 그 결과를 저장.
       const result = await requestSentence(request.text);
+      await chrome.storage.local.set({ isLoading: false });
       // console.log('result',result.urls);
       await chrome.storage.local.set({ urls: result });
       sendResponse({ success: true });

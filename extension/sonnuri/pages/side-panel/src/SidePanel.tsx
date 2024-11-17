@@ -28,11 +28,6 @@ const SidePanel: React.FC = () => {
   const handleVideoEnd = () => {
     if (currentVideoIndex < playlist.length - 1) {
       setCurrentVideoIndex(currentVideoIndex + 1);
-      // 연속재생 아닌경우 주석 처리
-      // setCurrentVideoIndex(currentVideoIndex + 1);
-      // const nextIsFirst = playlistInfo[currentVideoIndex + 1];
-      // console.log(nextIsFirst);
-      // setIsPlaying(nextIsFirst.isFirstIdx === -1 ? true : false);
     }
   };
   // 버튼 클릭 핸들러 추가
@@ -73,6 +68,12 @@ const SidePanel: React.FC = () => {
         setPlaylist(changes.urls.newValue.map((item: any) => item.url));
         setPlaylistInfoIsFirst(changes.urls.newValue.map((item: any) => item.isFirstIdx));
       }
+      if (changes.original_text) {
+        setOriginalText(changes.original_text.newValue);
+      }
+      if (changes.isLoading) {
+        setIsLoading(changes.isLoading.newValue);
+      }
     };
     chrome.storage.onChanged.addListener(newSentenceListener);
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -110,56 +111,58 @@ const SidePanel: React.FC = () => {
                 <img className="w-8 h-8" src="./word_sign_language.png" alt="word" />
               </TabsTrigger>
               <TabsTrigger value="interpolate" className="text-sm w-full" disabled={interpolateLoading}>
-                <img className="w-16 h-16" src="./sentence_sign_language.png" alt="word" />
+                <img className="w-8 h-8" src="./sentence_sign_language.png" alt="word" />
               </TabsTrigger>
             </TabsList>
             <TabsContent value="sentence">
-              <div className="grid md:grid-cols-2 gap-8">
-                {interpolateLoading && <div className="text-center text-gray-500">이어보기 비디오 생성중...</div>}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {playlistInfo && playlistInfo.length > 0 ? (
-                    playlistInfo.map((item, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleButtonClick(item.isFirstIdx)}
-                        className="text-sm px-2 py-1 bg-[#5B679E] text-white rounded-full"
-                      >
-                        {item.word}
-                      </button>
-                    ))
-                  ) : (
-                    <div className="text-center text-gray-500">저장된 문장이 없습니다.</div>
-                  )}
-                </div>
-                <div className="space-y-4">
-                  <div className="player-wrapper">
-                    {isLoading ? (
-                      <SkeletonLoader />
-                    ) : playlist.length > 0 ? (
-                      <>
-                        <ReactPlayer
-                          url={playlist[currentVideoIndex]}
-                          // url={"https://sonnuri.s3.ap-northeast-2.amazonaws.com/sentence/processed_52a78f3c57b475c024e9a8b7329cbf9c.mp4"}
-                          controls={false}
-                          playing
-                          playbackRate={playerSpeed}
-                          width="100%"
-                          height="200px"
-                          onEnded={handleVideoEnd}
-                          style={{ backgroundColor: '#000000' }}
-                        />
-                        <div className="mt-2">
-                          재생 중: {currentVideoIndex + 1} / {playlist.length}
-                        </div>
-                      </>
+              {isLoading ? (
+                <SkeletonLoader />
+              ) : (
+                <div className="grid md:grid-cols-2 gap-8">
+                  {interpolateLoading && <div className="text-center text-gray-500">이어보기 비디오 생성중...</div>}
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {playlistInfo && playlistInfo.length > 0 ? (
+                      playlistInfo.map((item, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleButtonClick(item.isFirstIdx)}
+                          className="text-sm px-2 py-1 bg-[#5B679E] text-white rounded-full"
+                        >
+                          {item.word}
+                        </button>
+                      ))
                     ) : (
-                      <div className="bg-transparent w-full h-[200px] rounded-lg flex items-center justify-center">
-                        <ReactPlayer width="100%" height="200px" style={{ backgroundColor: '#000000' }} />
-                      </div>
+                      <div className="text-center text-gray-500">저장된 문장이 없습니다.</div>
                     )}
                   </div>
+                  <div className="space-y-4">
+                    <div className="player-wrapper">
+                      {playlist.length > 0 ? (
+                        <>
+                          <ReactPlayer
+                            url={playlist[currentVideoIndex]}
+                            // url={"https://sonnuri.s3.ap-northeast-2.amazonaws.com/sentence/processed_52a78f3c57b475c024e9a8b7329cbf9c.mp4"}
+                            controls={false}
+                            playing
+                            playbackRate={playerSpeed}
+                            width="100%"
+                            height="200px"
+                            onEnded={handleVideoEnd}
+                            style={{ backgroundColor: '#000000' }}
+                          />
+                          <div className="mt-2">
+                            재생 중: {currentVideoIndex + 1} / {playlist.length}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="bg-transparent w-full h-[200px] rounded-lg flex items-center justify-center">
+                          <ReactPlayer width="100%" height="200px" style={{ backgroundColor: '#000000' }} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
             </TabsContent>
             <TabsContent value="interpolate">
               <h2 className="text-lg font-bold">
