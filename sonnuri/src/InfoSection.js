@@ -1,7 +1,7 @@
 // InfoSection.js
 import React from "react";
 
-function InfoSection({ number, title, description, image, titleImage, titleImageWidth  }) {
+function InfoSection({ number, title, description, image, titleImage, titleImageWidth, paddingLeft  }) {
   return (
     <div className="flex flex-col items-start space-y-4 w-1/2 pt-20 pl-60 pb-8">
       <div className="flex items-center space-x-2">
@@ -23,7 +23,10 @@ function InfoSection({ number, title, description, image, titleImage, titleImage
       <img
         src={image}
         alt={`${title} 이미지`}
-        className="w-auto h-80 pt-4 ml-20"
+        style={{
+          paddingLeft: paddingLeft, // 이미지에만 왼쪽 패딩 적용
+        }}
+        className="w-auto h-60 pt-4"
       />
     </div>
   );
