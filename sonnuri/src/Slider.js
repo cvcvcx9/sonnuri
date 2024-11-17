@@ -6,7 +6,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // 아이콘 임
 import FuncFirst from "./FuncFirst";
 import FuncSecond from "./FuncSecond";
 import FuncThird from "./FuncThird";
-import FuncForth from "./FuncForth";
+// import FuncForth from "./FuncForth";
 import { useRef } from "react";
 
 function Slider() {
