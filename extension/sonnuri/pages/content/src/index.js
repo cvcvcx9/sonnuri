@@ -155,6 +155,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 
 chrome.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'error_sentence_result') {
+    console.log('요청 결과 전송받기 실패');
   }
 });
 
