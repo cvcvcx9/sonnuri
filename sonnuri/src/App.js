@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "./Slider";
 
-import wordvideo from "./image/단어수어영상.png";
+// import wordvideo from "./image/단어수어영상.png";
 import senvideo from "./image/문장수어영상.png";
 import hand from "./image/한국수어.png";
 import sonnuri from "./image/sonnuri.png";
-import description from "./image/설명.jpg"
-
+import description from "./image/설명.jpg";
+import description1 from "./image/진짜설명1.png";
+import description2 from "./image/진짜설명2.png";
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,7 +38,7 @@ function App() {
   return (
     <div>
       <header className="flex justify-center">
-        <img src={sonnuri} className="w-auto h-20 my-2" />
+        <img src={sonnuri} alt="손누리로고" className="w-auto h-20 my-2" />
       </header>
       <div className="relative">
         <img
@@ -60,8 +61,6 @@ function App() {
           <div className="text-xl md:text-xl lg:text-2xl pt-10 text-center animate-slide-up text-white text-opacity-80">
             모든 콘텐츠를 수어로 쉽게 이해하세요
           </div>
-          
-
         </div>
       </div>
 
@@ -69,11 +68,7 @@ function App() {
       <div className="flex flex-col items-center my-20">
         <div className="w-px h-16 bg-gray-300"></div>
         {/* <div className="mt-4 text-4xl text-gray-400">설명</div> */}
-        <img
-          src={description}
-          alt="설명이미지"
-          className="w-28 h-auto mt-4"
-        />
+        <img src={description} alt="설명이미지" className="w-28 h-auto mt-4" />
         <div
           ref={ref} // 요소에 ref 추가
           className={`pt-4 text-3xl mt-8 transition-opacity duration-700 ${
@@ -84,9 +79,15 @@ function App() {
           수어로 번역해주는 확장 프로그램입니다.
         </div>
 
-        <div className="flex flec-col items-center">
+        <div className="flex flec-col items-center space-x-14">
           <div>
-            <img src={wordvideo} alt="단어 수어 영상" className="w-80 h-auto" />
+            <div className="w-72 h-auto">
+              <img
+                src={description2}
+                alt="단어 수어 영상"
+                className="w-80 h-auto"
+              />
+            </div>
             <div className="pt-20 text-gray-500 text-2xl">
               <div>청각장애인의 인터넷 소통을 </div>
               <div className="pt-2">더 쉽게 만들어드립니다!</div>
@@ -94,7 +95,7 @@ function App() {
           </div>
           <div>
             <div className="w-80 h-auto pt-60 pl-10">
-              <img src={senvideo} alt="문장 수어 영상" />
+              <img src={description1} alt="문장 수어 영상" />
             </div>
           </div>
         </div>
