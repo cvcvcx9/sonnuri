@@ -1,5 +1,5 @@
 function Dot({ activeIndex }) {
-  const arr = [1, 2, 3, 4];
+  const arr = [1, 2, 3];
 
   return (
     <div className="absolute bottom-8 mt-10 left-1/2 transform -translate-x-1/2 flex space-x-2">
