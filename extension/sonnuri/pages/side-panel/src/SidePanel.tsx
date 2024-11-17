@@ -45,12 +45,7 @@ const SidePanel: React.FC = () => {
       }
     });
 
-    chrome.storage.local.get('created_video_url', data => {
-      if (data.created_video_url) {
-        setInterpolatedUrl(data.created_video_url);
-        setInterpolateLoading(false);
-      }
-    });
+
     // 저장된 비디오 정보 로드
     chrome.storage.local.get('urls', data => {
       if (data.urls) {
@@ -82,7 +77,7 @@ const SidePanel: React.FC = () => {
       }
       if (message.type === 'make_video_started') {
         setInterpolateLoading(true);
-
+        setInterpolatedUrl('');
         console.log('보간 비디오 생성 시작');
       }
       if (message.type === 'make_video_ended') {

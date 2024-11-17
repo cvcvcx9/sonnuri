@@ -39,14 +39,14 @@ const extractUrls = sentences => {
   return urls;
 };
 
-const requestSentence = async text => {
+const requestSentence = async (text, type) => {
   try {
     const result = await fetch('http://k11a301.p.ssafy.io:8001/determine', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ text: text, type: '' }),
+      body: JSON.stringify({ text: text, type: type }),
     });
     const resultJson = await result.json();
     console.log('resultJson', resultJson);
@@ -54,14 +54,14 @@ const requestSentence = async text => {
     // 요청 성공 메시지 전달 - 콘텐츠 페이지에서 처리
     chrome.tabs.query({ active: true, currentWindow: true }, async tabs => {
       const tabId = tabs[0].id;
-      chrome.tabs.sendMessage(tabId, { type: 'success_sentence_result', urls: resultJson.urls });
+      chrome.tabs.sendMessage(tabId, { type: 'success_sentence_result', urls: resultJson.urls, requestType: type });
     });
     return urls;
   } catch (error) {
     // 요청 실패 메시지 전달 - 콘텐츠 페이지에서 처리
     chrome.tabs.query({ active: true, currentWindow: true }, async tabs => {
       const tabId = tabs[0].id;
-      chrome.tabs.sendMessage(tabId, { type: 'error_sentence_result', urls: [] });
+      chrome.tabs.sendMessage(tabId, { type: 'error_sentence_result', urls: [], requestType: type });
     });
     return [];
   }
@@ -75,10 +75,11 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
       await chrome.storage.local.set({ isLoading: true });
       await chrome.storage.local.set({ created_video_url: '' });
       // 드래그된 텍스트로 요청을 보내고, 그 결과를 저장.
-      const result = await requestSentence(request.text);
+      const result1 = await requestSentence(request.text, 'sentence');
+      const result2 = await requestSentence(request.text, 'finance');
       await chrome.storage.local.set({ isLoading: false });
       // console.log('result',result.urls);
-      await chrome.storage.local.set({ urls: result });
+      await chrome.storage.local.set({ urls: result1 });
       sendResponse({ success: true });
     }
   }
@@ -93,7 +94,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     console.log('result', message.urls);
     chrome.runtime.sendMessage({ type: 'make_video_started' });
 
-    const result = await requestMakeVideo(message.urls);
+    const result = await requestMakeVideo(message.urls, message.sentence);
     chrome.storage.local.set({ created_video_url: result.video_url });
     console.log('생성된 비디오 링크', result);
     chrome.runtime.sendMessage({ type: 'make_video_ended', data: result.video_url });
