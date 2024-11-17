@@ -43,12 +43,23 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-const { highlights: newHighlights, isHighlighting } = createToggleButton(
+let _isHighlighting = true;
+export const highlightState = {
+  get isHighlighting() {
+    return _isHighlighting;
+  },
+  set isHighlighting(value) {
+    _isHighlighting = value;
+  },
+};
+
+const { highlights: newHighlights } = createToggleButton(
   ctx,
   canvas,
   highlights,
   serverWords,
   isElementCovered,
+  highlightState,
 );
 // 요소가 가려져 있는지 확인하는 함수
 function isElementCovered(rect) {
@@ -92,9 +103,17 @@ const { loadingCircleWrapper: loadingMakeVideoCircleWrapper, circle: loadingMake
 loadingContainer.appendChild(loadingMakeVideoCircleWrapper);
 
 // 하이라이트 생성
-if (isHighlighting) {
+if (highlightState.isHighlighting) {
   setTimeout(() => {
-    highlights = highlightTextNodes(ctx, canvas, document.body, highlights, serverWords, isElementCovered);
+    highlights = highlightTextNodes(
+      ctx,
+      canvas,
+      document.body,
+      highlights,
+      serverWords,
+      isElementCovered,
+      highlightState,
+    );
   }, 300);
 }
 document.addEventListener('mouseup', e => {
@@ -160,7 +179,7 @@ canvas.addEventListener('mouseleave', () => hideVideoModal(modal));
 // canvas.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('popstate', () => {
-  if (isHighlighting) {
+  if (highlightState.isHighlighting) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     setTimeout(() => {
       highlights = highlightTextNodes(
@@ -170,14 +189,14 @@ window.addEventListener('popstate', () => {
         highlights,
         serverWords,
         isElementCovered,
-        isHighlighting,
+        highlightState,
       );
     }, 300);
   }
 });
 
 window.addEventListener('resize', () => {
-  if (isHighlighting) {
+  if (highlightState.isHighlighting) {
     highlights = highlightTextNodes(
       ctx,
       canvas,
@@ -185,7 +204,7 @@ window.addEventListener('resize', () => {
       highlights,
       serverWords,
       isElementCovered,
-      isHighlighting,
+      highlightState,
     );
   }
 });
@@ -195,7 +214,7 @@ document.addEventListener('click', event => {
   // 하이라이트 초기화
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   setTimeout(() => {
-    if (isHighlighting) {
+    if (highlightState.isHighlighting) {
       highlights = highlightTextNodes(
         ctx,
         canvas,
@@ -203,7 +222,7 @@ document.addEventListener('click', event => {
         highlights,
         serverWords,
         isElementCovered,
-        isHighlighting,
+        highlightState,
       );
     } else {
       highlights = [];
@@ -228,7 +247,7 @@ let isScrolling = false;
 // 스크롤 이벤트 처리
 let scrollTimeout; // 스크롤 타임아웃 변수 선언
 window.addEventListener('scroll', () => {
-  if (isHighlighting) {
+  if (highlightState.isHighlighting) {
     if (!isScrolling) {
       isScrolling = true;
       canvas.style.opacity = '0';
@@ -246,7 +265,7 @@ window.addEventListener('scroll', () => {
         highlights,
         serverWords,
         isElementCovered,
-        isHighlighting,
+        highlightState,
       );
     }, 150);
   }
