@@ -8,6 +8,8 @@ export default async function requestMakeVideo(urls, sentence) {
   requestMakeVideo.abortController = abortController;
 
   try {
+    console.log('urls', urls);
+    console.log('sentence', sentence);
     const response = await fetch('http://k11a301.p.ssafy.io:8003/process_videos', {
       method: 'POST',
       headers: {
