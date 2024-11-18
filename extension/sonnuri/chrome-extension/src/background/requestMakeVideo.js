@@ -8,9 +8,6 @@ export default async function requestMakeVideo(urls, sentence) {
   // requestMakeVideo.abortController = abortController;
 
   try {
-    if (!Array.isArray(urls)) {
-      urls = [urls];
-    }
     console.log('urls', urls);
     console.log('sentence', sentence);
     const response = await fetch('http://k11a301.p.ssafy.io:8003/process_videos', {
@@ -19,7 +16,6 @@ export default async function requestMakeVideo(urls, sentence) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ video_urls: urls, sentence: sentence }),
-      signal: abortController.signal,
     });
     const data = await response.json();
     if (data.status === 'success') {

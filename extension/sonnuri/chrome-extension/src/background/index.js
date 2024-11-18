@@ -115,11 +115,18 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     // 보간 비디오 생성 요청
     console.log('result', message.urls);
     chrome.runtime.sendMessage({ type: 'make_video_started' });
-
+    console.log('message.urls', message.urls);
+    // url이 하나일 경우 바로 저장
+    if (!Array.isArray(message.urls)) {
+      chrome.storage.local.set({created_video_url:message.urls})
+      console.log('생성된 비디오 링크 - 문장보간 요청안할시', message.urls);
+      chrome.runtime.sendMessage({ type: 'make_video_ended', data: message.urls });
+      return;
+    }
     const result = await requestMakeVideo(message.urls, message.sentence);
-    chrome.storage.local.set({ created_video_url: result.video_url });
-    console.log('생성된 비디오 링크', result);
-    chrome.runtime.sendMessage({ type: 'make_video_ended', data: result.video_url });
+      chrome.storage.local.set({ created_video_url: result[0].video_url });
+      console.log('생성된 비디오 링크', result[0]);
+      chrome.runtime.sendMessage({ type: 'make_video_ended', data: result[0].video_url });
   }
   return true;
 });

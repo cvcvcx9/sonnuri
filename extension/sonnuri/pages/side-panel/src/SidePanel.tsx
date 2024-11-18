@@ -8,7 +8,9 @@ const SidePanel: React.FC = () => {
   // 문장 리스트
   const [sentenceList, setSentenceList] = useState<string[]>([]);
   // 플레이되는 문장의 정보
-  const [playlistInfo, setPlaylistInfo] = useState<{ url: string; word: string; definition: string; isFirstIdx: number }[]>([]);
+  const [playlistInfo, setPlaylistInfo] = useState<
+    { url: string; word: string; definition: string; isFirstIdx: number }[]
+  >([]);
   // 비디오 리스트
   const [playlist, setPlaylist] = useState<string[]>([]);
   // 비디오 리스트의 첫번째 인덱스 정보
@@ -48,7 +50,6 @@ const SidePanel: React.FC = () => {
       }
     });
 
-
     // 저장된 비디오 정보 로드
     chrome.storage.local.get('urls', data => {
       if (data.urls) {
@@ -65,7 +66,6 @@ const SidePanel: React.FC = () => {
         setIsPlayAll(true);
       }
     });
-
 
     // 스토리지 변경을 감하고, 변경된 값을
     const newSentenceListener = (changes: any, namespace: any) => {
@@ -145,9 +145,8 @@ const SidePanel: React.FC = () => {
   const handlePlayAll = () => {
     const allUrls = Object.values(groupedUrls).flat();
     // 중복된 URL과 마침표가 포함된 단어 제거
-    const uniqueUrls = allUrls.filter((item, index, self) =>
-      index === self.findIndex((t) => t.url === item.url) &&
-      !item.word.includes('.')
+    const uniqueUrls = allUrls.filter(
+      (item, index, self) => index === self.findIndex(t => t.url === item.url) && !item.word.includes('.'),
     );
 
     setPlaylist(uniqueUrls.map(item => item.url));
@@ -203,9 +202,13 @@ const SidePanel: React.FC = () => {
               ) : (
                 <div className="grid md:grid-cols-2">
                   {interpolateState !== 'idle' && (
-                    <div className={`text-center ${interpolateState === 'error' ? 'text-red-500' :
-                      interpolateState === 'success' ? 'text-green-500' :
-                        'text-blue-500'
+                    <div
+                      className={`text-center ${
+                        interpolateState === 'error'
+                          ? 'text-red-500'
+                          : interpolateState === 'success'
+                            ? 'text-green-500'
+                            : 'text-blue-500'
                       }`}>
                       {getInterpolateStateMessage()}
                     </div>
@@ -213,8 +216,7 @@ const SidePanel: React.FC = () => {
                   <div className="flex flex-col gap-4 mt-4">
                     <button
                       onClick={handlePlayAll}
-                      className="text-sm px-4 py-2 bg-[#4A5578] text-white rounded-lg w-full"
-                    >
+                      className="text-sm px-4 py-2 bg-[#4A5578] text-white rounded-lg w-full">
                       전체 재생
                     </button>
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -222,19 +224,18 @@ const SidePanel: React.FC = () => {
                         <button
                           key={index}
                           onClick={() => handleWordClick(word)}
-                          className={`text-sm px-2 py-1 rounded-full ${currentWord === word
-                            ? 'bg-[#2A3250] text-white'
-                            : 'border border-[#5B679E] text-[#5B679E] hover:bg-[#5B679E] hover:text-white'
-                            }`}
-                        >
+                          className={`text-sm px-2 py-1 rounded-full ${
+                            currentWord === word
+                              ? 'bg-[#2A3250] text-white'
+                              : 'border border-[#5B679E] text-[#5B679E] hover:bg-[#5B679E] hover:text-white'
+                          }`}>
                           {word}
                         </button>
                       ))}
                       {Object.keys(groupedUrls).length > 9 && (
                         <button
                           onClick={() => setShowAllWords(!showAllWords)}
-                          className="text-sm px-2 py-1 rounded-full border border-[#5B679E] text-[#5B679E] hover:bg-[#5B679E] hover:text-white"
-                        >
+                          className="text-sm px-2 py-1 rounded-full border border-[#5B679E] text-[#5B679E] hover:bg-[#5B679E] hover:text-white">
                           {showAllWords ? '...접기' : '...더보기'}
                         </button>
                       )}
@@ -271,7 +272,11 @@ const SidePanel: React.FC = () => {
                                 <img className="w-8 h-8" src="./slower.png" alt="minus" />
                               </button>
                               <button onClick={() => setIsPlaying(!isPlaying)}>
-                                {isPlaying ? '일시정지' : '재생'}
+                                {isPlaying ? (
+                                  <img className="w-8 h-8" src="./Pause.png" alt="pause" />
+                                ) : (
+                                  <img className="w-8 h-8" src="./Play.png" alt="play" />
+                                )}
                               </button>
                               <button onClick={() => setPlayerSpeed(playerSpeed + 0.1)} disabled={playerSpeed >= 3.0}>
                                 <img className="w-8 h-8" src="./faster.png" alt="plus" />
@@ -300,13 +305,9 @@ const SidePanel: React.FC = () => {
               )}
             </TabsContent>
             <TabsContent value="interpolate">
-              <h2 className="text-lg font-bold">
-                원문
-              </h2>
+              <h2 className="text-lg font-bold">원문</h2>
               <h3 className="text-sm text-center mt-2">{originalText}</h3>
-              <h2 className="text-lg font-bold mt-4">
-                번역된 수어 비디오
-              </h2>
+              <h2 className="text-lg font-bold mt-4">번역된 수어 비디오</h2>
               <Card className="w-full">
                 <CardContent className="p-4">
                   <ReactPlayer
@@ -329,7 +330,11 @@ const SidePanel: React.FC = () => {
                       <img className="w-8 h-8" src="./slower.png" alt="minus" />
                     </button>
                     <button onClick={() => setIsPlaying(!isPlaying)}>
-                      {isPlaying ? '일시정지' : '재생'}
+                      {isPlaying ? (
+                        <img className="w-8 h-8" src="./Pause.png" alt="pause" />
+                      ) : (
+                        <img className="w-8 h-8" src="./Play.png" alt="play" />
+                      )}
                     </button>
                     <button onClick={() => setPlayerSpeed(playerSpeed + 0.1)} disabled={playerSpeed >= 3.0}>
                       <img className="w-8 h-8" src="./faster.png" alt="plus" />
@@ -341,8 +346,7 @@ const SidePanel: React.FC = () => {
           </Tabs>
         </CardContent>
       </Card>
-
-    </div >
+    </div>
   );
 };
 

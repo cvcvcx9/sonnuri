@@ -138,8 +138,13 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
     console.log('요청결과 전송받기 완료');
     console.log('컨텐츠 스크립트 message.urls', message.urls);
     const sentence = await chrome.storage.local.get('original_text');
-    console.log('sentence', sentence);
-    chrome.runtime.sendMessage({
+
+    if (message.urls.length === 1) {
+      await chrome.storage.local.set({ created_video_url: message.urls[0] });
+      return;
+    }
+      console.log('sentence', sentence);
+      chrome.runtime.sendMessage({
       type: 'request_make_video',
       urls: message.urls,
       sentence: sentence.original_text,
