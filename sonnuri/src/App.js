@@ -4,7 +4,7 @@ import Slider from "./Slider";
 // import wordvideo from "./image/단어수어영상.png";
 // import senvideo from "./image/문장수어영상.png";
 import hand from "./image/한국수어.png";
-import sonnuri from "./image/sonnuri.png";
+// import sonnuri from "./image/sonnuri.png";
 import description from "./image/설명.jpg";
 import description1 from "./image/진짜설명1.png";
 import description2 from "./image/진짜설명2.png";
