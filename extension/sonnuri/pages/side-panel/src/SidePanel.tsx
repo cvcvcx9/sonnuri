@@ -21,7 +21,7 @@ const SidePanel: React.FC = () => {
   // 비디오 로딩 상태
   const [isLoading, setIsLoading] = useState(false);
   // 재생 상태
-  const [isPlaying, setIsPlaying] = useState(false); // 재생 상태 추가
+  const [isPlaying, setIsPlaying] = useState(true); // 재생 상태 추가
   const [interpolateLoading, setInterpolateLoading] = useState(true);
   const [interpolatedUrl, setInterpolatedUrl] = useState('');
   const [playerSpeed, setPlayerSpeed] = useState(1.5);
@@ -141,7 +141,7 @@ const SidePanel: React.FC = () => {
     setCurrentDefinition(wordUrls[0]?.definition || '');
   };
 
-  // 전체 재생 버튼 핸들러
+  // 전체 재생 버튼 핸들러 수정
   const handlePlayAll = () => {
     const allUrls = Object.values(groupedUrls).flat();
     // 중복된 URL과 마침표가 포함된 단어 제거
@@ -150,11 +150,13 @@ const SidePanel: React.FC = () => {
     );
 
     setPlaylist(uniqueUrls.map(item => item.url));
+    setPlaylistInfo(uniqueUrls); // 전체 정보 저장
     setCurrentVideoIndex(0);
     setIsPlaying(true);
     setIsPlayAll(true);
-    setCurrentWord('');
-    setCurrentDefinition('');
+    // 첫 번째 단어 정보 설정
+    setCurrentWord(uniqueUrls[0]?.word || '');
+    setCurrentDefinition(uniqueUrls[0]?.definition || '');
   };
 
   const getInterpolateStateMessage = () => {
@@ -257,10 +259,17 @@ const SidePanel: React.FC = () => {
                               onEnded={() => {
                                 if (currentVideoIndex < playlist.length - 1) {
                                   setCurrentVideoIndex(prev => prev + 1);
+                                  // 다음 단어 정보 업데이트
+                                  if (isPlayAll && playlistInfo[currentVideoIndex + 1]) {
+                                    setCurrentWord(playlistInfo[currentVideoIndex + 1].word);
+                                    setCurrentDefinition(playlistInfo[currentVideoIndex + 1].definition);
+                                  }
                                 } else {
                                   setIsPlaying(false);
                                   setIsPlayAll(false);
                                   setCurrentVideoIndex(0);
+                                  setCurrentWord('');
+                                  setCurrentDefinition('');
                                 }
                               }}
                             />
@@ -312,7 +321,7 @@ const SidePanel: React.FC = () => {
                 <CardContent className="p-4">
                   <ReactPlayer
                     url={interpolatedUrl}
-                    controls={true}
+                    controls={false}
                     playing={isPlaying}
                     playbackRate={playerSpeed}
                     onEnded={() => {
