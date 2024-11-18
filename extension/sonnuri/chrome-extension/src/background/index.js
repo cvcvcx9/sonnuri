@@ -40,12 +40,12 @@ const extractUrls = sentences => {
               if (token.url && token.url !== '') {
                 const splitUrls = token.url.split(',');
                 splitUrls.forEach(url => {
-                  urlGroups[token.form] = urlGroups[token.form] || [];
-                  urlGroups[token.form].push({
+                  urlGroups[word.form] = urlGroups[word.form] || [];
+                  urlGroups[word.form].push({
                     url: url.trim(),
-                    word: token.form,
+                    word: word.form,
                     definition: token.definition,
-                    isFirstIdx: urlGroups[token.form].length === 0 ? 0 : -1,
+                    isFirstIdx: urlGroups[word.form].length === 0 ? 0 : -1,
                   });
                 });
               }
