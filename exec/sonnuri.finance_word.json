@@ -1,0 +1,3744 @@
+[{
+  "_id": {
+    "$oid": "67381b7c63057d2358904574"
+  },
+  "No": 102,
+  "Word": "-습니다",
+  "Description": "(('ㄹ'을 제외한 받침 있는 용언의 어간이나 어미 '-었-', '-겠-' 뒤에 붙어)) 합쇼할 자리에 쓰여, 현재 계속되는 동작이나 상태를 있는 그대로 나타내는 종결 어미.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/102_-습니다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7c63057d2358904576"
+  },
+  "No": 11409,
+  "Word": "보다",
+  "Description": "눈으로 대상의 존재나 형태적 특징을 알다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11409_보다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7c63057d2358904577"
+  },
+  "No": 11495,
+  "Word": "현실",
+  "Description": "시체가 안치되어 있는 무덤 속의 방.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11495_현실.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7c63057d2358904578"
+  },
+  "No": 11526,
+  "Word": "동안",
+  "Description": "어느 한때에서 다른 한때까지 시간의 길이.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11526_동안.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d2358904579"
+  },
+  "No": 11527,
+  "Word": "사이",
+  "Description": "한곳에서 다른 곳까지, 또는 한 물체에서 다른 물체까지의 거리나 공간.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11527_사이.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d235890457a"
+  },
+  "No": 11528,
+  "Word": "기간",
+  "Description": "어느 때부터 다른 어느 때까지의 동안.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11528_기간.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d235890457b"
+  },
+  "No": 11537,
+  "Word": "함께",
+  "Description": "한꺼번에 같이. 또는 서로 더불어.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11537_함께.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d235890457c"
+  },
+  "No": 11545,
+  "Word": "필요",
+  "Description": "반드시 요구되는 바가 있음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11545_필요.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d235890457d"
+  },
+  "No": 11699,
+  "Word": "비서",
+  "Description": "천한 서민.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11699_비서.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d235890457e"
+  },
+  "No": 11723,
+  "Word": "고정",
+  "Description": "‘고정하다’의 어근.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11723_고정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d235890457f"
+  },
+  "No": 11811,
+  "Word": "정리",
+  "Description": "고려 시대에, 벼슬아치의 등급에 따라 그 종자(從者)로서 배속되어 있던 장정. 국상(國相)은 넷, 경(卿) 이상은 셋, 정랑(正郞)은 둘, 원외랑은 한 사람이 배정되었다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11811_정리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d2358904580"
+  },
+  "No": 11812,
+  "Word": "정책",
+  "Description": "신하가 임금의 옹립을 꾀함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11812_정책.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d2358904581"
+  },
+  "No": 11832,
+  "Word": "민간",
+  "Description": "일반 백성들 사이.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11832_민간.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7d63057d2358904582"
+  },
+  "No": 11904,
+  "Word": "위",
+  "Description": "어떤 기준보다 더 높은 쪽. 또는 사물의 중간 부분보다 더 높은 쪽.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11904_위.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d2358904583"
+  },
+  "No": 11905,
+  "Word": "이상",
+  "Description": "예전에, 시문(詩文)을 평하는 등급 가운데 둘째 등급의 첫째.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11905_이상.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d2358904584"
+  },
+  "No": 11913,
+  "Word": "통장",
+  "Description": "금융 기관에서, 예금한 사람에게 출납의 상태를 적어 주는 장부.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11913_통장.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d2358904585"
+  },
+  "No": 11914,
+  "Word": "통하다",
+  "Description": "막힘이 없이 들고 나다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/11914_통하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d2358904586"
+  },
+  "No": 12029,
+  "Word": "개인",
+  "Description": "도장을 본디 모양과 다르게 고쳐 새김.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12029_개인.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d2358904587"
+  },
+  "No": 12138,
+  "Word": "말하다",
+  "Description": "생각이나 느낌 따위를 말로 나타내다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12138_말하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d2358904588"
+  },
+  "No": 12204,
+  "Word": "곳",
+  "Description": "공간적인 또는 추상적인 일정한 자리나 지역.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12204_곳.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d2358904589"
+  },
+  "No": 12205,
+  "Word": "위치",
+  "Description": "일정한 곳에 자리를 차지함. 또는 그 자리.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12205_위치.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d235890458a"
+  },
+  "No": 12206,
+  "Word": "장소",
+  "Description": "좋거나 잘하거나 긍정적인 점.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12206_장소.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7e63057d235890458b"
+  },
+  "No": 12216,
+  "Word": "의사",
+  "Description": "옷을 넣어 두는 상자.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12216_의사.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d235890458c"
+  },
+  "No": 12229,
+  "Word": "영어",
+  "Description": "죄인을 가두어 두는 곳. 한때 형무소라고 부르다가 현재 ‘교도소’로 고쳤다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12229_영어.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d235890458d"
+  },
+  "No": 12258,
+  "Word": "카드",
+  "Description": "일정한 크기로 조그맣게 자른 두꺼운 종이나 플라스틱. 어떤 내용을 증명하는 역할을 한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12258_카드.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d235890458e"
+  },
+  "No": 1226,
+  "Word": "경제",
+  "Description": "인간의 생활에 필요한 물건이나 노동을 생산ㆍ분배ㆍ소비하는 모든 활동. 또는 그것을 통하여 이루어지는 사회적 관계.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1226_경제.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d235890458f"
+  },
+  "No": 12311,
+  "Word": "휴대폰",
+  "Description": "‘휴대 전화’를 일상적으로 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12311_휴대폰.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d2358904590"
+  },
+  "No": 12331,
+  "Word": "과",
+  "Description": "국화과의 한해살이풀. 높이는 30~100cm이며, 잎은 어긋나고 피침 모양으로 거친 톱니가 있다. 7~9월에 남색ㆍ붉은색ㆍ흰색 따위의 큰 꽃이 피는데, 관상용으로 원예 품종이 많다. 한랭한 지방의 산지에 나는데 한국, 중국 등지에 분포한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12331_과.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d2358904591"
+  },
+  "No": 12372,
+  "Word": "꼭",
+  "Description": "북청 사자놀음에 나오는 양반의 하인. 또는 그 하인이 쓰는 분홍 바탕에 수염이 달린 탈.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12372_꼭.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d2358904592"
+  },
+  "No": 12375,
+  "Word": "필수",
+  "Description": "반드시 학습하거나 이수하여야 함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12375_필수.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d2358904593"
+  },
+  "No": 12453,
+  "Word": "수입",
+  "Description": "돈이나 물품 따위를 거두어들임. 또는 그 돈이나 물품.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12453_수입.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d2358904594"
+  },
+  "No": 12455,
+  "Word": "내",
+  "Description": "나",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12455_내.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b7f63057d2358904595"
+  },
+  "No": 12473,
+  "Word": "기본금",
+  "Description": "어떤 목적이나 사업, 행사 따위에 쓸 기본적인 자금. 또는 기초가 되는 자금.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12473_기본금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d2358904596"
+  },
+  "No": 12486,
+  "Word": "월급",
+  "Description": "한 달을 단위로 하여 지급하는 급료. 또는 그런 방식.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12486_월급.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d2358904597"
+  },
+  "No": 12494,
+  "Word": "재산가",
+  "Description": "재산이 많은 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12494_재산가.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d2358904598"
+  },
+  "No": 12499,
+  "Word": "읽다",
+  "Description": "글이나 글자를 보고 그 음대로 소리 내어 말로써 나타내다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12499_읽다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d2358904599"
+  },
+  "No": 12528,
+  "Word": "인상",
+  "Description": "사람 얼굴의 생김새. 또는 그 얼굴의 근육이나 눈살 따위.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12528_인상.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d235890459a"
+  },
+  "No": 12533,
+  "Word": "투명",
+  "Description": "아낌없이 목숨을 버림.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12533_투명.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d235890459b"
+  },
+  "No": 12537,
+  "Word": "관리",
+  "Description": "관직에 있는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12537_관리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d235890459c"
+  },
+  "No": 12566,
+  "Word": "실업",
+  "Description": "생업을 잃음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12566_실업.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d235890459d"
+  },
+  "No": 12571,
+  "Word": "할 수 없다",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12571_할 수 없다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d235890459e"
+  },
+  "No": 12571,
+  "Word": "할수없다",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12571_할수없다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d235890459f"
+  },
+  "No": 12575,
+  "Word": "밖에",
+  "Description": "‘그것 말고는’, ‘그것 이외에는’의 뜻을 나타내는 보조사. 주로 뒤에 부정을 나타내는 말이 따른다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12575_밖에.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8063057d23589045a0"
+  },
+  "No": 12584,
+  "Word": "특별",
+  "Description": "보통과 구별되게 다름.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12584_특별.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a1"
+  },
+  "No": 12586,
+  "Word": "특별히",
+  "Description": "보통과 구별되게 다르게.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12586_특별히.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a2"
+  },
+  "No": 12601,
+  "Word": "제거",
+  "Description": "중국 당나라 때에, 황제의 명에 따라 관리를 등용하던 제도.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12601_제거.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a3"
+  },
+  "No": 12644,
+  "Word": "영업",
+  "Description": "영리를 목적으로 하는 사업. 또는 그런 행위.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12644_영업.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a4"
+  },
+  "No": 12722,
+  "Word": "중요",
+  "Description": "중년에 죽음. 또는 젊어서 죽음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12722_중요.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a5"
+  },
+  "No": 12756,
+  "Word": "소개",
+  "Description": "둘 사이에서 양편의 일이 진행되게 주선함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12756_소개.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a6"
+  },
+  "No": 12767,
+  "Word": "현재",
+  "Description": "‘심사정’의 호.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12767_현재.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a7"
+  },
+  "No": 12779,
+  "Word": "대우",
+  "Description": "손님을 맞아서 시중을 듦.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12779_대우.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a8"
+  },
+  "No": 12779,
+  "Word": "접대",
+  "Description": "손님을 맞아서 시중을 듦.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12779_접대.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8163057d23589045a9"
+  },
+  "No": 12791,
+  "Word": "이름",
+  "Description": "다른 것과 구별하기 위하여 사물, 단체, 현상 따위에 붙여서 부르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12791_이름.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045aa"
+  },
+  "No": 12792,
+  "Word": "명",
+  "Description": "무명실로 짠 피륙.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12792_명.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045ab"
+  },
+  "No": 12797,
+  "Word": "절대",
+  "Description": "실처럼 가늘게 쪼갠 대오리. 갓이나 질이 좋은 패랭이, 삿자리 따위를 만드는 데 쓴다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12797_절대.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045ac"
+  },
+  "No": 12822,
+  "Word": "이",
+  "Description": "이목의 곤충을 통틀어 이르는 말. 몸의 길이는 1~4mm이고 편평한 방추형이다. 날개는 없고 머리 양쪽에 홑눈이 한 개씩 있다. 사람의 몸에 기생하면서 피를 빨아 먹는다. 잇과, 짐승닛과, 털닛과 따위가 있다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12822_이.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045ad"
+  },
+  "No": 12856,
+  "Word": "인정",
+  "Description": "품삯을 받고 육체노동을 하는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12856_인정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045ae"
+  },
+  "No": 12889,
+  "Word": "변경",
+  "Description": "중국 오대의 후량, 후진, 후한, 후주 및 북송의 도읍지. 현재의 허난성(河南省) 카이펑(開封)에 해당한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12889_변경.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045af"
+  },
+  "No": 12890,
+  "Word": "변동",
+  "Description": "바뀌어 달라짐.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12890_변동.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045b0"
+  },
+  "No": 12895,
+  "Word": "면제",
+  "Description": "책임이나 의무 따위를 면하여 줌.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12895_면제.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045b1"
+  },
+  "No": 12915,
+  "Word": "쓰다",
+  "Description": "붓, 펜, 연필과 같이 선을 그을 수 있는 도구로 종이 따위에 획을 그어서 일정한 글자의 모양이 이루어지게 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12915_쓰다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045b2"
+  },
+  "No": 12923,
+  "Word": "한도",
+  "Description": "밭에 심어 기르는 벼. 볍씨를 뿌려 가꾸는데 알이 굵고 잘 여문다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12923_한도.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8263057d23589045b3"
+  },
+  "No": 12950,
+  "Word": "전화",
+  "Description": "‘오곡’(五穀)을 달리 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12950_전화.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045b4"
+  },
+  "No": 12962,
+  "Word": "다음",
+  "Description": "어떤 차례의 바로 뒤.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/12962_다음.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045b5"
+  },
+  "No": 13000,
+  "Word": "구매",
+  "Description": "때리고 욕함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13000_구매.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045b6"
+  },
+  "No": 13003,
+  "Word": "매수",
+  "Description": "종이나 유리 따위의 장으로 셀 수 있는 물건의 수효.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13003_매수.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045b7"
+  },
+  "No": 13011,
+  "Word": "상세하다",
+  "Description": "낱낱이 자세하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13011_상세하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045b8"
+  },
+  "No": 13021,
+  "Word": "빌리다",
+  "Description": "남의 물건이나 돈 따위를 나중에 도로 돌려주거나 대가를 갚기로 하고 얼마 동안 쓰다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13021_빌리다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045b9"
+  },
+  "No": 13042,
+  "Word": "미리",
+  "Description": "어떤 일이 생기기 전에. 또는 어떤 일을 하기에 앞서.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13042_미리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045ba"
+  },
+  "No": 13057,
+  "Word": "문화",
+  "Description": "자연 상태에서 벗어나 일정한 목적 또는 생활 이상을 실현하고자 사회 구성원에 의하여 습득, 공유, 전달되는 행동 양식이나 생활 양식의 과정 및 그 과정에서 이룩하여 낸 물질적ㆍ정신적 소득을 통틀어 이르는 말. 의식주를 비롯하여 언어, 풍습, 종교, 학문, 예술, 제도 따위를 모두 포함한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13057_문화.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045bb"
+  },
+  "No": 13087,
+  "Word": "조건",
+  "Description": "검정 두건.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13087_조건.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045bc"
+  },
+  "No": 13102,
+  "Word": "현재",
+  "Description": "‘심사정’의 호.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13102_현재.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045bd"
+  },
+  "No": 13150,
+  "Word": "보내다",
+  "Description": "사람이나 물건 따위를 다른 곳으로 가게 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13150_보내다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8363057d23589045be"
+  },
+  "No": 13212,
+  "Word": "전체",
+  "Description": "개개 또는 부분의 집합으로 구성된 것을 몰아서 하나의 대상으로 삼는 경우에 바로 그 대상.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13212_전체.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045bf"
+  },
+  "No": 13214,
+  "Word": "모든",
+  "Description": "빠짐이나 남김이 없이 전부의.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13214_모든.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c0"
+  },
+  "No": 13270,
+  "Word": "미국",
+  "Description": "쌀가루를 쪄서 띄운 누룩.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13270_미국.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c1"
+  },
+  "No": 13291,
+  "Word": "이전",
+  "Description": "≪서경≫의 <요전(堯典)>과 <순전(舜典)>을 아울러 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13291_이전.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c2"
+  },
+  "No": 13334,
+  "Word": "전",
+  "Description": "물건의 위쪽 가장자리가 조금 넓적하게 된 부분.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13334_전.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c3"
+  },
+  "No": 13336,
+  "Word": "이전",
+  "Description": "≪서경≫의 <요전(堯典)>과 <순전(舜典)>을 아울러 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13336_이전.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c4"
+  },
+  "No": 13337,
+  "Word": "사정",
+  "Description": "사시(巳時)의 한가운데. 오전 열 시이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13337_사정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c5"
+  },
+  "No": 13360,
+  "Word": "확장",
+  "Description": "범위, 규모, 세력 따위를 늘려서 넓힘.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13360_확장.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c6"
+  },
+  "No": 13380,
+  "Word": "전자",
+  "Description": "농사짓는 일을 직업으로 하는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13380_전자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c7"
+  },
+  "No": 13406,
+  "Word": "자유",
+  "Description": "‘염구’의 자.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13406_자유.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c8"
+  },
+  "No": 13425,
+  "Word": "낮다",
+  "Description": "아래에서 위까지의 높이가 기준이 되는 대상이나 보통 정도에 미치지 못하는 상태에 있다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13425_낮다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8463057d23589045c9"
+  },
+  "No": 13438,
+  "Word": "목적",
+  "Description": "양치식물 속샛과의 상록 여러해살이풀. 줄기는 높이가 30~60cm이고, 가운데가 비었으며 가지는 없으나 마디가 뚜렷하다. 마디마다 퇴화한 잎이 있으며 홀씨주머니 이삭이 줄기 끝에 맺힌다. 줄기는 규산염이 들어 있어 뿔, 목재로 만든 기구를 닦는 데에 쓴다. 그늘진 습지에서 자라는데 한국, 일본, 캄차카반도, 만주, 시베리아, 히말라야, 유럽, 북아메리카 등지에 분포한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13438_목적.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045ca"
+  },
+  "No": 13456,
+  "Word": "자주",
+  "Description": "같은 일을 잇따라 잦게.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13456_자주.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045cb"
+  },
+  "No": 13475,
+  "Word": "조절",
+  "Description": "막히고 끊어짐. 또는 막히고 끊어지게 함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13475_조절.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045cc"
+  },
+  "No": 13499,
+  "Word": "선택",
+  "Description": "여럿 가운데서 필요한 것을 골라 뽑음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13499_선택.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045cd"
+  },
+  "No": 13508,
+  "Word": "본인",
+  "Description": "어떤 일에 직접 관계가 있거나 해당되는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13508_본인.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045ce"
+  },
+  "No": 13519,
+  "Word": "국민",
+  "Description": "국가를 구성하는 사람. 또는 그 나라의 국적을 가진 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13519_국민.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045cf"
+  },
+  "No": 13523,
+  "Word": "결정",
+  "Description": "행동이나 태도를 분명하게 정함. 또는 그렇게 정해진 내용.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13523_결정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045d0"
+  },
+  "No": 13524,
+  "Word": "정하다",
+  "Description": "겉으로 보기에 비뚤어지거나 굽은 데가 없다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13524_정하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045d1"
+  },
+  "No": 13547,
+  "Word": "수",
+  "Description": "생물에서 새끼를 배지 않거나 열매를 맺지 않는 쪽의 성(性).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13547_수.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045d2"
+  },
+  "No": 13561,
+  "Word": "이하",
+  "Description": "예전에, 시문(詩文)을 평하는 등급 가운데 둘째 등급의 셋째.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13561_이하.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8563057d23589045d3"
+  },
+  "No": 13582,
+  "Word": "결과",
+  "Description": "과업을 쉼.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13582_결과.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045d4"
+  },
+  "No": 13617,
+  "Word": "구분",
+  "Description": "사람마다 똑같이 나누어 줌.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13617_구분.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045d5"
+  },
+  "No": 13643,
+  "Word": "대응",
+  "Description": "수릿과의 새. 몸의 길이는 60cm 정도로 말똥가리보다 조금 크며, 머리와 목은 흰색 바탕에 엷은 갈색의 세로무늬가 있고, 날개는 엷은 갈색, 깃의 안쪽과 배는 흰색이다. 몽골ㆍ중국 등지에서 번식하고, 한국ㆍ인도ㆍ미얀마 등지에서 겨울을 보낸다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13643_대응.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045d6"
+  },
+  "No": 13682,
+  "Word": "전환",
+  "Description": "행실이나 태도의 잘못을 뉘우치고 마음을 바르게 고쳐먹음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13682_전환.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045d7"
+  },
+  "No": 13848,
+  "Word": "종이",
+  "Description": "식물성 섬유를 원료로 하여 만든 얇은 물건. 주로 글을 쓰거나 그림을 그리거나 인쇄를 하는 데 쓴다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13848_종이.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045d8"
+  },
+  "No": 13851,
+  "Word": "거래",
+  "Description": "주고받음. 또는 사고팖.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13851_거래.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045d9"
+  },
+  "No": 1385,
+  "Word": "급여소득",
+  "Description": "피고용자가 육체적ㆍ정신적 노동을 하여 보수로 얻는 소득. 봉급ㆍ급료ㆍ임금ㆍ세비(歲費)ㆍ연금ㆍ상여금 따위를 통틀어 이른다. 소득세의 과세 대상이 되며 원천 징수에 의하여 갑종 근로 소득과 을종 근로 소득으로 나뉜다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1385_급여소득.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045da"
+  },
+  "No": 13874,
+  "Word": "첼로",
+  "Description": "바이올린 계통의 대형 저음 현악기. 현이 네 줄이며 의자에 앉아 동체(胴體)를 무릎 사이에 끼고 활을 수평으로 하여 연주하는데, 침착하고 차분한 음색을 갖고 있어 독주 또는 합주 악기로 쓴다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13874_첼로.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045db"
+  },
+  "No": 13913,
+  "Word": "계약",
+  "Description": "관련되는 사람이나 조직체 사이에서 서로 지켜야 할 의무에 대하여 글이나 말로 정하여 둠. 또는 그런 약속.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13913_계약.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8663057d23589045dc"
+  },
+  "No": 13914,
+  "Word": "맺다",
+  "Description": "물방울이나 땀방울 따위가 생겨나 매달리다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13914_맺다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045dd"
+  },
+  "No": 13916,
+  "Word": "예약",
+  "Description": "미리 약속함. 또는 미리 정한 약속.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13916_예약.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045de"
+  },
+  "No": 13961,
+  "Word": "정확",
+  "Description": "바르고 확실함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13961_정확.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045df"
+  },
+  "No": 13968,
+  "Word": "확실하다",
+  "Description": "틀림없이 그러하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/13968_확실하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045e0"
+  },
+  "No": 14024,
+  "Word": "그러면",
+  "Description": "앞의 내용이 뒤의 내용의 조건이 될 때 쓰는 접속 부사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14024_그러면.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045e1"
+  },
+  "No": 14038,
+  "Word": "신",
+  "Description": "땅을 딛고 서거나 걸을 때 발에 신는 물건을 통틀어 이르는 말. 가죽ㆍ고무ㆍ비닐ㆍ헝겊ㆍ나무ㆍ짚ㆍ삼 따위로 만들며, 모양과 용도에 따라 여러 가지가 있다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14038_신.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045e2"
+  },
+  "No": 14042,
+  "Word": "가능",
+  "Description": "할 수 있거나 될 수 있음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14042_가능.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045e3"
+  },
+  "No": 14043,
+  "Word": "할수있다",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14043_할수있다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045e4"
+  },
+  "No": 14142,
+  "Word": "설명",
+  "Description": "어떤 일이나 대상의 내용을 상대편이 잘 알 수 있도록 밝혀 말함. 또는 그런 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14142_설명.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045e5"
+  },
+  "No": 14151,
+  "Word": "조심",
+  "Description": "마음에 새김.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14151_조심.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8763057d23589045e6"
+  },
+  "No": 14152,
+  "Word": "주의",
+  "Description": "주장이 되는 요지나 근본이 되는 중요한 뜻.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14152_주의.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045e7"
+  },
+  "No": 14176,
+  "Word": "내용",
+  "Description": "안살림살이에 드는 비용. 또는 그 씀씀이.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14176_내용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045e8"
+  },
+  "No": 14178,
+  "Word": "내역",
+  "Description": "안쪽 구역.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14178_내역.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045e9"
+  },
+  "No": 14179,
+  "Word": "사항",
+  "Description": "비례식, 방정식 따위에서의 넷째 항(項).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14179_사항.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045ea"
+  },
+  "No": 14187,
+  "Word": "보조",
+  "Description": "걸음걸이의 속도나 모양 따위의 상태.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14187_보조.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045eb"
+  },
+  "No": 14197,
+  "Word": "안내",
+  "Description": "어떤 내용을 소개하여 알려 줌. 또는 그런 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14197_안내.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045ec"
+  },
+  "No": 14201,
+  "Word": "이끌다",
+  "Description": "목적하는 곳으로 바로 가도록 같이 가면서 따라오게 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14201_이끌다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045ed"
+  },
+  "No": 14220,
+  "Word": "제출",
+  "Description": "덜어 냄.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14220_제출.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8863057d23589045ee"
+  },
+  "No": 14244,
+  "Word": "-았-었",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14244_-았-었.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045ef"
+  },
+  "No": 14263,
+  "Word": "말다",
+  "Description": "넓적한 물건을 돌돌 감아 원통형으로 겹치게 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14263_말다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f0"
+  },
+  "No": 14306,
+  "Word": "은메달",
+  "Description": "은으로 만든 메달. 국제 올림픽 경기 따위에서 2위를 차지한 선수에게 준다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14306_은메달.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f1"
+  },
+  "No": 14320,
+  "Word": "때",
+  "Description": "시간의 어떤 순간이나 부분.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14320_때.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f2"
+  },
+  "No": 14321,
+  "Word": "경우",
+  "Description": "논밭을 갈 때에 부리는 소.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14321_경우.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f3"
+  },
+  "No": 14322,
+  "Word": "시기",
+  "Description": "과거칠불의 둘째 부처. 인간의 수명이 7만 살 때 난 부처로, 분타리나무 아래에서 깨달음을 얻고 세 차례 설법하여 25만의 제자를 제도하였다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14322_시기.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f4"
+  },
+  "No": 14351,
+  "Word": "사회",
+  "Description": "회의나 예식 따위를 진행함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14351_사회.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f5"
+  },
+  "No": 14354,
+  "Word": "자신",
+  "Description": "그 사람의 몸 또는 바로 그 사람을 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14354_자신.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f6"
+  },
+  "No": 14360,
+  "Word": "충분하다",
+  "Description": "모자람이 없이 넉넉하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14360_충분하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f7"
+  },
+  "No": 14374,
+  "Word": "이후",
+  "Description": "기준이 되는 때를 포함하여 그보다 뒤.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14374_이후.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f8"
+  },
+  "No": 14375,
+  "Word": "후",
+  "Description": "입을 동글게 오므려 내밀고 입김을 많이 내뿜는 소리. 또는 그 모양.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14375_후.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8963057d23589045f9"
+  },
+  "No": 14376,
+  "Word": "수어",
+  "Description": "‘수화 언어’를 줄여 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14376_수어.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d23589045fa"
+  },
+  "No": 14380,
+  "Word": "구역",
+  "Description": "중국 전체의 국토.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14380_구역.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d23589045fb"
+  },
+  "No": 14381,
+  "Word": "지역",
+  "Description": "남의 땅을 자기의 땅에 이익이 되도록 사용하는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14381_지역.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d23589045fc"
+  },
+  "No": 14389,
+  "Word": "주고받다",
+  "Description": "서로 주기도 하고 받기도 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14389_주고받다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d23589045fd"
+  },
+  "No": 14409,
+  "Word": "중지",
+  "Description": "중국 중부 지방인 양쯔강(揚子江) 중ㆍ하류 지역. 장쑤성(江蘇省)ㆍ안후이성(安徽省)의 중남부와 저장성(浙江省)ㆍ장시성(江西省)ㆍ후베이성(湖北省)ㆍ후난성(湖南省)에 걸쳐 있으며, 기후가 따뜻하고 강수량이 많아서 쌀농사가 활발하며, 수운과 철도 및 도로망이 발달하여 광공업과 상업이 활발하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14409_중지.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d23589045fe"
+  },
+  "No": 14464,
+  "Word": "수단",
+  "Description": "어떤 목적을 이루기 위한 방법. 또는 그 도구.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14464_수단.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d23589045ff"
+  },
+  "No": 14472,
+  "Word": "가입",
+  "Description": "조직이나 단체 따위에 들어가거나, 서비스를 제공하는 상품 따위를 신청함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14472_가입.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d2358904600"
+  },
+  "No": 14473,
+  "Word": "등록",
+  "Description": "일정한 자격을 얻기 위하여 단체나 학교 따위에 문서나 이름을 올림.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14473_등록.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d2358904601"
+  },
+  "No": 14502,
+  "Word": "우리",
+  "Description": "짐승을 가두어 기르는 곳.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14502_우리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8a63057d2358904602"
+  },
+  "No": 14507,
+  "Word": "정도",
+  "Description": "바른 규칙.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14507_정도.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d2358904603"
+  },
+  "No": 14530,
+  "Word": "지출",
+  "Description": "어떤 목적을 위하여 돈을 지급하는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14530_지출.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d2358904604"
+  },
+  "No": 14548,
+  "Word": "증명",
+  "Description": "어떤 사항이나 판단 따위에 대하여 그것이 진실인지 아닌지 증거를 들어서 밝힘.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14548_증명.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d2358904605"
+  },
+  "No": 14561,
+  "Word": "중도",
+  "Description": "예전에, 장판마다 돌아다니며 과일이나 나무 따위의 흥정을 붙이고 돈을 받던 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14561_중도.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d2358904606"
+  },
+  "No": 14572,
+  "Word": "제시",
+  "Description": "시를 짓는 괴로움을 위로하기 위하여 자기가 지은 시를 제사 지내는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14572_제시.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d2358904607"
+  },
+  "No": 14580,
+  "Word": "서류",
+  "Description": "강물이나 냇물이 서쪽으로 흐름.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14580_서류.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d2358904608"
+  },
+  "No": 14581,
+  "Word": "문서",
+  "Description": "글이나 기호 따위로 일정한 의사나 관념 또는 사상을 나타낸 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14581_문서.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d2358904609"
+  },
+  "No": 14610,
+  "Word": "문장",
+  "Description": "관아에서 쓰던 문서.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14610_문장.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d235890460a"
+  },
+  "No": 14618,
+  "Word": "날",
+  "Description": "지구가 한 번 자전하는 동안. 자정에서 다음 자정까지의 동안으로 24시간이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14618_날.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8b63057d235890460b"
+  },
+  "No": 14618,
+  "Word": "날짜",
+  "Description": "지구가 한 번 자전하는 동안. 자정에서 다음 자정까지의 동안으로 24시간이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14618_날짜.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d235890460c"
+  },
+  "No": 14619,
+  "Word": "일자",
+  "Description": "한 글자라는 뜻으로, 아주 적은 지식을 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14619_일자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d235890460d"
+  },
+  "No": 14629,
+  "Word": "잔액",
+  "Description": "나머지 액수.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14629_잔액.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d235890460e"
+  },
+  "No": 14679,
+  "Word": "일",
+  "Description": "무엇을 이루거나 적절한 대가를 받기 위하여 어떤 장소에서 일정한 시간 동안 몸을 움직이거나 머리를 쓰는 활동. 또는 그 활동의 대상.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14679_일.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d235890460f"
+  },
+  "No": 14683,
+  "Word": "기본",
+  "Description": "사물이나 현상, 이론, 시설 따위를 이루는 바탕.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14683_기본.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d2358904610"
+  },
+  "No": 14721,
+  "Word": "하다",
+  "Description": "사람이나 동물, 물체 따위가 행동이나 작용을 이루다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14721_하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d2358904611"
+  },
+  "No": 14741,
+  "Word": "끝내다",
+  "Description": "일을 다 마무리하다. ‘끝나다’의 사동사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14741_끝내다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d2358904612"
+  },
+  "No": 14801,
+  "Word": "명령",
+  "Description": "윗사람이나 상위 조직이 아랫사람이나 하위 조직에 무엇을 하게 함. 또는 그런 내용.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14801_명령.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d2358904613"
+  },
+  "No": 14808,
+  "Word": "상담",
+  "Description": "문제를 해결하거나 궁금증을 풀기 위하여 서로 의논하거나 묻고 답함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14808_상담.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d2358904614"
+  },
+  "No": 14814,
+  "Word": "최고",
+  "Description": "가장 오래됨.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14814_최고.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d2358904615"
+  },
+  "No": 14815,
+  "Word": "가장",
+  "Description": "여럿 가운데 어느 것보다 정도가 높거나 세게.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14815_가장.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8c63057d2358904616"
+  },
+  "No": 14830,
+  "Word": "전쟁",
+  "Description": "국가와 국가, 또는 교전(交戰) 단체 사이에 무력을 사용하여 싸움.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14830_전쟁.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d2358904617"
+  },
+  "No": 14831,
+  "Word": "전투",
+  "Description": "두 편의 군대가 조직적으로 무장하여 싸움.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14831_전투.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d2358904618"
+  },
+  "No": 14898,
+  "Word": "조사",
+  "Description": "죽은 사람에 대하여 슬픈 뜻을 표함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14898_조사.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d2358904619"
+  },
+  "No": 14912,
+  "Word": "사용",
+  "Description": "조선 시대에, 오위(五衛)의 정구품 군직. 현직이 아닌 문관, 무관, 음관(蔭官)으로 채웠다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14912_사용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d235890461a"
+  },
+  "No": 14914,
+  "Word": "쓰다",
+  "Description": "붓, 펜, 연필과 같이 선을 그을 수 있는 도구로 종이 따위에 획을 그어서 일정한 글자의 모양이 이루어지게 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14914_쓰다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d235890461b"
+  },
+  "No": 14915,
+  "Word": "이용",
+  "Description": "대상을 필요에 따라 이롭게 씀.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14915_이용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d235890461c"
+  },
+  "No": 14920,
+  "Word": "고객",
+  "Description": "장사를 직업으로 하는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/14920_고객.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d235890461d"
+  },
+  "No": 15042,
+  "Word": "취소권",
+  "Description": "의사 표시 및 법률 행위를 취소할 수 있는 권리.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15042_취소권.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d235890461e"
+  },
+  "No": 15132,
+  "Word": "정보",
+  "Description": "보통 행군의 걸음걸이. 보통 걸음보다 힘 있고 절도 있게 팔과 다리를 움직이며 걷는 걸음이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15132_정보.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d235890461f"
+  },
+  "No": 15133,
+  "Word": "비교",
+  "Description": "둘 이상의 사물을 견주어 서로 간의 유사점, 차이점, 일반 법칙 따위를 고찰하는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15133_비교.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8d63057d2358904620"
+  },
+  "No": 15162,
+  "Word": "합치다",
+  "Description": "‘합하다’를 강조하여 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15162_합치다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904621"
+  },
+  "No": 15213,
+  "Word": "까지",
+  "Description": "어떤 일이나 상태 따위에 관련되는 범위의 끝임을 나타내는 보조사. 흔히 앞에는 시작을 나타내는 ‘부터’나 출발을 나타내는 ‘에서’가 와서 짝을 이룬다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15213_까지.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904622"
+  },
+  "No": 15215,
+  "Word": "종료",
+  "Description": "어떤 행동이나 일 따위가 끝남. 또는 행동이나 일 따위를 끝마침.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15215_종료.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904623"
+  },
+  "No": 15224,
+  "Word": "보장",
+  "Description": "어떤 일이 어려움 없이 이루어지도록 조건을 마련하여 보증하거나 보호함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15224_보장.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904624"
+  },
+  "No": 15247,
+  "Word": "전자",
+  "Description": "농사짓는 일을 직업으로 하는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15247_전자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904625"
+  },
+  "No": 15261,
+  "Word": "상황",
+  "Description": "자리를 물려주고 들어 앉은 황제를 이르던 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15261_상황.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904626"
+  },
+  "No": 15267,
+  "Word": "회원",
+  "Description": "어떤 회를 구성하는 사람들.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15267_회원.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904627"
+  },
+  "No": 15273,
+  "Word": "표시",
+  "Description": "겉으로 드러내 보임.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15273_표시.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904628"
+  },
+  "No": 15382,
+  "Word": "기술",
+  "Description": "과학 이론을 실제로 적용하여 사물을 인간 생활에 유용하도록 가공하는 수단.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15382_기술.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d2358904629"
+  },
+  "No": 15391,
+  "Word": "저축",
+  "Description": "‘저축거리다’의 어근.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15391_저축.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8e63057d235890462a"
+  },
+  "No": 15392,
+  "Word": "예금",
+  "Description": "일정한 계약에 의하여 은행이나 우체국 따위에 돈을 맡기는 일. 또는 그 돈. 당좌 예금, 정기 예금, 보통 예금 따위로 나눈다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15392_예금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d235890462b"
+  },
+  "No": 15393,
+  "Word": "적금",
+  "Description": "붉은색을 띤 금의 합금. 금에 구리를 25~50% 더하여 만드는데, 주로 장식으로 쓴다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15393_적금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d235890462c"
+  },
+  "No": 15409,
+  "Word": "다만",
+  "Description": "다른 것이 아니라 오로지.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15409_다만.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d235890462d"
+  },
+  "No": 15559,
+  "Word": "맞다",
+  "Description": "문제에 대한 답이 틀리지 아니하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15559_맞다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d235890462e"
+  },
+  "No": 15567,
+  "Word": "그",
+  "Description": "말하는 이와 듣는 이가 아닌 사람을 가리키는 삼인칭 대명사. 앞에서 이미 이야기하였거나 듣는 이가 생각하고 있는 사람을 가리킨다. 주로 남자를 가리킬 때 쓴다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15567_그.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d235890462f"
+  },
+  "No": 15599,
+  "Word": "납입",
+  "Description": "세금이나 공과금 따위를 내는 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15599_납입.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d2358904630"
+  },
+  "No": 15600,
+  "Word": "지급",
+  "Description": "돈이나 물품 따위를 정하여진 몫만큼 내줌.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15600_지급.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d2358904631"
+  },
+  "No": 15636,
+  "Word": "사람",
+  "Description": "생각을 하고 언어를 사용하며, 도구를 만들어 쓰고 사회를 이루어 사는 동물.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15636_사람.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d2358904632"
+  },
+  "No": 15645,
+  "Word": "영향",
+  "Description": "길이 누림.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15645_영향.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b8f63057d2358904633"
+  },
+  "No": 15651,
+  "Word": "있다",
+  "Description": "사람이나 동물이 어느 곳에서 떠나거나 벗어나지 아니하고 머물다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15651_있다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d2358904634"
+  },
+  "No": 15683,
+  "Word": "위험",
+  "Description": "해로움이나 손실이 생길 우려가 있음. 또는 그런 상태.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15683_위험.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d2358904635"
+  },
+  "No": 15695,
+  "Word": "맞추다",
+  "Description": "서로 떨어져 있는 부분을 제자리에 맞게 대어 붙이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15695_맞추다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d2358904636"
+  },
+  "No": 15744,
+  "Word": "번호",
+  "Description": "중국 당나라 때에, 죄인의 가족을 번갈아 가며 감시하던 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15744_번호.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d2358904637"
+  },
+  "No": 15799,
+  "Word": "올바르다",
+  "Description": "말이나 생각, 행동 따위가 이치나 규범에서 벗어남이 없이 옳고 바르다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15799_올바르다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d2358904638"
+  },
+  "No": 15812,
+  "Word": "금융",
+  "Description": "금전을 융통하는 일. 특히 이자를 붙여서 자금을 대차하는 일과 그 수급 관계를 이른다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15812_금융.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d2358904639"
+  },
+  "No": 15813,
+  "Word": "은행",
+  "Description": "임금이 총애하여 가까이 두는 신하.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15813_은행.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d235890463a"
+  },
+  "No": 15819,
+  "Word": "기술자",
+  "Description": "어떤 분야에 전문적 기술을 가진 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15819_기술자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d235890463b"
+  },
+  "No": 15842,
+  "Word": "희망",
+  "Description": "어떤 일을 이루거나 하기를 바람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15842_희망.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d235890463c"
+  },
+  "No": 15852,
+  "Word": "자금",
+  "Description": "‘자금거리다’의 어근.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15852_자금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9063057d235890463d"
+  },
+  "No": 15877,
+  "Word": "종류",
+  "Description": "사물의 부문을 나누는 갈래.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15877_종류.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d235890463e"
+  },
+  "No": 15905,
+  "Word": "않다",
+  "Description": "어떤 행동을 안 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15905_않다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d235890463f"
+  },
+  "No": 15913,
+  "Word": "높임법",
+  "Description": "남을 높여서 말하는 법. 문장의 주체를 높이는 주체 높임법, 말을 듣는 상대편을 높이는 상대 높임법이 있다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15913_높임법.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904640"
+  },
+  "No": 15939,
+  "Word": "로그인",
+  "Description": "다중 사용자 시스템을 사용하기 위하여 컴퓨터에 사용자임을 알리는 일. 미리 등록되어 있는 사용자의 특정한 이름과 암호의 입력을 통하여서만 작업을 할 수 있는 특정한 시스템 사용 환경에서 쓴다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15939_로그인.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904641"
+  },
+  "No": 15940,
+  "Word": "두려움",
+  "Description": "두려운 느낌.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15940_두려움.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904642"
+  },
+  "No": 15955,
+  "Word": "인터넷",
+  "Description": "전 세계의 컴퓨터가 서로 연결되어 정보를 교환할 수 있는, 하나의 거대한 컴퓨터 통신망.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15955_인터넷.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904643"
+  },
+  "No": 15963,
+  "Word": "통신",
+  "Description": "소식을 전함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15963_통신.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904644"
+  },
+  "No": 15970,
+  "Word": "사용자",
+  "Description": "사람을 부리거나 물건을 쓰는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15970_사용자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904645"
+  },
+  "No": 15971,
+  "Word": "소비자",
+  "Description": "재화를 소비하는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/15971_소비자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904646"
+  },
+  "No": 16007,
+  "Word": "센터",
+  "Description": "선반에서, 공작물을 받치는 원뿔 모양의 강철 조각.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16007_센터.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9163057d2358904647"
+  },
+  "No": 16027,
+  "Word": "들",
+  "Description": "편평하고 넓게 트인 땅.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16027_들.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d2358904648"
+  },
+  "No": 16041,
+  "Word": "힘",
+  "Description": "사람이나 동물이 몸에 갖추고 있으면서 스스로 움직이거나 다른 물건을 움직이게 하는 근육 작용.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16041_힘.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d2358904649"
+  },
+  "No": 16082,
+  "Word": "받다",
+  "Description": "다른 사람이 주거나 보내오는 물건 따위를 가지다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16082_받다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d235890464a"
+  },
+  "No": 16169,
+  "Word": "작성",
+  "Description": "서류, 원고 따위를 만듦.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16169_작성.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d235890464b"
+  },
+  "No": 16174,
+  "Word": "출금",
+  "Description": "돈을 내어 쓰거나 내어줌. 또는 그 돈.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16174_출금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d235890464c"
+  },
+  "No": 16203,
+  "Word": "신용",
+  "Description": "사람이나 사물이 틀림없다고 믿어 의심하지 아니함. 또는 그런 믿음성의 정도.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16203_신용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d235890464d"
+  },
+  "No": 16218,
+  "Word": "보관소",
+  "Description": "다른 사람의 물품을 대신 맡아 관리하는 곳.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16218_보관소.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d235890464e"
+  },
+  "No": 16245,
+  "Word": "동의",
+  "Description": "겨울철에 입는 옷.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16245_동의.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d235890464f"
+  },
+  "No": 16317,
+  "Word": "해지",
+  "Description": "이룰 수 없는 큰 소원.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16317_해지.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d2358904650"
+  },
+  "No": 16393,
+  "Word": "개월",
+  "Description": "달을 세는 단위.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16393_개월.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9263057d2358904651"
+  },
+  "No": 16418,
+  "Word": "사업",
+  "Description": "통일 신라 시대에 둔 국학(國學)의 으뜸 벼슬. 경덕왕 때 경(卿)을 고친 것으로, 아찬 이하의 관등을 가진 자로 임명하였다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16418_사업.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904652"
+  },
+  "No": 16427,
+  "Word": "원금",
+  "Description": "‘본전’을 전문적으로 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16427_원금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904653"
+  },
+  "No": 16443,
+  "Word": "시",
+  "Description": "마음에 차지 않거나 못마땅할 때 내는 소리.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16443_시.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904654"
+  },
+  "No": 16448,
+  "Word": "발전",
+  "Description": "더 낫고 좋은 상태나 더 높은 단계로 나아감.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16448_발전.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904655"
+  },
+  "No": 16526,
+  "Word": "그러나",
+  "Description": "앞의 내용과 뒤의 내용이 상반될 때 쓰는 접속 부사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16526_그러나.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904656"
+  },
+  "No": 16540,
+  "Word": "실명",
+  "Description": "→ 신명.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16540_실명.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904657"
+  },
+  "No": 16554,
+  "Word": "영화",
+  "Description": "일정한 의미를 갖고 움직이는 대상을 촬영하여 영사기로 영사막에 재현하는 종합 예술.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16554_영화.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904658"
+  },
+  "No": 16633,
+  "Word": "빠르다",
+  "Description": "어떤 동작을 하는 데 걸리는 시간이 짧다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16633_빠르다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d2358904659"
+  },
+  "No": 16698,
+  "Word": "글자",
+  "Description": "말을 적는 일정한 체계의 부호.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16698_글자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d235890465a"
+  },
+  "No": 16753,
+  "Word": "더욱",
+  "Description": "정도나 수준 따위가 한층 심하거나 높게.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16753_더욱.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9363057d235890465b"
+  },
+  "No": 16756,
+  "Word": "지점",
+  "Description": "본점에서 갈라져 나온 점포. 본점의 지휘와 명령에 따르면서도 부분적으로 독립한 기능을 가지고 있다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16756_지점.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d235890465c"
+  },
+  "No": 16804,
+  "Word": "투자",
+  "Description": "처음으로 윗사람을 만날 때 미리 명함을 드림.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16804_투자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d235890465d"
+  },
+  "No": 16814,
+  "Word": "느리다",
+  "Description": "어떤 동작을 하는 데 걸리는 시간이 길다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16814_느리다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d235890465e"
+  },
+  "No": 16841,
+  "Word": "이것",
+  "Description": "말하는 이에게 가까이 있거나 말하는 이가 생각하고 있는 사물을 가리키는 지시 대명사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16841_이것.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d235890465f"
+  },
+  "No": 16846,
+  "Word": "자동",
+  "Description": "기계나 설비 따위가 자체 내에 있는 일정한 장치의 작용에 의하여 스스로 작동함. 또는 그런 기계.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16846_자동.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d2358904660"
+  },
+  "No": 16853,
+  "Word": "마지못하다",
+  "Description": "마음이 내키지는 아니하지만 사정에 따라서 그렇게 하지 아니할 수 없다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16853_마지못하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d2358904661"
+  },
+  "No": 16875,
+  "Word": "이유",
+  "Description": "조선 숙종 때의 문신(1645~1721). 자는 자우(子雨). 호는 녹천(鹿川). 좌의정과 우의정을 거쳐 영의정을 지냈으며 한림(翰林)에 들어가 당론 타파를 주장하고, 1703년 중앙 관제의 일부를 개혁하였다. 1709년에는 북한산성을 신축할 것을 주장하여 이를 담당하였다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16875_이유.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d2358904662"
+  },
+  "No": 16889,
+  "Word": "변하다",
+  "Description": "무엇이 다른 것이 되거나 혹은 다른 성질로 달라지다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16889_변하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d2358904663"
+  },
+  "No": 16891,
+  "Word": "변화",
+  "Description": "사물의 성질, 모양, 상태 따위가 바뀌어 달라짐.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16891_변화.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d2358904664"
+  },
+  "No": 16894,
+  "Word": "높다",
+  "Description": "아래에서 위까지의 길이가 길다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16894_높다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d2358904665"
+  },
+  "No": 16898,
+  "Word": "또",
+  "Description": "어떤 일이 거듭하여.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16898_또.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9463057d2358904666"
+  },
+  "No": 16899,
+  "Word": "그리고",
+  "Description": "단어, 구, 절, 문장 따위를 병렬적으로 연결할 때 쓰는 접속 부사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16899_그리고.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d2358904667"
+  },
+  "No": 16974,
+  "Word": "방법",
+  "Description": "어떤 일을 해 나가거나 목적을 이루기 위하여 취하는 수단이나 방식.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16974_방법.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d2358904668"
+  },
+  "No": 16976,
+  "Word": "방식",
+  "Description": "일정한 방법이나 형식.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16976_방식.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d2358904669"
+  },
+  "No": 16988,
+  "Word": "잡아당기다",
+  "Description": "잡아서 끌어당기다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/16988_잡아당기다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d235890466a"
+  },
+  "No": 17032,
+  "Word": "규칙",
+  "Description": "죄 따위를 따지고 살펴 바로잡음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17032_규칙.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d235890466b"
+  },
+  "No": 17053,
+  "Word": "쉽다",
+  "Description": "하기가 까다롭거나 힘들지 않다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17053_쉽다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d235890466c"
+  },
+  "No": 17100,
+  "Word": "편하다",
+  "Description": "몸이나 마음이 거북하거나 괴롭지 아니하여 좋다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17100_편하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d235890466d"
+  },
+  "No": 17134,
+  "Word": "월",
+  "Description": "생각이나 감정을 말과 글로 표현할 때 완결된 내용을 나타내는 최소의 단위. 주어와 서술어를 갖추고 있는 것이 원칙이나 때로 이런 것이 생략될 수도 있다. 글의 경우, 문장의 끝에 ‘.’, ‘?’, ‘!’ 따위의 문장 부호를 찍는다. ‘철수는 몇 살이니?’, ‘세 살.’, ‘정말?’ 따위이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17134_월.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d235890466e"
+  },
+  "No": 17194,
+  "Word": "목차",
+  "Description": "죄를 금하고 제약하는 것. 율장(律藏)에서 설한 것으로, 소극적으로는 그른 일을 막고 나쁜 일을 멈추게 하는 힘이 되고, 적극적으로는 모든 선을 일으키는 근본이 된다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17194_목차.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d235890466f"
+  },
+  "No": 17208,
+  "Word": "상실",
+  "Description": "한 집에서 주인이 거처하는 방.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17208_상실.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9563057d2358904670"
+  },
+  "No": 1721,
+  "Word": "만기",
+  "Description": "어음 금액의 지급일로서 어음에 적힌 날짜. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1721_만기.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904671"
+  },
+  "No": 17288,
+  "Word": "알리다",
+  "Description": "사물이나 상황에 대한 정보나 지식을 알게 하다. ‘알다’의 사동사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17288_알리다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904672"
+  },
+  "No": 17391,
+  "Word": "상품",
+  "Description": "상등의 품위(品位).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17391_상품.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904673"
+  },
+  "No": 17402,
+  "Word": "현금",
+  "Description": "→ 거문고.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17402_현금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904674"
+  },
+  "No": 17446,
+  "Word": "복리",
+  "Description": "행복과 이익을 아울러 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17446_복리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904675"
+  },
+  "No": 17494,
+  "Word": "주다",
+  "Description": "물건 따위를 남에게 건네어 가지거나 누리게 하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17494_주다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904676"
+  },
+  "No": 17496,
+  "Word": "내주다",
+  "Description": "넣어 두었던 물건 따위를 꺼내어 주다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17496_내주다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904677"
+  },
+  "No": 17498,
+  "Word": "제공",
+  "Description": "공중에서 적을 제압하는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17498_제공.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904678"
+  },
+  "No": 17506,
+  "Word": "다르다",
+  "Description": "비교가 되는 두 대상이 서로 같지 아니하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17506_다르다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9663057d2358904679"
+  },
+  "No": 17578,
+  "Word": "일반",
+  "Description": "하나를 반으로 가름. 또는 그렇게 가른 반.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17578_일반.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d235890467a"
+  },
+  "No": 17592,
+  "Word": "성장",
+  "Description": "사람이나 동식물 따위가 자라서 점점 커짐.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17592_성장.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d235890467b"
+  },
+  "No": 17618,
+  "Word": "성공",
+  "Description": "목적하는 바를 이룸.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17618_성공.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d235890467c"
+  },
+  "No": 17639,
+  "Word": "금리",
+  "Description": "빌려준 돈이나 예금 따위에 붙는 이자. 또는 그 비율.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17639_금리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d235890467d"
+  },
+  "No": 17701,
+  "Word": "되다",
+  "Description": "다른 상태나 성질로 바뀌거나 변하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17701_되다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d235890467e"
+  },
+  "No": 17721,
+  "Word": "주인공",
+  "Description": "연극, 영화, 소설 따위에서 사건의 중심이 되는 인물.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17721_주인공.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d235890467f"
+  },
+  "No": 17723,
+  "Word": "계산",
+  "Description": "수를 헤아림.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17723_계산.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d2358904680"
+  },
+  "No": 17739,
+  "Word": "안전",
+  "Description": "그릇의 아가리나 전의 안쪽.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17739_안전.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d2358904681"
+  },
+  "No": 17747,
+  "Word": "기계",
+  "Description": "기묘한 꾀.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17747_기계.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9763057d2358904682"
+  },
+  "No": 17783,
+  "Word": "휴게소",
+  "Description": "길을 가는 사람들이 잠깐 동안 머물러 쉴 수 있도록 마련하여 놓은 장소.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17783_휴게소.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d2358904683"
+  },
+  "No": 17795,
+  "Word": "혁신",
+  "Description": "묵은 풍속, 관습, 조직, 방법 따위를 완전히 바꾸어서 새롭게 함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17795_혁신.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d2358904684"
+  },
+  "No": 17851,
+  "Word": "특성",
+  "Description": "일정한 사물에만 있는 특수한 성질.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17851_특성.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d2358904685"
+  },
+  "No": 17883,
+  "Word": "가격",
+  "Description": "손이나 주먹, 몽둥이 따위로 때리거나 침.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17883_가격.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d2358904686"
+  },
+  "No": 17884,
+  "Word": "금액",
+  "Description": "도자기 위에 그림을 붙게 하는 수금(水金). 염화 금(鹽化金) 용액을 황, 테레빈유와 섞은 액체이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17884_금액.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d2358904687"
+  },
+  "No": 17885,
+  "Word": "돈",
+  "Description": "사물의 가치를 나타내며, 상품의 교환을 매개하고, 재산 축적의 대상으로도 사용하는 물건. 예전에는 조가비, 짐승의 가죽, 보석, 옷감, 농산물 따위를 이용하였으나 요즈음은 금, 은, 동 따위의 금속이나 종이를 이용하여 만들며 그 크기나 모양, 액수 따위는 일정한 법률에 의하여 정한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17885_돈.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d2358904688"
+  },
+  "No": 17891,
+  "Word": "수수료",
+  "Description": "어떤 일을 맡아 처리해 준 데 대한 대가로서 주는 요금.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17891_수수료.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d2358904689"
+  },
+  "No": 17896,
+  "Word": "메뉴",
+  "Description": "식당이나 음식점 따위에서 파는 음식의 종류와 가격을 적은 판.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17896_메뉴.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9863057d235890468a"
+  },
+  "No": 17903,
+  "Word": "타인",
+  "Description": "다른 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17903_타인.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d235890468b"
+  },
+  "No": 17919,
+  "Word": "오르다",
+  "Description": "사람이나 동물 따위가 아래에서 위쪽으로 움직여 가다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/17919_오르다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d235890468c"
+  },
+  "No": 18002,
+  "Word": "이해",
+  "Description": "말하는 이가 앞에서 이야기했거나 바로 지금 이야기하는 해.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18002_이해.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d235890468d"
+  },
+  "No": 18018,
+  "Word": "권리",
+  "Description": "권세와 이익.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18018_권리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d235890468e"
+  },
+  "No": 18078,
+  "Word": "단어",
+  "Description": "분리하여 자립적으로 쓸 수 있는 말이나 이에 준하는 말. 또는 그 말의 뒤에 붙어서 문법적 기능을 나타내는 말. “철수가 영희의 일기를 읽은 것 같다.”에서 자립적으로 쓸 수 있는 ‘철수’, ‘영희’, ‘일기’, ‘읽은’, ‘같다’와 조사 ‘가’, ‘의’, ‘를’, 의존 명사 ‘것’ 따위이다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18078_단어.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d235890468f"
+  },
+  "No": 18084,
+  "Word": "보다",
+  "Description": "눈으로 대상의 존재나 형태적 특징을 알다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18084_보다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d2358904690"
+  },
+  "No": 18086,
+  "Word": "위하다",
+  "Description": "이롭게 하거나 돕다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18086_위하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d2358904691"
+  },
+  "No": 18088,
+  "Word": "연사",
+  "Description": "농사가 잘되고 못된 형편. 또는 농사가 되어 가는 형편.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18088_연사.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d2358904692"
+  },
+  "No": 18139,
+  "Word": "사",
+  "Description": "사례하는 뜻을 표함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18139_사.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d2358904693"
+  },
+  "No": 18139,
+  "Word": "회사",
+  "Description": "사례하는 뜻을 표함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18139_회사.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9963057d2358904694"
+  },
+  "No": 18144,
+  "Word": "강요",
+  "Description": "억지로 또는 강제로 요구함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18144_강요.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d2358904695"
+  },
+  "No": 18168,
+  "Word": "연",
+  "Description": "한 해.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18168_연.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d2358904696"
+  },
+  "No": 18200,
+  "Word": "국방",
+  "Description": "외국의 침략에 대비 태세를 갖추고 국토를 방위하는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18200_국방.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d2358904697"
+  },
+  "No": 18243,
+  "Word": "경쟁",
+  "Description": "같은 목적에 대하여 이기거나 앞서려고 서로 겨룸.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18243_경쟁.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d2358904698"
+  },
+  "No": 18245,
+  "Word": "고시",
+  "Description": "옛 시절이나 때.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18245_고시.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d2358904699"
+  },
+  "No": 18258,
+  "Word": "판매",
+  "Description": "상품 따위를 팖.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18258_판매.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d235890469a"
+  },
+  "No": 18300,
+  "Word": "원하다",
+  "Description": "못마땅하게 여기어 탓하거나 불평을 품고 미워하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18300_원하다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d235890469b"
+  },
+  "No": 18301,
+  "Word": "바라다",
+  "Description": "생각이나 바람대로 어떤 일이나 상태가 이루어지거나 그렇게 되었으면 하고 생각하다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18301_바라다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d235890469c"
+  },
+  "No": 18306,
+  "Word": "원",
+  "Description": "우리나라의 화폐 단위. 1원은 1전의 100배이다. 1962년 6월 10일부터 시행되었다. 기호는 ￦.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18306_원.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9a63057d235890469d"
+  },
+  "No": 18339,
+  "Word": "회사원",
+  "Description": "회사에서 근무하는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18339_회사원.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d235890469e"
+  },
+  "No": 18372,
+  "Word": "요청",
+  "Description": "필요한 어떤 일이나 행동을 청함. 또는 그런 청.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18372_요청.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d235890469f"
+  },
+  "No": 18374,
+  "Word": "요구",
+  "Description": "받아야 할 것을 필요에 의하여 달라고 청함. 또는 그 청.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18374_요구.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a0"
+  },
+  "No": 1837,
+  "Word": "바리사이파",
+  "Description": "기원전 2세기에 일어난 유대 민족의 한 종파. 율법의 준수와 종교적인 순수함을 강조하였다. 형식주의와 위선에 빠져 예수를 공격하였다. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1837_바리사이파.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a1"
+  },
+  "No": 18380,
+  "Word": "기대다",
+  "Description": "몸이나 물건을 무엇에 의지하면서 비스듬히 대다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18380_기대다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a2"
+  },
+  "No": 18403,
+  "Word": "주민등록증",
+  "Description": "대한민국 국민의 신분을 증명하기 위해 발급되는 공식적인 카드.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18403_주민등록증.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a3"
+  },
+  "No": 1854,
+  "Word": "어음",
+  "Description": "일정한 금액을 일정한 날짜와 장소에서 치를 것을 약속하거나 제삼자에게 그 지급을 위탁하는 유가 증권. 약속 어음과 환어음이 있다. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1854_어음.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a4"
+  },
+  "No": 1884,
+  "Word": "산업",
+  "Description": "인간의 생활을 경제적으로 풍요롭게 하기 위하여 재화나 서비스를 생산하는 사업. 농업ㆍ목축업ㆍ임업ㆍ광업ㆍ공업을 비롯한 유형물(有形物)의 생산 이외에 상업ㆍ금융업ㆍ운수업ㆍ서비스업 따위와 같이 생산에 직접 결부되지 않으나 국민 경제에 불가결한 사업도 포함하며, 좁은 뜻으로는 공업만을 가리키기도 한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1884_산업.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a5"
+  },
+  "No": 18,
+  "Word": "기관",
+  "Description": "일정한 모양과 생리 기능을 가지고 있는 생물체의 부분. 형태적으로 독립되어 있으며, 여러 개의 조직이 일정한 질서로 결합되어 이루어지며 이들이 모여 기관계를 형성하고 기관 혹은 기관계가 모여 개체를 구성한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/18_기관.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a6"
+  },
+  "No": 1961,
+  "Word": "성장률",
+  "Description": "경제 성장률(經濟成長率).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1961_성장률.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9b63057d23589046a7"
+  },
+  "No": 1962,
+  "Word": "이익",
+  "Description": "일정 기간의 총수입에서 그것을 위하여 들인 비용을 뺀 차액.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/1962_이익.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046a8"
+  },
+  "No": 20001,
+  "Word": "가능한",
+  "Description": "어떤 일이나 사물이 실현될 수 있는 상태에 있음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20001_가능한.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046a9"
+  },
+  "No": 20001,
+  "Word": "거래처",
+  "Description": "지속적으로 거래를 하는 상대방 업체나 개인.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20001_거래처.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046aa"
+  },
+  "No": 20002,
+  "Word": "개설한",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20002_개설한.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046ab"
+  },
+  "No": 20002,
+  "Word": "거치식",
+  "Description": "일정 기간 동안 자금을 은행 등에 예치하여 이자를 받는 형태의 금융 상품.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20002_거치식.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046ac"
+  },
+  "No": 20003,
+  "Word": "공용",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20003_공용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046ad"
+  },
+  "No": 20005,
+  "Word": "금융사",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20005_금융사.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046ae"
+  },
+  "No": 20006,
+  "Word": "당행",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20006_당행.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046af"
+  },
+  "No": 20007,
+  "Word": "대출",
+  "Description": "돈이나 물건을 빌려줌, 또는 그 돈이나 물건.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20007_대출.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9c63057d23589046b0"
+  },
+  "No": 20008,
+  "Word": "만료일",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20008_만료일.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b1"
+  },
+  "No": 20009,
+  "Word": "미사용",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20009_미사용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b2"
+  },
+  "No": 20010,
+  "Word": "부득이한",
+  "Description": "피할 수 없는, 어쩔 수 없는",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20010_부득이한.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b3"
+  },
+  "No": 20011,
+  "Word": "불특정",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20011_불특정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b4"
+  },
+  "No": 20012,
+  "Word": "비밀번호",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20012_비밀번호.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b5"
+  },
+  "No": 20013,
+  "Word": "사업자",
+  "Description": "사업을 경영하는 사람 또는 단체.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20013_사업자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b7"
+  },
+  "No": 20015,
+  "Word": "사용중",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20015_사용중.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b8"
+  },
+  "No": 20016,
+  "Word": "상품명",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20016_상품명.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9d63057d23589046b9"
+  },
+  "No": 20017,
+  "Word": "서명",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20017_서명.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046ba"
+  },
+  "No": 20018,
+  "Word": "설명서",
+  "Description": "어떤 사물이나 절차에 대한 설명이나 지침이 담긴 문서.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20018_설명서.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046bb"
+  },
+  "No": 20019,
+  "Word": "설명서와",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20019_설명서와.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046bc"
+  },
+  "No": 20020,
+  "Word": "신규",
+  "Description": "새롭게 시작하거나 추가된 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20020_신규.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046bd"
+  },
+  "No": 20021,
+  "Word": "신규일",
+  "Description": "새로운 일이 시작되는 날.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20021_신규일.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046be"
+  },
+  "No": 20022,
+  "Word": "실적",
+  "Description": "일정 기간 동안 기업이나 개인이 경제 활동을 통해 벌어들인 수익이나 성과.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20022_실적.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046bf"
+  },
+  "No": 20024,
+  "Word": "아이디",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20024_아이디.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046c0"
+  },
+  "No": 20025,
+  "Word": "않아야",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20025_않아야.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046c1"
+  },
+  "No": 20026,
+  "Word": "약정한",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20026_약정한.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046c2"
+  },
+  "No": 20027,
+  "Word": "영업점",
+  "Description": "고객과 직접 대면하여 금융 상품을 판매하고 서비스를 제공하는 은행 등의 지점.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20027_영업점.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9e63057d23589046c3"
+  },
+  "No": 20028,
+  "Word": "요청권",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20028_요청권.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046c4"
+  },
+  "No": 20030,
+  "Word": "우대",
+  "Description": "특별히 대우하거나 우선적으로 돌보아 줌.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20030_우대.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046c5"
+  },
+  "No": 20031,
+  "Word": "월복리",
+  "Description": "복리로 계산되는 금융 상품에서 원금과 이자가 매월 복리에 의해 계산되는 방식.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20031_월복리.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046c6"
+  },
+  "No": 20032,
+  "Word": "이에",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20032_이에.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046c7"
+  },
+  "No": 20033,
+  "Word": "이체",
+  "Description": "돈이나 물건 따위를 한 곳에서 다른 곳으로 옮김.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20033_이체.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046c8"
+  },
+  "No": 20034,
+  "Word": "입금",
+  "Description": "돈을 은행 등의 금융 기관에 맡기거나 계좌로 보내는 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20034_입금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046c9"
+  },
+  "No": 20035,
+  "Word": "입출금",
+  "Description": "은행에서 돈을 입금하거나 출금하는 행위 또는 이러한 기능을 가진 금융 서비스.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20035_입출금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046ca"
+  },
+  "No": 20036,
+  "Word": "적립식",
+  "Description": "일정한 기간 동안 돈이나 물건을 점차적으로 모아 쌓아 가는 방식.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20036_적립식.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381b9f63057d23589046cb"
+  },
+  "No": 20037,
+  "Word": "적용",
+  "Description": "어떤 대상이나 범위에 맞추어 사용함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20037_적용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046cc"
+  },
+  "No": 20038,
+  "Word": "전산",
+  "Description": "정보를 처리하고 관리하기 위해 컴퓨터 시스템을 사용하는 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20038_전산.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046cd"
+  },
+  "No": 20039,
+  "Word": "전이라도",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20039_전이라도.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046ce"
+  },
+  "No": 20040,
+  "Word": "정하는",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20040_정하는.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046cf"
+  },
+  "No": 20041,
+  "Word": "청약",
+  "Description": "어떤 일이나 행사에 참여하기 위해 일정한 조건으로 신청하는 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20041_청약.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046d0"
+  },
+  "No": 20042,
+  "Word": "최대",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20042_최대.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046d1"
+  },
+  "No": 20043,
+  "Word": "최저",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20043_최저.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046d2"
+  },
+  "No": 20044,
+  "Word": "클라우드",
+  "Description": "인터넷을 통해 제공되는 서버, 스토리지, 데이터베이스, 네트워킹, 소프트웨어 등의 컴퓨팅 자원의 집합.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20044_클라우드.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046d3"
+  },
+  "No": 20045,
+  "Word": "타인에게",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20045_타인에게.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba063057d23589046d4"
+  },
+  "No": 20046,
+  "Word": "특약",
+  "Description": "특별히 약정함. 또는 그런 약정.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20046_특약.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba163057d23589046d5"
+  },
+  "No": 20047,
+  "Word": "특정",
+  "Description": "어떤 것을 분명하게 정하거나 지음.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20047_특정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba163057d23589046d6"
+  },
+  "No": 20050,
+  "Word": "현황",
+  "Description": "현재의 상태나 상황.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20050_현황.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba163057d23589046d7"
+  },
+  "No": 20051,
+  "Word": "확인",
+  "Description": "어떤 사실이나 내용을 틀림없이 그렇다고 인정하거나 증명하는 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20051_확인.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba163057d23589046d8"
+  },
+  "No": 20052,
+  "Word": "안보",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20052_안보.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba163057d23589046d9"
+  },
+  "No": 20053,
+  "Word": "협력",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20053_협력.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba163057d23589046da"
+  },
+  "No": 20054,
+  "Word": "올리거나",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20054_올리거나.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba163057d23589046db"
+  },
+  "No": 20055,
+  "Word": "영상을",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20055_영상을.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046dc"
+  },
+  "No": 20056,
+  "Word": "보여줍니다",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20056_보여줍니다.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046dd"
+  },
+  "No": 20057,
+  "Word": "불투명도",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20057_불투명도.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046de"
+  },
+  "No": 20058,
+  "Word": "가독성을",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20058_가독성을.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046df"
+  },
+  "No": 2150,
+  "Word": "약정",
+  "Description": "증권 시장에서, 거래원 사이에 증권의 매매가 성립되는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/2150_약정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046e0"
+  },
+  "No": 224,
+  "Word": "에1①",
+  "Description": "((체언 뒤에 붙어)) 앞말이 처소의 부사어임을 나타내는 격 조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/224_에1①.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046e1"
+  },
+  "No": 226,
+  "Word": "에",
+  "Description": "앞말이 조건, 환경, 상태 따위의 부사어임을 나타내는 격 조사. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/226_에.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046e2"
+  },
+  "No": 226,
+  "Word": "에1④",
+  "Description": "앞말이 조건, 환경, 상태 따위의 부사어임을 나타내는 격 조사. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/226_에1④.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046e3"
+  },
+  "No": 227,
+  "Word": "에게",
+  "Description": "어떤 행동이 미치는 대상을 나타내는 격 조사. 준말: 게.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/227_에게.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046e4"
+  },
+  "No": 2303,
+  "Word": "완전고용",
+  "Description": "일할 능력이 있고 일하고 싶어 하는 사람이 모두 고용되어 실업자가 없는 상태의 고용. 곧 노동의 수요와 공급이 일치하는 상태의 고용을 이른다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/2303_완전고용.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046e5"
+  },
+  "No": 2583,
+  "Word": "자산액",
+  "Description": "자산의 액수.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/2583_자산액.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba263057d23589046e6"
+  },
+  "No": 270,
+  "Word": "이나1②③",
+  "Description": "((수량이나 정도를 나타내는, 받침 있는 체언이나 부사어 뒤에 붙어)) 수량이 크거나 많음, 혹은 정도가 높음을 강조하는 보조사. ,((수량이나 정도를 나타내는, 받침 있는 체언이나 부사어 뒤에 붙어)) 수량이나 정도를 어림잡는 뜻을 나타내는 보조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/270_이나1②③.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046e7"
+  },
+  "No": 275,
+  "Word": "이라도",
+  "Description": "((받침 있는 체언이나 부사어 뒤에 붙어)) 그것이 썩 좋은 것은 아니나 그런대로 괜찮음을 나타내는 보조사. 그것이 최선의 것이 아니라 차선의 것임을 나타낸다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/275_이라도.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046e8"
+  },
+  "No": 275,
+  "Word": "이라도①",
+  "Description": "((받침 있는 체언이나 부사어 뒤에 붙어)) 그것이 썩 좋은 것은 아니나 그런대로 괜찮음을 나타내는 보조사. 그것이 최선의 것이 아니라 차선의 것임을 나타낸다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/275_이라도①.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046e9"
+  },
+  "No": 2761,
+  "Word": "망상",
+  "Description": "병적인 상태에서 생기는 그릇된 생각.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/2761_망상.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046ea"
+  },
+  "No": 2920,
+  "Word": "는",
+  "Description": "((받침 없는 체언이나 부사어, 일부 연결 어미 뒤에 붙어)) 강조의 뜻을 나타내는 보조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/2920_는.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046eb"
+  },
+  "No": 3140,
+  "Word": "로",
+  "Description": "((받침 없는 체언이나 'ㄹ' 받침으로 끝나는 체언 뒤에 붙어)) 움직임의 경로를 나타내는 격 조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/3140_로.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046ec"
+  },
+  "No": 3140,
+  "Word": "로①",
+  "Description": "((받침 없는 체언이나 'ㄹ' 받침으로 끝나는 체언 뒤에 붙어)) 움직임의 경로를 나타내는 격 조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/3140_로①.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046ed"
+  },
+  "No": 3830,
+  "Word": "제공자",
+  "Description": "수혈용 혈액이나 이식용 장기를 주는 사람.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/3830_제공자.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046ee"
+  },
+  "No": 3838,
+  "Word": "주기적",
+  "Description": "일정한 간격을 두고 되풀이하여 진행하거나 나타나는 것.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/3838_주기적.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba363057d23589046ef"
+  },
+  "No": 390,
+  "Word": "으로②③",
+  "Description": "어떤 물건의 재료나 원료를 나타내는 격 조사.,어떤 일의 수단ㆍ도구를 나타내는 격 조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/390_으로②③.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f0"
+  },
+  "No": 400,
+  "Word": "은",
+  "Description": "((받침 있는 체언이나 부사어, 일부 연결 어미 뒤에 붙어)) 강조의 뜻을 나타내는 보조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/400_은.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f1"
+  },
+  "No": 4494,
+  "Word": "공인인증서",
+  "Description": "인터넷 뱅킹이나 온라인 증권 거래, 인터넷 쇼핑, 전자 민원 서비스 따위를 이용할 때 본인임을 증명하기 위해 사용하는 증서. 일종의 디지털 신분증으로 공인 인증 기관에서 발행해 준다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/4494_공인인증서.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f2"
+  },
+  "No": 4675,
+  "Word": "동영상파일",
+  "Description": "",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/4675_동영상파일.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f3"
+  },
+  "No": 4682,
+  "Word": "디스크",
+  "Description": "보조 기억 장치로 사용하는 둥근 모양의 판. 하드 디스크, 플로피 디스크 같은 자기 디스크와 콤팩트디스크, 레이저 디스크 같은 광학 디스크가 있다. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/4682_디스크.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f4"
+  },
+  "No": 4840,
+  "Word": "속도감",
+  "Description": "물체가 나아가거나 일이 진행되는 빠르기의 느낌.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/4840_속도감.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f5"
+  },
+  "No": 4892,
+  "Word": "보안",
+  "Description": "비인가된 접근으로부터 통신 네트워크 및 시스템, 응용 서비스 등을 보호함.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/4892_보안.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f6"
+  },
+  "No": 4916,
+  "Word": "소형컴퓨터",
+  "Description": "외형적 크기가 보통보다 작은 컴퓨터.,규격, 속도, 능력 면에서 메인 프레임 컴퓨터와 마이크로컴퓨터 사이에 위치하는 컴퓨터.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/4916_소형컴퓨터.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f7"
+  },
+  "No": 522,
+  "Word": "주",
+  "Description": "주식(株式).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/522_주.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f8"
+  },
+  "No": 5295,
+  "Word": "입력",
+  "Description": "컴퓨터가 처리할 데이터를 외부로부터 받아들이는 모든 작용. 또는 일반적으로 데이터가 입력 장치나 보조 기억 장치로부터 컴퓨터의 주 기억 장피로 이동하는 것. (input).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/5295_입력.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046f9"
+  },
+  "No": 5315,
+  "Word": "찾기",
+  "Description": "데이터 집합 중에서 필요한 특성을 지닌 것을 찾아내는 것. (search).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/5315_찾기.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba463057d23589046fa"
+  },
+  "No": 5516,
+  "Word": "패스워드",
+  "Description": "특정한 시스템에 로그인을 할 때에 사용자의 신원을 확인하기 위하여 입력하는 문자열.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/5516_패스워드.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d23589046fb"
+  },
+  "No": 5892,
+  "Word": "노출",
+  "Description": "감염원에 드러냄.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/5892_노출.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d23589046fc"
+  },
+  "No": 5984,
+  "Word": "안정",
+  "Description": "병을 치료하기 위하여, 몸과 마음을 편안하고 고요하게 하는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/5984_안정.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d23589046fd"
+  },
+  "No": 6478,
+  "Word": "재생",
+  "Description": "상실되거나 손상된 생물체의 한 부분에 새로운 조직이 생겨 다시 자라남. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/6478_재생.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d23589046fe"
+  },
+  "No": 6671,
+  "Word": "개설",
+  "Description": "은행에서, 신용장을 발행하는 일.,은행에서, 새로운 계좌를 마련하는 일. '냄', '새로 냄', '새로 엶', '엶'으로 순화.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/6671_개설.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d23589046ff"
+  },
+  "No": 7053,
+  "Word": "저축보험",
+  "Description": "보험에 가입한 사람이 일정한 나이에 이르렀을 때 일정한 금액을 보험 회사가 지급할 것을 약속하는 보험. 학자(學資) 보험, 혼인 보험 따위의 생존 보험을 이른다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/7053_저축보험.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d2358904700"
+  },
+  "No": 7054,
+  "Word": "적립금",
+  "Description": "은행이나 회사가 이익금의 일부를 장래에 대비하여 자체적으로 보관하여 두는 돈. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/7054_적립금.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d2358904701"
+  },
+  "No": 7296,
+  "Word": "이",
+  "Description": "((목적어나 부사어 뒤에 붙어)) 앞말을 지정하여 강조하는 뜻을 나타내는 보조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/7296_이.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d2358904702"
+  },
+  "No": 7503,
+  "Word": "만기일",
+  "Description": "만기(滿期). 어음 금액의 지급일로서 어음에 적힌 날짜.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/7503_만기일.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d2358904703"
+  },
+  "No": 7701,
+  "Word": "로그아웃",
+  "Description": "사용 중인 네트워크에서 업무를 종료하고 주 컴퓨터와의 연결을 단절하고 나오는 일.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/7701_로그아웃.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d2358904704"
+  },
+  "No": 7730,
+  "Word": "에서",
+  "Description": "구약 성경에서 아브라함의 아들 이삭이 낳은 쌍둥이 가운데 형. 장남이지만 신(神)의 선택을 받지 못하여 아우 야곱에게 팥죽 한 그릇에 상속권을 팔았다고 하며, 후에 소돔 땅으로 떠나 에돔 사람의 조상이 되었다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/7730_에서.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba563057d2358904705"
+  },
+  "No": 7745,
+  "Word": "따라",
+  "Description": "‘특별한 이유 없이 그 경우에만 공교롭게’의 뜻을 나타내는 보조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/7745_따라.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d2358904706"
+  },
+  "No": 8015,
+  "Word": "정보",
+  "Description": "①데이터를 처리, 가공한 결과 ②수신자가 이전에는 알지 못했던 지식. (information).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/8015_정보.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d2358904707"
+  },
+  "No": 8196,
+  "Word": "공동",
+  "Description": "생체나 기관 내의 속이 빈 장소, 공간 또는 잠재성 공간.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/8196_공동.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d2358904708"
+  },
+  "No": 8306,
+  "Word": "미래형",
+  "Description": "미래를 나타내는 시제 형태.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/8306_미래형.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d2358904709"
+  },
+  "No": 8515,
+  "Word": "영상데이터",
+  "Description": "영상 정보를 표현한 데이터. 음성 데이터에 상대되는 개념이다. (video data).",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/8515_영상데이터.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d235890470a"
+  },
+  "No": 8590,
+  "Word": "현재진행",
+  "Description": "현재 동작이 진행 중에 있음을 나타내는 동작상.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/8590_현재진행.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d235890470b"
+  },
+  "No": 8605,
+  "Word": "가계",
+  "Description": "소비의 주체로 '가정'을 이르는 말.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/8605_가계.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d235890470c"
+  },
+  "No": 8693,
+  "Word": "기준환율",
+  "Description": "외환 시세에서, 어느 한 나라의 통화와의 관계가 다른 외환 시세의 기준이 되는 환율. 일반적으로 미국의 달러에 대한 환율을 기준으로 하여 세계 각국의 통화와의 환율을 계산한다. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/8693_기준환율.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d235890470d"
+  },
+  "No": 9056,
+  "Word": "예금계좌",
+  "Description": "금융 기관에 예금하려고 설정한 개인명이나 법인명의 계좌. ",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9056_예금계좌.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba663057d235890470e"
+  },
+  "No": 9073,
+  "Word": "마우스",
+  "Description": "컴퓨터 입력 장치의 하나. 책상 위 따위에서 움직이면 그에 따라 화면에 나타난 커서(cursor)가 움직이며, 위에 있는 버튼을 눌러 명령어를 선택하거나 프로그램을 실행한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9073_마우스.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba763057d235890470f"
+  },
+  "No": 9178,
+  "Word": "약관",
+  "Description": "계약의 당사자가 다수의 상대편과 계약을 체결하기 위하여 일정한 형식에 의하여 미리 마련한 계약의 내용.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9178_약관.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba763057d2358904710"
+  },
+  "No": 9292,
+  "Word": "시스템",
+  "Description": "필요한 기능을 실현하기 위하여 관련 요소를 어떤 법칙에 따라 조합한 집합체.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9292_시스템.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba763057d2358904711"
+  },
+  "No": 9304,
+  "Word": "웹브라우저",
+  "Description": "인터넷에서 월드 와이드 웹 정보를 검색하는 데 사용되는 응용 프로그램. 웹 브라우저 또는 브라우저라고도 한다.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9304_웹브라우저.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba763057d2358904712"
+  },
+  "No": 9384,
+  "Word": "여러가지",
+  "Description": "‘복수(複數)’의 뜻을 더하는 접미사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9384_여러가지.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba763057d2358904713"
+  },
+  "No": 9551,
+  "Word": "며",
+  "Description": "((받침 없는 체언 뒤에 붙어)) 둘 이상의 사물을 같은 자격으로 이어 주는 접속 조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9551_며.mp4"
+},
+{
+  "_id": {
+    "$oid": "67381ba763057d2358904714"
+  },
+  "No": 9834,
+  "Word": "을",
+  "Description": "((받침 있는 일부 부사 뒤에 붙어)) 강조하는 뜻을 나타내는 보조사.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/9834_을.mp4"
+},
+{
+  "_id": {
+    "$oid": "6738483563057d2358904715"
+  },
+  "No": 20014,
+  "Word": "사업자등록증",
+  "Description": "사업자가 세무서에 사업자 등록을 할 때 발급받는 등록증.",
+  "URL": "https://sonnuri.s3.ap-northeast-2.amazonaws.com/AI_Videos/20014_사업자등록증.mp4"
+}]
