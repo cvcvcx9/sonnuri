@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "./Slider";
 
 // import wordvideo from "./image/단어수어영상.png";
-import senvideo from "./image/문장수어영상.png";
+// import senvideo from "./image/문장수어영상.png";
 import hand from "./image/한국수어.png";
-import sonnuri from "./image/sonnuri.png";
+// import sonnuri from "./image/sonnuri.png";
 import description from "./image/설명.jpg";
 import description1 from "./image/진짜설명1.png";
 import description2 from "./image/진짜설명2.png";
+import sonnuri2 from "./image/왕눈이누리손로고.png";
+
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,7 +40,7 @@ function App() {
   return (
     <div>
       <header className="flex justify-center">
-        <img src={sonnuri} alt="손누리로고" className="w-auto h-20 my-2" />
+        <img src={sonnuri2} alt="손누리로고" className="w-auto h-20 my-2" />
       </header>
       <div className="relative">
         <img
