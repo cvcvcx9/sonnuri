@@ -226,7 +226,7 @@ class VideoConnector:
                     'ContentDisposition': 'inline'
                 }
             )
-            url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{s3_key}/sentence"
+            url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{s3_key}"
             return url, s3_key
         except Exception as e:
             print(f"S3 upload error: {e}")
