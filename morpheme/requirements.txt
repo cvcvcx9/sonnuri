@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+kiwipiepy
+kobert_transformers
+numpy
+openai
+pandas
+pydantic
+pymongo
+python-dotenv
+Requests
+scikit_learn
+torch
