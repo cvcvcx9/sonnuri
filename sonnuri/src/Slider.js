@@ -20,7 +20,6 @@ function Slider() {
         spaceBetween={10}
         slidesPerView={1}
         loop={true}
-        autoplay={{ delay: 7000 }}
         className="w-full h-auto"
       >
       
