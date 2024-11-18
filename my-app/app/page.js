@@ -59,15 +59,15 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="text-sm text-gray-500">입출금통장</div>
-              <div className="text-xl font-bold mt-1">1,234,567원</div>
+              <div className="text-xl font-bold mt-1">1,524,200원</div>
             </div>
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="text-sm text-gray-500">예금/적금</div>
-              <div className="text-xl font-bold mt-1">5,678,901원</div>
+              <div className="text-xl font-bold mt-1">5,508,000원</div>
             </div>
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="text-sm text-gray-500">투자상품</div>
-              <div className="text-xl font-bold mt-1">9,012,345원</div>
+              <div className="text-xl font-bold mt-1">2,012,305원</div>
             </div>
           </div>
         </div>
