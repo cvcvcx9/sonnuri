@@ -219,7 +219,7 @@ async def extract_words_from_sentence(sentences: List[Sentence], type: str) -> L
 async def saveWord(word: str, word_tokens: List[Token], words: List[Word], sentence: str, type: str):
     text = remove_non_alphanumeric_korean(word)
     url, definition = get_url_and_definition(text, sentence, type)
-    word = Word(form=word, tokens=word_tokens, url=url, definition=definition)
+    word = Word(form=text, tokens=word_tokens, url=url, definition=definition)
     words.append(word)
     
 def get_url_and_definition(word: str, sentence: str, type: str):
@@ -475,6 +475,7 @@ async def import_s3_ai_words():
             }
 
             # MongoDB에 데이터 삽입
+            collection.update_one(query, finance_document, upsert=True)
             finance_collection.update_one(query, finance_document, upsert=True)
             print(f"Inserted into MongoDB: {finance_document}")
         else:
