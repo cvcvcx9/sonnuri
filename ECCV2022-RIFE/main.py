@@ -161,20 +161,19 @@ class VideoConnector:
 
 def main():
     # CSV 파일 경로
-    csv_path = "C:/Users/SSAFY/Desktop/A301/parsed_morphemes.csv"
+    csv_path = "C:/Users/SSAFY/Desktop/A301/뉴스자막.csv"
     data = pd.read_csv(csv_path, encoding='cp949')
     data.columns = data.columns.str.strip()
     # 각 행에 대해 비디오 처리
     for _, row in data.iterrows():
         형태소 = row['형태소']
         files = eval(row['파일'])  # 문자열로 되어 있는 리스트를 리스트로 변환
-        new_num = row['번호']
         
         # 파일 경로 목록 생성
-        video_paths = [f"G:/공유 드라이브/수어사전데이터/videos/AI_videos/{file}.mp4" for file in files]
+        video_paths = [f"C:/Users/SSAFY/Downloads/good/{file}.mp4" for file in files]
         
         # 결과 비디오 경로 설정
-        output_path = f"G:/공유 드라이브/수어사전데이터/videos/AI_videos/{new_num}_{형태소}.mp4"
+        output_path = f"C:/Users/SSAFY/Desktop/A301/뉴스자막/{형태소}.mp4"
         
         # VideoConnector 초기화 및 처리
         connector = VideoConnector()
