@@ -442,41 +442,43 @@ def parse_file_name(file_name):
         return no, word
     return None, None
 
-@app.get("/import-s3-ai-words")
-async def import_s3_ai_words():
-    finance_collection = db['finance_word']
-    file_list = get_s3_file_list(S3_BUCKET, "AI_Videos/")
+# @app.get("/import-s3-ai-words")
+# async def import_s3_ai_words():
+#     finance_collection = db['finance_word']
+#     original_collection = db['sonnuri']
+#     file_list = get_s3_file_list(S3_BUCKET, "AI_Videos/")
 
-    # MongoDB에 데이터 삽입
-    for file_key in file_list:
-        # 파일 이름 파싱
-        file_name = file_key.split('/')[-1]  # 폴더 경로 제거
-        no, word = parse_file_name(file_name)
+#     # MongoDB에 데이터 삽입
+#     for file_key in file_list:
+#         # 파일 이름 파싱
+#         file_name = file_key.split('/')[-1]  # 폴더 경로 제거
+#         no, word = parse_file_name(file_name)
 
-        if no is not None and word is not None:
-            # S3 URL 생성
-            s3_url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/AI_Videos/{file_name}"
+#         if no is not None and word is not None:
+#             # S3 URL 생성
+#             s3_url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/AI_Videos/{file_name}"
             
-            # 기존 MongoDB 값
-            document = collection.find_one({'No': no})
-            description = ''
-            if document:
-                description = document.get("Description", '')
+#             # 기존 MongoDB 값
+#             if (no < 20000):
+#                 document = original_collection.find_one({'NO': no})
+#                 s3_url = ''
+#                 if document:
+#                     s3_url = document.get("URL", '')
 
-            # MongoDB에 삽입할 데이터
-            query = {"No": no, "Word": word}  # 조건: No와 Word가 같은 데이터
-            finance_document = {
-                "$set": {
-                    'No': no,
-                    'Word': word,
-                    'URL': s3_url,
-                    'Description': description
-                }
-            }
+#             # MongoDB에 삽입할 데이터
+#             query = {"No": no}  # 조건: No와 Word가 같은 데이터
+#             finance_document = {
+#                 "$set": {
+#                     'No': no,
+#                     'Word': word,
+#                     'URL': s3_url,
+#                 }
+#             }
+#             collection.update_one(query, finance_document, upsert=True)
 
-            # MongoDB에 데이터 삽입
-            collection.update_one(query, finance_document, upsert=True)
-            finance_collection.update_one(query, finance_document, upsert=True)
-            print(f"Inserted into MongoDB: {finance_document}")
-        else:
-            print(f"Skipping file (invalid format): {file_name}")
+#             # MongoDB에 데이터 삽입
+#             # collection.update_one(query, finance_document, upsert=True)
+#             # finance_collection.update_one(query, finance_document, upsert=True)
+#             print(f"Inserted into MongoDB: {finance_document}")
+#         else:
+#             print(f"Skipping file (invalid format): {file_name}")
