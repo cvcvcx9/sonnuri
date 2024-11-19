@@ -9,3 +9,8 @@ ECCV2022-RIFE/ECCvenv/*
 .idea/*
 determine/__pycache__/main.cpython-312.pyc
 morpheme/__pycache__/app.cpython-312.pyc
+
+**/node_modules/
+**/dist/
+**/build/
+**/.turbo/
