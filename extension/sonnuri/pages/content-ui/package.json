@@ -26,7 +26,8 @@
     "@extension/shared": "workspace:*",
     "@extension/storage": "workspace:*",
     "@extension/ui": "workspace:*",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "react-player": "^2.16.0"
   },
   "devDependencies": {
     "@extension/hmr": "workspace:*",

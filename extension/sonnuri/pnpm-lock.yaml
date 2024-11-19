@@ -334,6 +334,9 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      react-player:
+        specifier: ^2.16.0
+        version: 2.16.0(react@18.3.1)
     devDependencies:
       '@extension/hmr':
         specifier: workspace:*
