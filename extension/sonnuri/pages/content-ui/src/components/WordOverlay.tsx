@@ -1,0 +1,67 @@
+import React, { useEffect, useRef } from 'react';
+import { highlightTextNodes } from '../util/drawHighlightTextNodes';
+import findTextNodes from '../util/findNextNodes';
+
+const WordOverlay = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    // 텍스트 본문을 파싱해서 노드들을 찾아옴
+    const textNodes = findTextNodes(document.body);
+    canvasRef.current.width = window.innerWidth;
+    canvasRef.current.height = window.innerHeight;
+    const ctx = canvasRef.current.getContext('2d');
+    // 찾아온 노드에서 텍스트와 가지고 있는 텍스트를 이용해서 하이라이트 그리기
+    highlightTextNodes(canvasRef.current, textNodes);
+
+    // 노드 변경 감지 - 리액트 라이프사이클 처럼 노드 변경 감지
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          highlightTextNodes(canvasRef.current, findTextNodes(document.body));
+        }
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // 스크롤 감지
+    let scrollTimer: any = null;
+
+    const handleScroll = () => {
+      if (!canvasRef.current) return;
+      const ctx = canvasRef.current.getContext('2d');
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+      if (scrollTimer) clearTimeout(scrollTimer);
+
+      scrollTimer = setTimeout(() => {
+        highlightTextNodes(canvasRef.current, findTextNodes(document.body));
+      }, 100);
+    };
+
+    const handleResize = () => {
+      if (!canvasRef.current) return;
+      canvasRef.current.width = window.innerWidth;
+      canvasRef.current.height = window.innerHeight;
+      highlightTextNodes(canvasRef.current, findTextNodes(document.body));
+    }
+
+    document.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('scroll', handleScroll);
+      if (scrollTimer) clearTimeout(scrollTimer);
+    };
+  }, []);
+
+  return (
+    <div>
+      <canvas id="canvas" className="fixed top-0 left-0 pointer-events-none z-9999" ref={canvasRef} />
+    </div>
+  );
+}
+
+export default WordOverlay
