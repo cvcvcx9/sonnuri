@@ -1,0 +1,91 @@
+#my_word_modal.close {
+    position: fixed;
+    background: transparent;
+    z-index: 10001;
+    width: 360px;
+    height: 240px;
+    right: 30px;
+    bottom: 30px;
+    display: block; /* 항상 DOM에 존재하도록 설정 */
+    visibility: hidden; /* 초기 상태에서 숨기기 */
+    opacity: 0; /* 초기 상태에서 투명 */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; /* 애니메이션 속성 */
+}
+
+#my_word_modal.open {
+    position: fixed;
+    background: transparent;
+    z-index: 10001;
+    width: 360px;
+    height: 240px;
+    display: block; /* 항상 DOM에 존재하도록 설정 */
+    visibility: visible; /* 초기 상태에서 숨기기 */
+    opacity: 1; /* 초기 상태에서 투명 */
+    transform: translateY(20px); /* 아래에서 위로 올라오는 효과 */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; /* 애니메이션 속성 */
+    border-radius: 5px;
+    right: 30px;
+    bottom: 30px;
+    visibility: visible;
+  }
+
+/* 로딩 컨테이너 */
+#loading-container {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10003;
+    top: 50%;
+    right:10px;
+    transform: translateY(-50%);
+}
+
+/* 로딩 컨테이너 내부 로딩 아이콘 */
+  #loading-circle-container {
+    display: none;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #777777;
+    border-radius: 5px;
+    background: orange;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    right: 10px;
+}
+
+
+
+
+  .loader.loading {
+    width: 36px;
+    height: 36px;
+    border: 5px solid #FFF;
+    border-bottom-color: #FF3D00;
+    border-radius: 50%;
+    display: block;
+    position: fixed;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+    .loader.stop {
+        
+        display: none;
+    }
+
+    .loader.success {
+        display: none;
+    }
+
+    .loader.error {
+        display: none;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 

@@ -1,0 +1,30 @@
+{
+  "extensionDescription": {
+    "description": "sonnuri 설명",
+    "message": "한국 수어 사용자를 위한 웹 서핑 보조도구입니다."
+  },
+  "extensionName": {
+    "description": "sonnuri",
+    "message": "손누리"
+  },
+  "toggleTheme": {
+    "message": "테마 변경"
+  },
+  "loading": {
+    "message": "로딩 중..."
+  },
+  "greeting": {
+    "description": "인사 메시지",
+    "message": "안녕하세요, 제 이름은 $NAME$입니다.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "조창훈"
+      }
+    }
+  },
+  "hello": {
+    "description": "Placeholder 예시",
+    "message": "안녕 $1"
+  }
+}
