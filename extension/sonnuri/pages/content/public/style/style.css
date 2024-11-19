@@ -1,0 +1,25 @@
+#my_word_modal {
+    position: absolute;
+    background: white;
+    z-index: 10001;
+    width: 360px;
+    height: 240px;
+    display: block; /* 항상 DOM에 존재하도록 설정 */
+    visibility: hidden; /* 초기 상태에서 숨기기 */
+    opacity: 0; /* 초기 상태에서 투명 */
+    transform: translateY(20px); /* 아래에서 위로 올라오는 효과 */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; /* 애니메이션 속성 */
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#my_word_modal.open {
+    right: 30px;
+    bottom: 30px;
+    visibility: visible;
+  }
+  #my_word_modal.close {
+    right: -360px;
+    bottom: -240px;
+    visibility: hidden;
+  }
