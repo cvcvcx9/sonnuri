@@ -19,7 +19,7 @@ const WordOverlay = () => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [hoveredHighlight, setHoveredHighlight] = useState<Highlight | null>(null);
-
+  const [isHighlightMode, setIsHighlightMode] = useState(true);
   const showVideoModal = (highlight: any) => {
     setHoveredHighlight(highlight);
   }
@@ -30,6 +30,11 @@ const WordOverlay = () => {
 
   useEffect(() => {
     if (!canvasRef.current) return;
+    if (!isHighlightMode) {
+      setHighlights([]);
+      canvasRef.current.getContext('2d')?.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      return;
+    }
     // 텍스트 본문을 파싱해서 노드들을 찾아옴
     const textNodes = findTextNodes(document.body);
     canvasRef.current.width = window.innerWidth;
@@ -82,7 +87,7 @@ const WordOverlay = () => {
       document.removeEventListener('scroll', handleScroll);
       if (scrollTimer) clearTimeout(scrollTimer);
     };
-  }, []);
+  }, [isHighlightMode]);
 
 
   const handleMouseMove = (e: MouseEvent) => {
@@ -113,6 +118,9 @@ const WordOverlay = () => {
           </div>
         )}
       </div>
+      <button className="fixed right-4 bottom-60 w-20 h-10 bg-white text-black p-2 rounded-md z-20000" onClick={() => setIsHighlightMode(!isHighlightMode)}>
+        {isHighlightMode ? '번역' : '하이라이트'}
+      </button>
     </div>
   );
 }
