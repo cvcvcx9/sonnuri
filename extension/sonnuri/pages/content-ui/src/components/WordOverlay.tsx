@@ -33,6 +33,8 @@ const WordOverlay = () => {
     if (!isHighlightMode) {
       setHighlights([]);
       canvasRef.current.getContext('2d')?.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      // 모든 이벤트 제거
+      document.removeEventListener('mousemove', handleMouseMove);
       return;
     }
     // 텍스트 본문을 파싱해서 노드들을 찾아옴
