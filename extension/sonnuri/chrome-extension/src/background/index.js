@@ -136,7 +136,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 // 사이드패널 열기 요청
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'open_side_panel') {
-    console.log('open_side_panel 요청 전달받음');
+    chrome.runtime.sendMessage({type: 'request_send_loading_start'})
     chrome.tabs.query({ active: true, currentWindow: true }, async tabs => {
       const tabId = tabs[0].id;
       chrome.sidePanel.setOptions({

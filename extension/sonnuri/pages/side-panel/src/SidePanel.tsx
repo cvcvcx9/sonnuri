@@ -6,7 +6,6 @@ import SkeletonLoader from './components/SkeletonLoader';
 
 const SidePanel: React.FC = () => {
   // 문장 리스트
-  const [sentenceList, setSentenceList] = useState<string[]>([]);
   // 플레이되는 문장의 정보
   const [playlistInfo, setPlaylistInfo] = useState<
     { url: string; word: string; definition: string; isFirstIdx: number }[]
@@ -15,7 +14,6 @@ const SidePanel: React.FC = () => {
   const [playlist, setPlaylist] = useState<string[]>([]);
   // 비디오 리스트의 첫번째 인덱스 정보
   const [playlistInfoIsFirst, setPlaylistInfoIsFirst] = useState<number[]>([]);
-  const [allUrls, setAllUrls] = useState<any[]>([]);
   // 현재 재생중인 비디오 인덱스
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   // 비디오 로딩 상태
@@ -31,13 +29,27 @@ const SidePanel: React.FC = () => {
   const [currentWord, setCurrentWord] = useState<string>('');
   const [currentDefinition, setCurrentDefinition] = useState<string>('');
   const [showAllWords, setShowAllWords] = useState(false);
+  const [tabValue,setTabValue] = useState('interpolate')
+  const [tabIconSrc,setTabIconSrc] = useState("./word_sign_language.png")
 
   // 단어별로 그룹화된 URL 정보 (객체 형태 그대로 사용)
   const [groupedUrls, setGroupedUrls] = useState<{ [key: string]: any[] }>({});
 
   const [interpolateState, setInterpolateState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
+
+  const toggleTabValue = () =>{
+    if (tabValue == 'interpolate'){
+      setTabValue('sentence');
+    }else{
+      setTabValue("interpolate")
+    }
+  }
+
   useEffect(() => {
+
+    
+
     chrome.storage.local.get('original_text', data => {
       if (data.original_text) {
         setOriginalText(data.original_text);
@@ -53,6 +65,7 @@ const SidePanel: React.FC = () => {
     // 저장된 비디오 정보 로드
     chrome.storage.local.get('urls', data => {
       if (data.urls) {
+        setIsLoading(true); // 로딩 시작
         // urlGroups 객체를 그대로 저장
         setGroupedUrls(data.urls);
 
@@ -67,12 +80,22 @@ const SidePanel: React.FC = () => {
       }
     });
 
-    // 스토리지 변경을 감하고, 변경된 값을
+    // 스토리지 변경을 감지하고 처리
     const newSentenceListener = (changes: any, namespace: any) => {
       if (changes.urls) {
+        setIsLoading(true); // 로딩 시작
         setCurrentVideoIndex(0);
         const newUrls = changes.urls.newValue;
-        // urlGroups 객체를 그대로 저장
+
+        // 기존 상태 초기화
+        setGroupedUrls({});
+        setPlaylistInfo([]);
+        setPlaylist([]);
+        setPlaylistInfoIsFirst([]);
+        setCurrentWord('');
+        setCurrentDefinition('');
+
+        // urlGroups 객체를 업데이트
         setGroupedUrls(newUrls);
 
         // 전체 URL 리스트는 모든 그룹의 URL을 합쳐서 설정
@@ -81,6 +104,10 @@ const SidePanel: React.FC = () => {
         setPlaylistInfo(allUrls.filter((item: any) => item.isFirstIdx !== -1));
         setPlaylist(allUrls.map((item: any) => item.url));
         setPlaylistInfoIsFirst(allUrls.map((item: any) => item.isFirstIdx));
+
+        setIsPlaying(true);
+        setIsPlayAll(true);
+        setIsLoading(false); // 로딩 완료
       }
       if (changes.original_text) {
         setOriginalText(changes.original_text.newValue);
@@ -91,6 +118,22 @@ const SidePanel: React.FC = () => {
     };
     chrome.storage.onChanged.addListener(newSentenceListener);
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      console.log('Received message:', message);
+
+      if (message.type === 'open_side_panel') {
+        console.log('Handling open_side_panel message');
+        setIsLoading(true);
+        setGroupedUrls({});
+        setPlaylistInfo([]);
+        setPlaylist([]);
+        setPlaylistInfoIsFirst([]);
+        setCurrentWord('');
+        setCurrentDefinition('');
+        setInterpolatedUrl('');
+        setInterpolateState('idle');
+        setIsPlayAll(false);
+      }
+
       if (message.type === 'success_make_video_result') {
         setIsLoading(false);
       }
@@ -162,13 +205,15 @@ const SidePanel: React.FC = () => {
   const getInterpolateStateMessage = () => {
     switch (interpolateState) {
       case 'loading':
-        return '비디오 생성중...';
+        return '보간 비디오 생성중...';
       case 'success':
         return '생성완료';
       case 'error':
         return '영상생성 실패';
+      case 'idle':
+        return '영상 요청 대기중'
       default:
-        return '';
+        return '요청된 문장 없음';
     }
   };
 
@@ -191,19 +236,7 @@ const SidePanel: React.FC = () => {
         <CardContent className="p-4 min-h-[500px]">
           <Tabs defaultValue="sentence" className="w-full">
             <TabsList className="flex justify-center">
-              <TabsTrigger value="sentence" className="text-sm w-full">
-                <img className="w-8 h-8" src="./word_sign_language.png" alt="word" />
-              </TabsTrigger>
-              <TabsTrigger value="interpolate" className="text-sm w-full" disabled={interpolateLoading}>
-                <img className="w-8 h-8" src="./sentence_sign_language.png" alt="word" />
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="sentence">
-              {isLoading ? (
-                <SkeletonLoader />
-              ) : (
-                <div className="grid md:grid-cols-2">
-                  {interpolateState !== 'idle' && (
+              <TabsTrigger value={tabValue} onClick={toggleTabValue} disabled={interpolateLoading || interpolateState !== 'success'} className="text-sm w-full">
                     <div
                       className={`text-center ${
                         interpolateState === 'error'
@@ -212,9 +245,14 @@ const SidePanel: React.FC = () => {
                             ? 'text-green-500'
                             : 'text-blue-500'
                       }`}>
-                      {getInterpolateStateMessage()}
+                        {tabValue === 'interpolate' ? getInterpolateStateMessage() : "단어별 설명보기"}
                     </div>
-                  )}
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="sentence">
+              {isLoading ? (
+                <SkeletonLoader />
+              ) : <>
                   <div className="flex flex-col gap-4 mt-4">
                     <button
                       onClick={handlePlayAll}
@@ -245,7 +283,7 @@ const SidePanel: React.FC = () => {
                   </div>
                   <div className="space-y-4">
                     <div className="player-wrapper">
-                      {playlist.length > 0 ? (
+                       
                         <Card className="w-full">
                           <CardContent className="p-4">
                             <ReactPlayer
@@ -299,19 +337,11 @@ const SidePanel: React.FC = () => {
                             </div>
                           </CardContent>
                         </Card>
-                      ) : (
-                        <Card className="w-full">
-                          <CardContent className="p-4">
-                            <div className="bg-transparent w-full h-[200px] rounded-lg flex items-center justify-center">
-                              <ReactPlayer width="100%" height="200px" style={{ backgroundColor: '#000000' }} />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      )}
-                    </div>
+                      
                   </div>
                 </div>
-              )}
+              </>
+              }
             </TabsContent>
             <TabsContent value="interpolate">
               <h2 className="text-lg font-bold">원문</h2>

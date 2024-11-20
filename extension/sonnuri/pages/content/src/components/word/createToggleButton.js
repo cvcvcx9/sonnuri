@@ -30,7 +30,7 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
   toggleButtonImg.style.cursor = 'pointer';
   toggleButtonImg.style.border = 'none';
   toggleButtonImg.style.backgroundColor = 'transparent';
-  let toggleButtonImgSrc = chrome.runtime.getURL('content/img/highlightOff.png');
+  let toggleButtonImgSrc = chrome.runtime.getURL('content/img/highlightOn.png');
 
   toggleButtonImg.src = toggleButtonImgSrc;
   toggleButtonImg.style.width = '60px';
@@ -40,7 +40,6 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
     e.stopPropagation();
 
     highlightState.isHighlighting = !highlightState.isHighlighting;
-    console.log('isHighlighting', highlightState.isHighlighting);
     toggleButtonImgSrc = highlightState.isHighlighting
       ? chrome.runtime.getURL('content/img/highlightOff.png')
       : chrome.runtime.getURL('content/img/highlightOn.png');
