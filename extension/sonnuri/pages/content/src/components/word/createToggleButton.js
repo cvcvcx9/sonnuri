@@ -41,7 +41,6 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
   toggleButton.appendChild(toggleButtonImg);
 
   toggleButton.onclick = e => {
-    e.stopPropagation();
     highlightState.isHighlighting = !highlightState.isHighlighting;
 
     if (highlightState.isHighlighting) {

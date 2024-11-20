@@ -9,7 +9,6 @@ import hideVideoModal from './components/word/hideVideoModal.js';
 import highlightTextNodes from './components/word/highlightTextNodes.js';
 import showVideoModal from './components/word/showVideoModal.js';
 import serverWords from './words.js';
-
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
   this.beginPath();
   this.moveTo(x + radius, y);
@@ -128,10 +127,7 @@ document.addEventListener('mouseup', e => {
       message.style.zIndex = '10000';
       document.body.appendChild(message);
 
-      // 로딩 아이콘을 표시한다.
-      await chrome.runtime.sendMessage({
-        type: 'open_side_panel',
-      });
+      
       // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
       await chrome.runtime.sendMessage({
         type: 'request_sentence',
@@ -169,6 +165,10 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 chrome.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'success_make_video_result') {
     console.log('보간 비디오 생성 요청 결과 전송받기 완료');
+    // 로딩 아이콘을 표시한다.
+     chrome.runtime.sendMessage({
+        type: 'open_side_panel',
+      });
   }
 });
 
