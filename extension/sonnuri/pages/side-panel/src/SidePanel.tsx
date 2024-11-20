@@ -228,126 +228,9 @@ const SidePanel: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-center items-center ">
-        <img className="w-16 h-16" src="./sonnuri_logo.png" alt="logo" />
-      </div>
-
       <Card className="w-full bg-[#DFE7FD]">
         <CardContent className="p-4 min-h-[500px]">
-          <Tabs defaultValue="sentence" className="w-full">
-            <TabsList className="flex justify-center">
-              <TabsTrigger value={tabValue} onClick={toggleTabValue} disabled={interpolateLoading || interpolateState !== 'success'} className="text-sm w-full">
-              {tabValue === 'interpolate' ?
-                    <div
-                      className={`text-center ${
-                        interpolateState === 'error'
-                          ? 'text-red-500'
-                          : interpolateState === 'success'
-                            ? 'text-green-500'
-                            : 'text-blue-500'
-                      }`}>
-                        getInterpolateStateMessage() 
-                      </div>
-                    :   "단어별 설명보기"
-                    }
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="sentence">
-              {isLoading ? (
-                <SkeletonLoader />
-              ) : <>
-                  <div className="flex flex-col gap-4 mt-4">
-                    <button
-                      onClick={handlePlayAll}
-                      className="text-sm px-4 py-2 bg-[#4A5578] text-white rounded-lg w-full">
-                      전체 재생
-                    </button>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {getVisibleWords().map((word, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleWordClick(word)}
-                          className={`text-sm px-2 py-1 rounded-full ${
-                            currentWord === word
-                              ? 'bg-[#2A3250] text-white'
-                              : 'border border-[#5B679E] text-[#5B679E] hover:bg-[#5B679E] hover:text-white'
-                          }`}>
-                          {word}
-                        </button>
-                      ))}
-                      {Object.keys(groupedUrls).length > 9 && (
-                        <button
-                          onClick={() => setShowAllWords(!showAllWords)}
-                          className="text-sm px-2 py-1 rounded-full border border-[#5B679E] text-[#5B679E] hover:bg-[#5B679E] hover:text-white">
-                          {showAllWords ? '...접기' : '...더보기'}
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="player-wrapper">
-                       
-                        <Card className="w-full">
-                          <CardContent className="p-4">
-                            <ReactPlayer
-                              url={playlist[currentVideoIndex]}
-                              controls={false}
-                              playing={isPlaying}
-                              playbackRate={playerSpeed}
-                              width="100%"
-                              height="200px"
-                              style={{ backgroundColor: '#000000' }}
-                              onEnded={() => {
-                                if (currentVideoIndex < playlist.length - 1) {
-                                  setCurrentVideoIndex(prev => prev + 1);
-                                  // 다음 단어 정보 업데이트
-                                  if (isPlayAll && playlistInfo[currentVideoIndex + 1]) {
-                                    setCurrentWord(playlistInfo[currentVideoIndex + 1].word);
-                                    setCurrentDefinition(playlistInfo[currentVideoIndex + 1].definition);
-                                  }
-                                } else {
-                                  setIsPlaying(false);
-                                  setIsPlayAll(false);
-                                  setCurrentVideoIndex(0);
-                                  setCurrentWord('');
-                                  setCurrentDefinition('');
-                                }
-                              }}
-                            />
-                            {/* <div className="mt-2 text-right">
-                              {playerSpeed.toFixed(1)}x
-                            </div> */}
-                            <div className="flex justify-center pt-6 items-center gap-4">
-                              <button onClick={() => setPlayerSpeed(playerSpeed - 0.1)} disabled={playerSpeed <= 0.5}>
-                                <img className="w-8 h-8" src="./slower.png" alt="minus" />
-                              </button>
-                              <button onClick={() => setIsPlaying(!isPlaying)}>
-                                {isPlaying ? (
-                                  <img className="w-8 h-8" src="./Pause.png" alt="pause" />
-                                ) : (
-                                  <img className="w-8 h-8" src="./Play.png" alt="play" />
-                                )}
-                              </button>
-                              <button onClick={() => setPlayerSpeed(playerSpeed + 0.1)} disabled={playerSpeed >= 3.0}>
-                                <img className="w-8 h-8" src="./faster.png" alt="plus" />
-                              </button>
-                            </div>
-                            <div className="mt-2">
-                              <div className="font-bold">단어의 뜻</div>
-                              <div className="mt-1 text-gray-700">
-                                {currentDefinition || '재생할 단어를 선택해주세요'}
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      
-                  </div>
-                </div>
-              </>
-              }
-            </TabsContent>
-            <TabsContent value="interpolate">
-              <h2 className="text-lg font-bold">원문</h2>
+              <h2 className='text-lg font-bold mt-4'>번역 요청 원문</h2>
               <h3 className="text-sm text-center mt-2">{originalText}</h3>
               <h2 className="text-lg font-bold mt-4">번역된 수어 비디오</h2>
               <Card className="w-full">
@@ -383,13 +266,9 @@ const SidePanel: React.FC = () => {
                     </button>
                   </div>
                 </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
       </Card>
-    </div>
-  );
-};
+      </CardContent>
+      </Card>
+    </div>)}
 
 export default SidePanel;
