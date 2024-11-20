@@ -101,8 +101,19 @@ if (highlightState.isHighlighting) {
     );
   }, 300);
 }
+
+let mouseDownX = 0;
+let mouseDownY = 0;
+
+document.addEventListener('mousedown', e => {
+  mouseDownX = e.pageX;
+  mouseDownY = e.pageY;
+});
+
 document.addEventListener('mouseup', e => {
-  const selectedText = window.getSelection().toString(); // 드래그된 단어 가���오기
+  const isDragging = Math.hypot(e.pageX - mouseDownX, e.pageY - mouseDownY) > 5;
+  if (!isDragging) return;
+  const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
   if (selectedText) {
     translateSentenceBtn.style.top = `${e.pageY}px`; // 버튼 위치 변경
     translateSentenceBtn.style.left = `${e.pageX}px`; // 버튼 위치 변경

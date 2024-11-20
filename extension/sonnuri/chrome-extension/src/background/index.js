@@ -136,7 +136,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 // 사이드패널 열기 요청
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'open_side_panel') {
-    chrome.runtime.sendMessage({type: 'request_send_loading_start'})
+    chrome.runtime.sendMessage({ type: 'request_send_loading_start' });
     chrome.tabs.query({ active: true, currentWindow: true }, async tabs => {
       const tabId = tabs[0].id;
       chrome.sidePanel.setOptions({
@@ -159,4 +159,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
     return true;
   }
+});
+
+chrome.runtime.onConnect.addListener(port => {
+  console.log('side_panel에서 연결 요청 받음');
+  port.onDisconnect.addListener(() => {
+    console.log('side_panel에서 연결 끊김');
+    chrome.storage.local.set({ interpolated_url: '' });
+    chrome.storage.local.set({ isLoading: true });
+  });
 });
