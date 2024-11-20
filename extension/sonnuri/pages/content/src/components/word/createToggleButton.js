@@ -24,14 +24,16 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
   toggleButton.style.cursor = 'pointer';
   toggleButton.style.border = 'none';
   toggleButton.style.backgroundColor = 'transparent';
-  toggleButton.style.transition = 'filter 0.3s ease';
+  toggleButton.style.transition = 'filter 0.5s ease';
 
   const toggleButtonImg = document.createElement('img');
   toggleButtonImg.id = 'toggle-button-img';
   toggleButtonImg.style.cursor = 'pointer';
   toggleButtonImg.style.border = 'none';
   toggleButtonImg.style.backgroundColor = 'transparent';
-  let toggleButtonImgSrc = chrome.runtime.getURL('content/img/highlight_icon.png');
+  toggleButtonImg.style.transition = 'filter 0.5s ease';
+
+  const toggleButtonImgSrc = chrome.runtime.getURL('content/img/highlight_icon.png');
 
   toggleButtonImg.src = toggleButtonImgSrc;
   toggleButtonImg.style.width = '60px';
@@ -39,11 +41,11 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
   toggleButton.appendChild(toggleButtonImg);
 
   toggleButton.onclick = e => {
-
+    e.stopPropagation();
     highlightState.isHighlighting = !highlightState.isHighlighting;
 
     if (highlightState.isHighlighting) {
-      toggleButton.style.filter = 'none';
+      toggleButtonImg.style.filter = 'grayscale(100%)';
       highlights = highlightTextNodes(
         ctx,
         canvas,
@@ -54,13 +56,11 @@ export default function createToggleButton(ctx, canvas, highlights, serverWords,
         highlightState,
       );
     } else {
-      toggleButton.style.filter = 'blur(3px)';
-      toggleButtonImgSrc = chrome.runtime.getURL('content/img/highlight_icon.png');
+      toggleButtonImg.style.filter = 'none';
       highlights = [];
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    toggleButtonImg.src = toggleButtonImgSrc;
   };
 
   controlPanel.appendChild(toggleButton);
