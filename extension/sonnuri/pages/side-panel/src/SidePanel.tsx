@@ -237,6 +237,7 @@ const SidePanel: React.FC = () => {
           <Tabs defaultValue="sentence" className="w-full">
             <TabsList className="flex justify-center">
               <TabsTrigger value={tabValue} onClick={toggleTabValue} disabled={interpolateLoading || interpolateState !== 'success'} className="text-sm w-full">
+              {tabValue === 'interpolate' ?
                     <div
                       className={`text-center ${
                         interpolateState === 'error'
@@ -245,8 +246,10 @@ const SidePanel: React.FC = () => {
                             ? 'text-green-500'
                             : 'text-blue-500'
                       }`}>
-                        {tabValue === 'interpolate' ? getInterpolateStateMessage() : "단어별 설명보기"}
-                    </div>
+                        getInterpolateStateMessage() 
+                      </div>
+                    :   "단어별 설명보기"
+                    }
               </TabsTrigger>
             </TabsList>
             <TabsContent value="sentence">
