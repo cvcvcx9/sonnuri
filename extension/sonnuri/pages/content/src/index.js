@@ -41,7 +41,7 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-let _isHighlighting = true;
+let _isHighlighting = false;
 export const highlightState = {
   get isHighlighting() {
     return _isHighlighting;
