@@ -100,8 +100,19 @@ if (highlightState.isHighlighting) {
     );
   }, 300);
 }
+
+let mouseDownX = 0;
+let mouseDownY = 0;
+
+document.addEventListener('mousedown', e => {
+  mouseDownX = e.pageX;
+  mouseDownY = e.pageY;
+});
+
 document.addEventListener('mouseup', e => {
-  const selectedText = window.getSelection().toString(); // 드래그된 단어 가���오기
+  const isDragging = Math.hypot(e.pageX - mouseDownX, e.pageY - mouseDownY) > 5;
+  if (!isDragging) return;
+  const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
   if (selectedText) {
     translateSentenceBtn.style.top = `${e.pageY}px`; // 버튼 위치 변경
     translateSentenceBtn.style.left = `${e.pageX}px`; // 버튼 위치 변경
@@ -113,19 +124,6 @@ document.addEventListener('mouseup', e => {
     // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
     translateSentenceBtn.onclick = async () => {
       await chrome.storage.local.set({ original_text: selectedText });
-      
-      const message = document.createElement('div');
-      message.innerText = '손누리가 번역중입니다';
-      message.classList.add('translation-message');
-      message.style.position = 'absolute';
-      message.style.left = translateSentenceBtn.style.left;
-      message.style.top = translateSentenceBtn.style.top;
-      message.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-      message.style.color = 'white';
-      message.style.padding = '8px 12px';
-      message.style.borderRadius = '4px';
-      message.style.zIndex = '10000';
-      document.body.appendChild(message);
 
       
       // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
@@ -153,8 +151,8 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
       await chrome.storage.local.set({ created_video_url: message.urls[0] });
       return;
     }
-      console.log('sentence', sentence);
-      chrome.runtime.sendMessage({
+    console.log('sentence', sentence);
+    chrome.runtime.sendMessage({
       type: 'request_make_video',
       urls: message.urls,
       sentence: sentence.original_text,
