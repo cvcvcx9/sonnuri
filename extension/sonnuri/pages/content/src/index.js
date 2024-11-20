@@ -51,7 +51,7 @@ export const highlightState = {
   },
 };
 
-const { highlights: newHighlights } = createToggleButton(
+const { toggleButton, highlights: newHighlights } = createToggleButton(
   ctx,
   canvas,
   highlights,
