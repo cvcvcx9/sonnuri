@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import requestMakeVideo from './requestMakeVideo';
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -136,7 +137,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 // 사이드패널 열기 요청
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'open_side_panel') {
-    console.log('open_side_panel 요청 전달받음');
+    chrome.runtime.sendMessage({ type: 'request_send_loading_start' });
     chrome.tabs.query({ active: true, currentWindow: true }, async tabs => {
       const tabId = tabs[0].id;
       chrome.sidePanel.setOptions({
@@ -144,6 +145,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         path: 'side-panel/index.html',
         enabled: true, // 반드시 true로 설정해야 활성화됨
       });
+      console.log("사이드패널 열기");
+      
       await chrome.sidePanel.open({ tabId: tabId });
       sendResponse({ success: true });
     });
@@ -159,4 +162,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
     return true;
   }
+});
+
+chrome.runtime.onConnect.addListener(port => {
+  console.log('side_panel에서 연결 요청 받음');
+  port.onDisconnect.addListener(() => {
+    console.log('side_panel에서 연결 끊김');
+    chrome.storage.local.set({ interpolated_url: '' });
+    chrome.storage.local.set({ isLoading: true });
+  });
 });

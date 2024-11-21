@@ -1,19 +1,16 @@
-import React from 'react';
-import { Skeleton } from '../../../../packages/ui/lib/components/ui';
+import { Skeleton } from '@extension/ui'
 
-
-
-const SkeletonLoader: React.FC = () => {
+const ErrorPlayer = () => {
     return (
         <div className="flex flex-col items-center justify-center">
             <Skeleton className="h-48 w-full rounded-md flex flex-col items-center justify-center">
                 <div className="flex justify-center mt-4">
-                    <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+                    <h3 className="text-red-500 text-lg font-bold">비디오 생성에 실패했습니다.</h3>
                 </div>
 
             </Skeleton>
         </div>
-    );
+    )
 }
 
-export default SkeletonLoader
+export default ErrorPlayer
