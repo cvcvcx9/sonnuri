@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import requestMakeVideo from './requestMakeVideo';
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -144,6 +145,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         path: 'side-panel/index.html',
         enabled: true, // 반드시 true로 설정해야 활성화됨
       });
+      console.log("사이드패널 열기");
+      
       await chrome.sidePanel.open({ tabId: tabId });
       sendResponse({ success: true });
     });

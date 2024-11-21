@@ -93874,4 +93874,36 @@ export default [
     word: '이유',
     URL: ['http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20191029/632415/MOV000250158_700X466.mp4'],
   },
+  
+  {
+    NO: 100341,
+    word: '아침밥',
+    URL: [
+      'http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20191015/627813/MOV000239897_700X466.mp4',
+      'http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20201211/785278/MOV000357032_700X466.mp4',
+    ],
+  },
+  {
+    NO: 100342,
+    word: '고객이',
+    URL: 'http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20191021/629412/MOV000258719_700X466.mp4',
+  },
+  {
+    NO: 100343,
+    word: '상품을',
+    URL: 'http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20160325/287212/MOV000291090_700X466.mp4',
+  },
+  {
+    NO: 100344,
+    word: '먹기',
+    URL: 'http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20200824/735123/MOV000241825_700X466.mp4',
+  },
+  {
+    NO: 100345,
+    word: '우대금리',
+    URL: [
+      'http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20200821/733622/MOV000257457_700X466.mp4',
+      'http://sldict.korean.go.kr/multimedia/multimedia_files/convert/20160325/286860/MOV000289586_700X466.mp4',
+    ],
+  },
 ];

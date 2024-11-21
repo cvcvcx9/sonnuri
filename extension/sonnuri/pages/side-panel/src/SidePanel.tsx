@@ -117,6 +117,7 @@ const SidePanel: React.FC = () => {
                   controls={false}
                   playing={isPlaying}
                   playbackRate={playerSpeed}
+                  loop={true}
                   onEnded={() => {
                     setIsPlaying(false);
                   }}
