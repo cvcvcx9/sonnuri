@@ -34,8 +34,8 @@ export default function highlightTextNodes(
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const textNodes = findTextNodes(documentBody);
 
-  ctx.fillStyle = 'rgba(255, 0, 0, 0.3)'; // 반투명한 빨간색
-  ctx.strokeStyle = 'red'; // 테두리 색상
+  ctx.fillStyle = 'rgba(255, 255, 0, 0.3)'; // 반투명한 빨간색
+  ctx.strokeStyle = 'rgba(255, 255, 0, 0.5)'; // 테두리 색상
   ctx.lineWidth = 1;
 
   highlights = [];

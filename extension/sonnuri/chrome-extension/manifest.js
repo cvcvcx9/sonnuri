@@ -33,12 +33,15 @@ const manifest = deepmerge(
       type: 'module',
     },
     action: {
-      default_icon: 'sonnuriIcon_32.png',
+      default_icon: 'icons/icon32.png',
     },
-    icons: {
-      64: 'sonnuriIcon_64.png',
-      128: 'sonnuriIcon_128.png',
+    "icons": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     },
+    
     content_scripts: [
       {
         matches: ['http://*/*', 'https://*/*', '<all_urls>'],
