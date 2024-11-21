@@ -8,8 +8,7 @@ import handleMouseMoveOnCanvas from './components/word/handleMouseMoveOnCanvas.j
 import hideVideoModal from './components/word/hideVideoModal.js';
 import highlightTextNodes from './components/word/highlightTextNodes.js';
 import showVideoModal from './components/word/showVideoModal.js';
-import serverWords from './words.js';
-
+import originServerWords from './words.js';
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
   this.beginPath();
   this.moveTo(x + radius, y);
@@ -26,6 +25,7 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, ra
 
 let highlights = [];
 
+const serverWords = originServerWords.sort((a,b)=>a.word.length - b.word.length)
 const modal = createModal();
 const { overlay, canvas, ctx } = createOverlay();
 
@@ -41,7 +41,7 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-let _isHighlighting = true;
+let _isHighlighting = false;
 export const highlightState = {
   get isHighlighting() {
     return _isHighlighting;
@@ -51,7 +51,7 @@ export const highlightState = {
   },
 };
 
-const { highlights: newHighlights } = createToggleButton(
+const { toggleButton, highlights: newHighlights } = createToggleButton(
   ctx,
   canvas,
   highlights,
@@ -101,8 +101,19 @@ if (highlightState.isHighlighting) {
     );
   }, 300);
 }
+
+let mouseDownX = 0;
+let mouseDownY = 0;
+
+document.addEventListener('mousedown', e => {
+  mouseDownX = e.pageX;
+  mouseDownY = e.pageY;
+});
+
 document.addEventListener('mouseup', e => {
-  const selectedText = window.getSelection().toString(); // 드래그된 단어 가���오기
+  const isDragging = Math.hypot(e.pageX - mouseDownX, e.pageY - mouseDownY) > 5;
+  if (!isDragging) return;
+  const selectedText = window.getSelection().toString(); // 드래그된 단어 가져오기
   if (selectedText) {
     translateSentenceBtn.style.top = `${e.pageY}px`; // 버튼 위치 변경
     translateSentenceBtn.style.left = `${e.pageX}px`; // 버튼 위치 변경
@@ -114,10 +125,10 @@ document.addEventListener('mouseup', e => {
     // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
     translateSentenceBtn.onclick = async () => {
       await chrome.storage.local.set({ original_text: selectedText });
-      // 로딩 아이콘을 표시한다.
-      await chrome.runtime.sendMessage({
+      chrome.runtime.sendMessage({
         type: 'open_side_panel',
       });
+      
       // 백그라운드에 request_sentence 요청을 보내 백엔드 서버에 문장을 요청하고, 로딩상태를 변경한다.
       await chrome.runtime.sendMessage({
         type: 'request_sentence',
@@ -143,8 +154,8 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
       await chrome.storage.local.set({ created_video_url: message.urls[0] });
       return;
     }
-      console.log('sentence', sentence);
-      chrome.runtime.sendMessage({
+    console.log('sentence', sentence);
+    chrome.runtime.sendMessage({
       type: 'request_make_video',
       urls: message.urls,
       sentence: sentence.original_text,
@@ -155,6 +166,8 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 chrome.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'success_make_video_result') {
     console.log('보간 비디오 생성 요청 결과 전송받기 완료');
+    // 로딩 아이콘을 표시한다.
+    
   }
 });
 

@@ -13,7 +13,7 @@ export default function showVideoModal(highlight, mouseX, mouseY, modal) {
   video.controls = false;
   video.autoplay = true;
   video.preload = 'auto';
-  video.loop = true;
+  video.loop = false;
 
   // 현재 비디오 소스 설정 함수
   const setVideoSource = index => {
@@ -34,7 +34,7 @@ export default function showVideoModal(highlight, mouseX, mouseY, modal) {
   };
 
   // 비디오 종료 시 다음 비디오 재생
-  video.onended = playNextVideo;
+  video.addEventListener("ended",playNextVideo);
 
   video.onplay = () => {
     video.playbackRate = 1.5;
