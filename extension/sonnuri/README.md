@@ -1,4 +1,6 @@
 # :hand: 손누리 :hand:
+## 청각 장애인의 편리한 단어장과 번역기
+![서비스 이미지](chrome-extension/public/sonnuri_logo.png)
 
 ## :book: 익스텐션 설명
 - 청각 장애인의 웹 접근성을 높이기 위한 서비스 입니다.
