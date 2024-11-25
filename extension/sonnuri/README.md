@@ -10,7 +10,6 @@
 
 <img src="README_IMAGES/하이라이트기능.gif" width="300" height="200"/>
 
-![alt text](README_IMAGES/하이라이트기능.gif){: width="300" height="200"}
 
 
 - 문장을 드래그하여 요청하면, 해당 문장에 대한 영상을 수어 문법에 맞게 재배치 및 생성하여 보여줍니다.
