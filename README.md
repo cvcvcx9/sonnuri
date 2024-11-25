@@ -1,6 +1,6 @@
 # 손누리
 ## 청각 장애인의 편리한 단어장과 번역기
-![서비스 이미지](chrome-extension/public/sonnuri_logo.png)
+![서비스 이미지](extension/sonnuri/chrome-extension/public/sonnuri_logo.png)
 
 ## :book: 익스텐션 설명
 - 청각 장애인의 웹 접근성을 높이기 위한 서비스 입니다.
@@ -8,19 +8,19 @@
 ### 🎱 주요 기능
 - 하이라이트 된 단어에 마우스를 올려놓으면 해당 단어에 대한 수어를 영상으로 보여줍니다.
 
-<img src="README_IMAGES/하이라이트기능.gif" width="640" height="480"/>
+<img src="extension/sonnuri/README_IMAGES/하이라이트기능.gif" width="640" height="480"/>
 
 
 
 - 문장을 드래그하여 요청하면, 해당 문장에 대한 영상을 수어 문법에 맞게 재배치 및 생성하여 보여줍니다.
 
-<img src="README_IMAGES/문장번역 요청.gif" width="640" height="480"/>
+<img src="extension/sonnuri/README_IMAGES/문장번역 요청.gif" width="640" height="480"/>
 
 
 - 단어별로 뚝뚝 끊겨보이는 수어 영상을 RIFE를 통해 자연스럽게 이어지게 하면서 한 사람이 하는 듯한 모습을 보여줍니다.
 
 
-<img src="README_IMAGES/번역결과.gif" width="480" height="640"/>
+<img src="extension/sonnuri/README_IMAGES/번역결과.gif" width="480" height="640"/>
 
 ### 🕹 사용 방법
 - 익스텐션을 설치하면 해당 랜딩페이지가 나타납니다.
