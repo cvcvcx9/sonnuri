@@ -1,4 +1,4 @@
-# 손누리
+# 손누리1
 ## 청각 장애인의 편리한 단어장과 번역기
 ![서비스 이미지](extension/sonnuri/chrome-extension/public/sonnuri_logo.png)
 
